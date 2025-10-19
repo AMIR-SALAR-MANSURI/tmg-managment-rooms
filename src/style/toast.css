@@ -1,0 +1,23 @@
+@reference "tailwindcss";
+
+@layer components {
+  .sonner-toast {
+    @apply rounded-md p-4 shadow-md;
+  }
+
+  .sonner-toast-success {
+    @apply bg-gradient-to-r from-white via-white to-[#E1FFF2] border border-green-300;
+  }
+
+  .sonner-toast-error {
+    @apply bg-gradient-to-r from-white via-white to-[#FFEAEA] border border-red-300;
+  }
+
+  .sonner-toast-warning {
+    @apply bg-gradient-to-r from-white via-white to-[#FFF8E1] border border-yellow-300;
+  }
+
+  .sonner-toast-description {
+    @apply w-72 truncate text-nowrap;
+  }
+}
