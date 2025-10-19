@@ -1,0 +1,114 @@
+{
+    "errors": {
+      "invalid_type": "نوع ورودی باید از نوع {{expected}} باشد ،{{received}} معتبر نیست",
+      "invalid_type_received_undefined": "مقدار تعریف نشده است",
+      "invalid_type_received_null": "مقدار تعریف نشده است",
+      "invalid_literal": "مقدار تحت اللفظی نامعتبر، مورد انتظار {{expected}}",
+      "unrecognized_keys": "کلید {{- keys}} ناشناخته است",
+      "invalid_union": "ورودی نامتعبر است ",
+      "invalid_union_discriminator": "یک ارزش متمایز و بیانی. {{-options}} مورد انتظار",
+      "invalid_enum_value": "یک مقدار enum اکسپرس. مورد انتظار {{- options}}، دریافت '{{received}}'",
+      "invalid_arguments": "آرگومان ها نامعتبر است",
+      "invalid_return_type": "مقدار خروجی نامعتبر است",
+      "invalid_date": "تاریخ نامتعبر است ",
+      "custom": "ورودی نامتعبر است ",
+      "invalid_intersection_types": "ادغام نتایج تقاطع ممکن نیست",
+      "not_multiple_of": "عدد باید مضربی از {{multipleOf}} باشد",
+      "not_finite": "تعداد باید محدود باشد",
+      "invalid_string": {
+        "email": "نامتعبر است  {{validation}}",
+        "url": "نامتعبر است  {{validation}}",
+        "uuid": "نامتعبر است  {{validation}}",
+        "cuid": "نامتعبر است  {{validation}}",
+        "regex": "نامتعبر است ",
+        "datetime": "نامتعبر است  {{validation}}",
+        "startsWith": "ورودی نامتعبر است : باید با {{startsWith}} شروع شود",
+        "endsWith": "ورودی نامتعبر است : باید با {{endsWith} تمام شود"
+      },
+      "too_small": {
+        "array": {
+          "exact": "آرایه باید حاوی {{minimum}} عنصر باشد",
+          "inclusive": " حداقل {{minimum}} مورد را انتخاب کنید",
+          "not_inclusive": " حداقل {{minimum}} راانتخاب کنید"
+        },
+        "string": {
+          "exact": " باید حاوی {{minimum}} کاراکتر باشد",
+          "inclusive": " باید حداقل دارای {{minimum}} کاراکتر باشد",
+          "not_inclusive": " باید بیش از {{minimum}} کاراکتر داشته باشد"
+        },
+        "number": {
+          "exact": "مقدار باید {{minimum}} باشد",
+          "inclusive": "مقدار باید بزرگتر یا مساوی با {{minimum}} باشد",
+          "not_inclusive": "مقدار باید بیشتر از {{minimum}} باشد"
+        },
+        "set": {
+          "exact": "ورودی نامتعبر است ",
+          "inclusive": "ورودی نامتعبر است ",
+          "not_inclusive": "ورودی نامتعبر است "
+        },
+        "date": {
+          "exact": "تاریخ باید {{- minimum, datetime}} باشد",
+          "inclusive": "تاریخ باید بزرگتر یا مساوی با {{- minimum, datetime}} باشد",
+          "not_inclusive": "تاریخ باید بزرگتر از {{- minimum, datetime}} باشد"
+        }
+      },
+      "too_big": {
+        "array": {
+          "exact": "آرایه باید حاوی {{maximum}} عنصر باشد",
+          "inclusive": "آرایه باید حداکثر حاوی {{maximum}} عنصر باشد",
+          "not_inclusive": "آرایه باید کمتر از {{maximum}} عنصر داشته باشد"
+        },
+        "string": {
+          "exact": " باید دارای {{maximum}} کاراکتر باشد",
+          "inclusive": " باید حداکثر دارای {{maximum}} کاراکتر باشد",
+          "not_inclusive": " باید کمتر از {{maximum}} کاراکتر باشد"
+        },
+        "number": {
+          "exact": "مقدار باید {{maximum}} باشد",
+          "inclusive": "مقدار باید کمتر یا مساوی با {{maximum}} باشد",
+          "not_inclusive": "مقدار باید کمتر از {{maximum}} باشد"
+        },
+        "set": {
+          "exact": "ورودی نامتعبر است ",
+          "inclusive": "ورودی نامتعبر است ",
+          "not_inclusive": "ورودی نامتعبر است "
+        },
+        "date": {
+          "exact": "تاریخ باید {{- maximum, datetime}} باشد",
+          "inclusive": "تاریخ باید کمتر یا مساوی با {{- maximum, datetime}} باشد",
+          "not_inclusive": "تاریخ باید کمتر از {{- maximum, datetime}} باشد"
+        }
+      }
+    },
+    "validations": {
+      "email": "ایمیل",
+      "url": "پیوند",
+      "uuid": "uuid",
+      "cuid": "cuid",
+      "regex": "بیان منظم",
+      "datetime": "تاریخ و ساعت"
+    },
+    "types": {
+      "function": "تابع",
+      "number": "عدد",
+      "string": "حروف",
+      "nan": "ورودی غیر عددی",
+      "integer": "عدد صحيح",
+      "float": "عدد اعشاری",
+      "boolean": "مقدار بولی",
+      "date": "تاريخ",
+      "bigint": "عدد صحيح بزرگ",
+      "undefined": "تعریف نشده",
+      "symbol": "کد",
+      "null": "خالی",
+      "array": "آرایه",
+      "object": "شیء",
+      "unknown": "ناشناخته",
+      "promise": "وعده",
+      "void": "بدون ارزش",
+      "never": "هرگز",
+      "map": "نقشه",
+      "set": "گروه"
+    }
+  }
+  

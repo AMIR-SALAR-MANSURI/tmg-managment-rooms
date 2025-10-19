@@ -1,16 +1,16 @@
-import { ApiResponseDto } from "@/types/responseType";
+import { PaginationType } from "@/types/responseType";
 import { parseAsInteger, useQueryState } from "nuqs";
 
-const usePagination = (p?: ApiResponseDto & { key?: string }) => {
+const usePagination = (p?: PaginationType & { key?: string }) => {
   const key = p?.key || "";
 
   const [currentPage, setCurrentPage] = useQueryState(
     key + "page",
-    parseAsInteger.withDefault(p?.pagingMetaData.currentPage || 1)
+    parseAsInteger.withDefault(p?.pageNumber || 1)
   );
   const [currentPageSize, setCurrentPageSize] = useQueryState(
     key + "pageSize",
-    parseAsInteger.withDefault(p?.pagingMetaData.pageSize || 12)
+    parseAsInteger.withDefault(p?.pageSize || 12)
   );
 
   const pagination = {
