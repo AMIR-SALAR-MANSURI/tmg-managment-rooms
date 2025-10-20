@@ -41,13 +41,57 @@ export function ChatInterface({
             <div key={message.id} className="flex gap-4">
               {message.role === "user" ? (
                 <>
-                  <Avatar>
-                    <AvatarImage src="/placeholder.svg?height=32&width=32" />
-                    <AvatarFallback>JD</AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1">
-                    <div className="bg-muted rounded-lg p-4">
-                      <p>{message.content}</p>
+                  {/* <div className="flex gap-1 w-full items-center">
+                    <div className="flex-1">
+                      <div className="bg-muted  p-4 rounded-2xl">
+                        <p>{message.content}</p>
+                      </div>
+                    </div>
+                    <Avatar className="size-11">
+                      <AvatarImage src="/placeholder.svg?height=46&width=46" />
+                      <AvatarFallback>JD</AvatarFallback>
+                    </Avatar>
+                  </div> */}
+                  <div className="w-full flex items-center gap-1">
+                    <Avatar className="size-11">
+                      <AvatarFallback>AI</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <div className="bg-muted rounded-2xl border p-4">
+                        <p className="mb-4">{message.content}</p>
+                        <div className="flex items-center gap-2">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 w-8 p-0"
+                          >
+                            <Copy className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 w-8 p-0"
+                          >
+                            <Share className="h-4 w-4" />
+                          </Button>
+                          <div className="ml-auto flex items-center gap-1">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-8 w-8 p-0"
+                            >
+                              <ThumbsDown className="h-4 w-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-8 w-8 p-0"
+                            >
+                              <ThumbsUp className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </>

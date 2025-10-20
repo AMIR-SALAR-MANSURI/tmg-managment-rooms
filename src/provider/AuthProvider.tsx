@@ -23,14 +23,14 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     if (!isLoading && !token) {
-      router.push("/auth/login");
+      router.push("/login");
     }
   }, [isLoading, token, router]);
 
   if (isLoading || !token) {
     return (
       <div className="flex flex-col justify-center items-center w-full h-dvh space-y-8">
-        {/* <FlipLoading /> */}
+        <div className="w-10 h-10 animate-spin rounded-full border-dashed border-8 border-primary"></div>
         <span> ...درحال دریافت اطلاعات</span>
       </div>
     );

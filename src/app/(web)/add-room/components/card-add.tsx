@@ -33,32 +33,36 @@ const CardAdd = () => {
   });
 
   return (
-    <Card className="shadow-lg">
-      <CardHeader>
-        <CardTitle className="text-3xl font-bold">افزودن اتاق جدید</CardTitle>
-        <CardDescription>اطلاعات اتاق جدید خود را وارد کنید</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form className="space-y-6">
-            <RoomForm />
-          </form>
-          <div className="flex gap-4 pt-4">
-            <Button type="submit" className="flex-1" size="lg">
-              ذخیره
-            </Button>
-            <Button
-              type="button"
-              variant="primary"
-              // onClick={() => router.push("/")}
-              size="lg"
-            >
-              انصراف
-            </Button>
-          </div>
-        </Form>
-      </CardContent>
-    </Card>
+    <div className="relative group">
+      {/* <div className="absolute -inset-1 bg-gradient-to-r from-blue-300 to-blue-400 rounded-lg blur opacity-25 transition duration-1000 animate-pulse"></div> */}
+
+      <Card className="relative shadow-lg bg-white border-0">
+        <CardHeader>
+          <CardTitle className="text-3xl font-bold">افزودن اتاق جدید</CardTitle>
+          <CardDescription>اطلاعات اتاق جدید خود را وارد کنید</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form className="space-y-6">
+              <RoomForm />
+            </form>
+            <div className="flex gap-4 pt-4">
+              <Button type="submit" className="flex-1" size="lg">
+                ذخیره
+              </Button>
+              <Button
+                type="button"
+                variant="primary"
+                // onClick={() => router.push("/")}
+                size="lg"
+              >
+                انصراف
+              </Button>
+            </div>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 

@@ -1,3 +1,5 @@
+import { LoginRequest } from "@/services";
+import { useLogin } from "@/services/auth/auth.hook";
 import getBaseAxios from "@/services/baseAxios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -8,6 +10,8 @@ export default function useAuth() {
   const router = useRouter();
 
   const [token, setToken] = useState<string | null>(null);
+
+  const { mutateAsync, isPending } = useLogin();
 
   useEffect(() => {
     const savedToken = localStorage.getItem(key);
@@ -27,11 +31,11 @@ export default function useAuth() {
     });
   };
 
-  const handleLogin = async (values: "") => {
-    // const res = await mutateAsync(values);
-    if (token) {
-      localStorage.setItem("token", token);
-      setToken(token);
+  const handleLogin = async (values: LoginRequest) => {
+    const res = await mutateAsync(values);
+    if (res) {
+      localStorage.setItem("token", res.data.token);
+      setToken(res.data.token);
       router.push("/");
       setAxiosAuthHeader();
     }

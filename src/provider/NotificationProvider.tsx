@@ -1,7 +1,7 @@
 "use client";
 
 import { Toaster as ToasterSonner } from "@/components/ui/sonner";
-import { baseAxiosResponseInterceptors } from "@/services/baseAxios";
+// import { baseAxiosResponseInterceptors } from "@/services/baseAxios";
 import { AlertTriangle, CheckCircle, XCircle } from "lucide-react";
 import React, { useEffect } from "react";
 import "../style/toast.css";
@@ -13,9 +13,9 @@ interface NotificationProviderProps {
 export default function NotificationProvider({
   children,
 }: NotificationProviderProps) {
-  useEffect(() => {
-    baseAxiosResponseInterceptors();
-  }, []);
+  // useEffect(() => {
+  //   baseAxiosResponseInterceptors();
+  // }, []);
 
   return (
     <>

@@ -1,5 +1,4 @@
 "use client";
-
 import {
   baseAxiosRequestInterceptors,
   baseAxiosResponseInterceptors,
@@ -31,7 +30,7 @@ export default function EnvClientProvider({
       const data = await res.json();
       window.__CONFIG__ = data;
       baseAxiosRequestInterceptors(window.__CONFIG__?.baseUrl as string);
-      // baseAxiosResponseInterceptors();
+      baseAxiosResponseInterceptors();
       setEnv(data);
     }
 
@@ -39,7 +38,15 @@ export default function EnvClientProvider({
   }, []);
 
   if (!env) {
-    return <>loading...</>;
+    return (
+      <>
+        {" "}
+        <div className="flex flex-col justify-center items-center w-full h-dvh space-y-8">
+          <div className="w-10 h-10 animate-spin rounded-full border-dashed border-8 border-primary"></div>
+          <span> ...درحال دریافت اطلاعات</span>
+        </div>
+      </>
+    );
   }
 
   return children;

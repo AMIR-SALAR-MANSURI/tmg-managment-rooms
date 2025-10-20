@@ -24,9 +24,7 @@ export default function RootLayout({
         <EnvClientProvider>
           <QueryClientProvider>
             <NotificationProvider>
-              <NuqsAdapter>
-                <AuthProvider>{children}</AuthProvider>
-              </NuqsAdapter>
+              <NuqsAdapter>{children}</NuqsAdapter>
             </NotificationProvider>
           </QueryClientProvider>
         </EnvClientProvider>
