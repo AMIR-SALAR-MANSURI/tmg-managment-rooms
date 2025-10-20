@@ -9,12 +9,18 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import React from "react";
+import { UseFormReturn } from "react-hook-form";
 
-const RoomForm = () => {
+interface ServerFormProps {
+  form?: UseFormReturn<any, any, any>;
+}
+
+const RoomForm = ({ form }: ServerFormProps) => {
   return (
-    <div>
+    <div className="space-y-8">
       {" "}
       <FormField
+        control={form?.control}
         name="title"
         render={({ field }) => (
           <FormItem>
@@ -27,18 +33,20 @@ const RoomForm = () => {
         )}
       />
       <FormField
+        control={form?.control}
         name="description"
         render={({ field }) => (
           <FormItem>
             <FormLabel>عکس</FormLabel>
             <FormControl>
-              <InputFilePond />
+              <InputFilePond {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
         )}
       />
       <FormField
+        control={form?.control}
         name="image"
         render={({ field }) => (
           <FormItem>

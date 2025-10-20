@@ -6,6 +6,7 @@ import QueryClientProvider from "@/provider/queryClientProvider";
 import NotificationProvider from "@/provider/NotificationProvider";
 import EnvClientProvider from "@/provider/env-client-provider";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import AuthProvider from "@/provider/AuthProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,7 +24,9 @@ export default function RootLayout({
         <EnvClientProvider>
           <QueryClientProvider>
             <NotificationProvider>
-              <NuqsAdapter>{children}</NuqsAdapter>
+              <NuqsAdapter>
+                <AuthProvider>{children}</AuthProvider>
+              </NuqsAdapter>
             </NotificationProvider>
           </QueryClientProvider>
         </EnvClientProvider>

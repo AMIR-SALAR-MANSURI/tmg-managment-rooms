@@ -113,6 +113,18 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+
+.filepond--drop-label {
+    font-family: "IRANSansfanum" !important;
+}
+
+.filepond--credits {
+    display: none;
+}
+
+.filepond--file {
+  font-family: "IRANSansfanum" !important;
+}
 @layer base {
   * {
     @apply border-border outline-ring/50;
