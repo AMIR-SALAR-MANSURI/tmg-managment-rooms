@@ -64,13 +64,10 @@ export class ClientsService extends BaseService {
 
   public static clients() {
     return z.object({
-      clientId: z.string(),
       name: z.string(),
       description: z.string(),
-      systemPrompt: z.string(),
-      imageBase64: z.string(),
-      contentPrompt: z.string(),
-      llmModelId: z.string(),
+      isDisabled: z.boolean(),
+      userIds: z.array(z.string()),
     });
   }
 }

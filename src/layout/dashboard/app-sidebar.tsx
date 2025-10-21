@@ -4,15 +4,9 @@ import {
   BookOpenCheck,
   Bot,
   Briefcase,
-  ClipboardList,
-  Command,
   FileText,
   ImageIcon,
   LayoutDashboard,
-  LinkIcon,
-  MessageSquareText,
-  Phone,
-  Presentation,
   Settings,
   ShieldQuestion,
   UserSearch as UserRoundSearch,
@@ -21,23 +15,18 @@ import {
 import * as React from "react";
 
 import { usePathname } from "next/navigation";
-import { IconInnerShadowTop } from "@tabler/icons-react";
 import { NavMain } from "./nav-main";
-import Link from "next/link";
 
 import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarHeader,
   Sidebar,
   SidebarContent,
   SidebarFooter,
+  SidebarHeader,
 } from "@/components/ui/sidebar";
 import { VersionSwitcher } from "@/components/ui/version-switcher";
 
 export const MenuItem = {
-  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
+  versions: ["1 کلاینت", "کلاینت 2", "کلاینت 3"],
 
   user: {
     name: "shadcn",

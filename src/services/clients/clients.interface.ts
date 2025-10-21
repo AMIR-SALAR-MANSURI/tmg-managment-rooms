@@ -7,6 +7,7 @@ interface ClientsList {
   name: string;
   description: string;
   isDisabled: boolean;
+  userIds: [string];
 }
 
 const clients = ClientsService.clients();

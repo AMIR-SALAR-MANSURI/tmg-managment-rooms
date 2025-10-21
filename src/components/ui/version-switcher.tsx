@@ -38,7 +38,7 @@ export function VersionSwitcher({
                 </div>
                 {/* <span className="font-medium">Documentation</span> */}
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="">v{selectedVersion}</span>
+                  <span className="">{selectedVersion}</span>
                 </div>
               </div>
               <div>
@@ -57,7 +57,7 @@ export function VersionSwitcher({
                 key={version}
                 onSelect={() => setSelectedVersion(version)}
               >
-                v{version}{" "}
+                {version}{" "}
                 {version === selectedVersion && <Check className="ml-auto" />}
               </DropdownMenuItem>
             ))}

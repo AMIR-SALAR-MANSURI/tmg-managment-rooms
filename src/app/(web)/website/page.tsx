@@ -2,7 +2,7 @@
 import { FeaturesSection } from "@/components/landing/FeaturesSection";
 import { Footer } from "@/components/landing/Footer";
 import { HeroSection } from "@/components/landing/HeroSection";
-import { useGetAllLlm } from "@/services";
+import { useGetAllLlm } from "@/services/llmModels";
 import React from "react";
 
 const page = () => {

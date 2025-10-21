@@ -4,7 +4,7 @@ import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 
 import { cn } from "@/lib/utils";
-import { ClosedCaption } from "lucide-react";
+import { CloseSquare } from "iconsax-reactjs";
 
 const Dialog = DialogPrimitive.Root;
 
@@ -20,10 +20,7 @@ const DialogOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Overlay
     ref={ref}
-    className={cn(
-      "fixed inset-0 z-50 bg-accent-foreground/75 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-      className
-    )}
+    className={cn("fixed inset-0 z-50 bg-accent-foreground/50 ", className)}
     {...props}
   />
 ));
@@ -39,7 +36,7 @@ const DialogContent = React.forwardRef<
       ref={ref}
       dir="rtl"
       className={cn(
-        "fixed left-[50%] top-[50%] max-h-[calc(100dvh-60px)] z-50 grid w-full max-w-lg text-primary-text translate-x-[-50%] translate-y-[-50%] gap-4 border-2 border-r-6 border-primary-500 bg-foreground px-6 pb-4 pt-2 lg:px-8 lg:pb-6 lg:pt-4 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] rounded-xl",
+        "fixed left-[50%] top-[50%] max-h-[calc(100dvh-60px)] z-50 grid w-full max-w-lg text-primary-text translate-x-[-50%] translate-y-[-50%] gap-4 border-2 border-primary-500 bg-card px-6 pb-4 pt-2 lg:px-8 lg:pb-6 lg:pt-4 shadow-lg duration-200 rounded-xl",
         className
       )}
       {...props}
@@ -49,7 +46,7 @@ const DialogContent = React.forwardRef<
         id="close-dialog"
         className="absolute left-6 lg:left-8 top-3 lg:top-5 rounded-lg ring-offset-background hover:opacity-75 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
       >
-        <ClosedCaption className="size-5 lg:size-6 text-primary-text" />
+        <CloseSquare className="size-5 lg:size-6 text-primary-text" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>

@@ -5,25 +5,21 @@ import PageWrapper from "@/layout/dashboard/page-wrapper";
 import { Bot, LayoutDashboard, Plus, Settings, User } from "lucide-react";
 import React from "react";
 import { columns } from "./components/client-column";
+import CreateDialog from "./components/create-dialog";
 
 const page = () => {
   return (
     <PageWrapper
       breadcrumbItems={[
         { href: "/dashboard", label: "داشبورد", icon: LayoutDashboard },
-        { href: "/dashboard/client", label: "کاربران", icon: User },
+        { href: "/dashboard/client", label: "کلاینت", icon: User },
       ]}
-      title="مدیریت کاربران"
-      description="مدیریت کاربران"
+      title="مدیریت کلاینت"
+      description="مدیریت کلاینت"
       className="*:w-full *:min-h-full"
       action={
         <>
-          <Button
-          // onClick={}
-          >
-            افزودن
-            <Plus />
-          </Button>
+          <CreateDialog />
         </>
       }
     >
