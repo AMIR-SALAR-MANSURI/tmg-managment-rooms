@@ -9,7 +9,7 @@ import {
 import { IDRequest } from "@/types/responseType";
 
 export class RoomService extends BaseService {
-  public readonly basePath = "/Rooms";
+  public readonly basePath = "/RoomsManagement";
 
   public EndPoint = {
     roomList: "/List",

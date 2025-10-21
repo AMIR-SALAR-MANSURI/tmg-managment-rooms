@@ -5,6 +5,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+function isNotEmpty(value: any | null | undefined) {
+  return value != null && value !== "" && value !== undefined;
+}
+
 function getBaseURL(envURL: string) {
   if (!envURL || envURL === "/") {
     return "/api";
@@ -30,4 +34,4 @@ function getBaseURL(envURL: string) {
 
   return envURL;
 }
-export { getBaseURL };
+export { getBaseURL, isNotEmpty };

@@ -2,16 +2,16 @@ import { queryClient } from "@/lib/queryClient";
 import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
 import { z } from "zod";
 import { ApiResponseDto, IDRequest } from "../../types/responseType";
-import { RoomService } from "./room.service";
-import { EditRoomRequest, GetAllRoomRequest } from "./room.interface";
+import { ClientsService } from "./clients.service";
+import { GetAllClientsRequest } from "./clients.interface";
 
-const service = new RoomService();
+const service = new ClientsService();
 
-const useGetAllClients = (filter: GetAllRoomRequest) => {
+const useGetAllClients = (filter: GetAllClientsRequest) => {
   return useInfiniteQuery({
-    queryKey: [service.EndPoint.roomList, filter],
+    queryKey: [service.EndPoint.clientsList, filter],
     queryFn: ({ pageParam = 1 }) =>
-      service.roomList({
+      service.clientsList({
         ...filter,
         pageNumber: pageParam,
         pageSize: filter?.pageSize || 12,
@@ -27,8 +27,8 @@ const useGetAllClients = (filter: GetAllRoomRequest) => {
 };
 const useGetClients = (id: string) => {
   const query = useQuery({
-    queryKey: [service.EndPoint.roomGet, id],
-    queryFn: () => service.roomGet(id),
+    queryKey: [service.EndPoint.clientsGet, id],
+    queryFn: () => service.clientsGet(id),
     select: (data) => data.data,
   });
 
@@ -39,11 +39,11 @@ const useGetClients = (id: string) => {
 
 const useAddClients = () => {
   return useMutation({
-    mutationFn: service.roomAdd.bind(service),
+    mutationFn: service.clientsAdd.bind(service),
     onSuccess(data: ApiResponseDto<{}>) {
       if (data.isSuccess)
         queryClient.invalidateQueries({
-          queryKey: [service.EndPoint.roomList],
+          queryKey: [service.EndPoint.clientsList],
           exact: false,
         });
     },
@@ -52,11 +52,11 @@ const useAddClients = () => {
 
 const useEditClients = () => {
   return useMutation({
-    mutationFn: service.roomEdit.bind(service),
+    mutationFn: service.clientsEdit.bind(service),
     onSuccess(data: ApiResponseDto<{}>) {
       if (data.isSuccess)
         queryClient.invalidateQueries({
-          queryKey: [service.EndPoint.roomList],
+          queryKey: [service.EndPoint.clientsList],
           exact: false,
         });
     },

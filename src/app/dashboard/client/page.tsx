@@ -1,6 +1,10 @@
+"use client";
+import { Button } from "@/components/ui/button";
+import DataTable from "@/components/ui/data-table";
 import PageWrapper from "@/layout/dashboard/page-wrapper";
-import { LayoutDashboard, User } from "lucide-react";
+import { Bot, LayoutDashboard, Plus, Settings, User } from "lucide-react";
 import React from "react";
+import { columns } from "./components/client-column";
 
 const page = () => {
   return (
@@ -12,8 +16,20 @@ const page = () => {
       title="مدیریت کاربران"
       description="مدیریت کاربران"
       className="*:w-full *:min-h-full"
+      action={
+        <>
+          <Button
+          // onClick={}
+          >
+            افزودن
+            <Plus />
+          </Button>
+        </>
+      }
     >
-      fkjsdkfjkshfk
+      <>
+        <DataTable columns={columns()} data={[]} />
+      </>
     </PageWrapper>
   );
 };

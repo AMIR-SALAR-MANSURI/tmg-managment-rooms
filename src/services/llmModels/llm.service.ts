@@ -3,7 +3,7 @@ import { BaseService } from "@/services/BaseService";
 import { AddLlmRequest, GetAllLlmResponse } from "./llm.interface";
 
 export class LlmService extends BaseService {
-  public readonly basePath = "/LLMModels";
+  public readonly basePath = "/ModelsManagement";
 
   public EndPoint = {
     llmList: "/List",

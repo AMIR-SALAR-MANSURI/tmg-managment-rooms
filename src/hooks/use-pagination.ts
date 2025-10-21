@@ -1,35 +1,41 @@
-import { PaginationType } from "@/types/responseType";
-import { parseAsInteger, useQueryState } from "nuqs";
+"use client";
 
-const usePagination = (p?: PaginationType & { key?: string }) => {
-  const key = p?.key || "";
+import { PaginationState, Updater } from "@tanstack/react-table";
+import { parseAsInteger, useQueryStates } from "nuqs";
 
-  const [currentPage, setCurrentPage] = useQueryState(
-    key + "page",
-    parseAsInteger.withDefault(p?.pageNumber || 1)
-  );
-  const [currentPageSize, setCurrentPageSize] = useQueryState(
-    key + "pageSize",
-    parseAsInteger.withDefault(p?.pageSize || 12)
-  );
+type PaginationQuery = {
+  page: number;
+  size: number;
+};
 
-  const pagination = {
-    page: currentPage,
-    per_page: currentPageSize,
+const usePagination = (defaults: PaginationQuery = { page: 0, size: 5 }) => {
+  const [query, setQuery] = useQueryStates({
+    pageNumber: parseAsInteger.withDefault(defaults.page),
+    pageSize: parseAsInteger.withDefault(defaults.size),
+  });
+
+  const onPaginationChange = (updater: Updater<PaginationState>) => {
+    let newPagination: PaginationState;
+    if (typeof updater === "function") {
+      const currentPagination = {
+        pageIndex: query.pageNumber,
+        pageSize: query.pageSize,
+      };
+      newPagination = updater(currentPagination);
+    } else {
+      newPagination = updater;
+    }
+
+    console.log(newPagination);
+
+    const { pageIndex, pageSize } = newPagination;
+    setQuery({
+      pageNumber: pageIndex,
+      pageSize,
+    });
   };
 
-  const getNextPage = () => {
-    setCurrentPageSize(currentPageSize + currentPageSize);
-  };
-
-  return {
-    currentPage,
-    currentPageSize,
-    pagination,
-    setCurrentPage,
-    setCurrentPageSize,
-    getNextPage,
-  };
+  return { pagination: query, onPaginationChange };
 };
 
 export { usePagination };

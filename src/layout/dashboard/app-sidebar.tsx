@@ -5,6 +5,7 @@ import {
   Bot,
   Briefcase,
   ClipboardList,
+  Command,
   FileText,
   ImageIcon,
   LayoutDashboard,
@@ -19,20 +20,25 @@ import {
 } from "lucide-react";
 import * as React from "react";
 
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar";
 import { usePathname } from "next/navigation";
 import { IconInnerShadowTop } from "@tabler/icons-react";
 import { NavMain } from "./nav-main";
+import Link from "next/link";
+
+import {
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarHeader,
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+} from "@/components/ui/sidebar";
+import { VersionSwitcher } from "@/components/ui/version-switcher";
 
 export const MenuItem = {
+  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
+
   user: {
     name: "shadcn",
     email: "m@example.com",
@@ -212,21 +218,30 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   };
 
   return (
-    <Sidebar collapsible="icon" side="right" {...props}>
-      <SidebarHeader>
-        <SidebarMenu>
+    <Sidebar collapsible="icon" side="right" variant="inset" {...props}>
+      <SidebarHeader className="">
+        <VersionSwitcher
+          versions={MenuItem.versions}
+          defaultVersion={MenuItem.versions[0]}
+        />
+        {/* <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
+              size="lg"
+              className="group-data-[collapsible=icon]:!p-0 items-center"
               asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <a href="#">
-                <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Acme Inc.</span>
-              </a>
+              <Link href="/dashboard">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                  <Command className="size-4" />
+                </div>
+                <p className="flex-1 text-right truncate font-medium">
+                  داشبورد مدیریت
+                </p>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
-        </SidebarMenu>
+        </SidebarMenu> */}
       </SidebarHeader>
       <SidebarContent>
         <NavMain
