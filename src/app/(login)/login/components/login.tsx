@@ -41,7 +41,7 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if (token) router.push("/");
+    if (token) router.push("/dashboard");
   }, [token]);
 
   return (

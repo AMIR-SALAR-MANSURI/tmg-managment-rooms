@@ -3,13 +3,14 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { z } from "zod";
 import { ApiResponseDto } from "../../types/responseType";
 import { UserService } from "./user.service";
+import { GetAllUserRequest } from "./user.interface";
 
 const service = new UserService();
 
-const useGetAllUser = () => {
+const useGetAllUser = (filter: GetAllUserRequest) => {
   const query = useQuery({
-    queryKey: [service.basePath],
-    queryFn: () => service.userList(),
+    queryKey: [service.EndPoint.userList, filter],
+    queryFn: () => service.userList(filter),
     select: (data) => data.data,
   });
 

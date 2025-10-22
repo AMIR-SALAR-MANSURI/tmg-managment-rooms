@@ -7,10 +7,10 @@ import { EditRoomRequest, GetAllRoomRequest } from "./room.interface";
 
 const service = new RoomService();
 
-const useGetAllClients = (filter: GetAllRoomRequest) => {
+const useGetAllRoom = (filter: GetAllRoomRequest) => {
   return useInfiniteQuery({
     queryKey: [service.EndPoint.roomList, filter],
-    queryFn: ({ pageParam = 1 }) =>
+    queryFn: ({ pageParam = 0 }) =>
       service.roomList({
         ...filter,
         pageNumber: pageParam,
@@ -22,10 +22,10 @@ const useGetAllClients = (filter: GetAllRoomRequest) => {
       // }
       // return undefined;
     },
-    initialPageParam: 1,
+    initialPageParam: 0,
   });
 };
-const useGetClients = (id: string) => {
+const useGetRoom = (id: string) => {
   const query = useQuery({
     queryKey: [service.EndPoint.roomGet, id],
     queryFn: () => service.roomGet(id),
@@ -37,7 +37,7 @@ const useGetClients = (id: string) => {
   };
 };
 
-const useAddClients = () => {
+const useAddRoom = () => {
   return useMutation({
     mutationFn: service.roomAdd.bind(service),
     onSuccess(data: ApiResponseDto<{}>) {
@@ -50,7 +50,7 @@ const useAddClients = () => {
   });
 };
 
-const useEditClients = () => {
+const useEditRoom = () => {
   return useMutation({
     mutationFn: service.roomEdit.bind(service),
     onSuccess(data: ApiResponseDto<{}>) {
@@ -63,4 +63,4 @@ const useEditClients = () => {
   });
 };
 
-export { useAddClients, useGetAllClients, useEditClients, useGetClients };
+export { useAddRoom, useGetAllRoom, useEditRoom, useGetRoom };

@@ -12,9 +12,8 @@ interface LlmList {
 }
 
 interface Filter {
-  pageSize?: number;
-  pageNumber?: number;
   clientId?: string;
+  returnAll?: boolean;
 }
 
 const user = UserService.UserModels();

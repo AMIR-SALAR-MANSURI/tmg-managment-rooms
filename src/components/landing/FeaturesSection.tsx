@@ -1,5 +1,5 @@
 "use client";
-import { Plus } from "lucide-react";
+import { Edit, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { GetAllRoomResponse } from "@/services";
@@ -9,47 +9,14 @@ interface Props {
   data: GetAllRoomResponse[] | undefined;
 }
 
-const features = [
-  {
-    image: "/file.svg",
-    title: "پاسخ‌گویی خودکار",
-    description:
-      "با هوش مصنوعی پیشرفته، پاسخ‌های سریع و دقیق به درخواست‌های مشتریان ارائه دهید",
-  },
-  {
-    image: "/file.svg",
-    title: "مدیریت تیکت‌ها",
-    description:
-      "سازماندهی و پیگیری آسان تمام درخواست‌های پشتیبانی در یک پلتفرم یکپارچه",
-  },
-  {
-    image: "/file.svg",
-    title: "گزارش‌های هوشمند",
-    description: "تحلیل عملکرد تیم و رضایت مشتریان با داشبورد تحلیلی پیشرفته",
-  },
-  {
-    image: "/file.svg",
-    title: "یکپارچه‌سازی",
-    description: "اتصال آسان با ابزارها و سرویس‌های مورد استفاده سازمان شما",
-  },
-];
-
+//from-white to-blue-50
 export function FeaturesSection({ data }: Props) {
   const router = useRouter();
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-blue-50">
+    <section className="bg-gradient-to-b ">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            قابلیت‌های پیشرفته
-          </h2>
-          <p className="text-xl text-gray-600">
-            ابزارهای حرفه‌ای برای مدیریت پشتیبانی سازمان شما
-          </p>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* {data?.map((feature, index) => (
+          {data?.map((feature, index) => (
             <div
               key={index}
               className="relative group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
@@ -61,31 +28,20 @@ export function FeaturesSection({ data }: Props) {
                 }}
                 className="absolute top-3 left-3 z-10 bg-blue-500 hover:bg-blue-600 text-white rounded-full p-2 transition-colors duration-200 shadow-md"
                 title="ویرایش"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="w-4 h-4"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.862 4.487a2.25 2.25 0 113.182 3.182L7.5 20.213l-4 1 1-4 12.362-12.726z"
-                  />
-                </svg>
-              </Button>
+                iconLeft={Edit}
+              ></Button>
 
-              {/* محتوای کارت */}
-          {/* <div
+              <div
                 onClick={() => router.push("/chat-bot")}
                 className="cursor-pointer"
               >
                 <div className="relative h-48 w-full overflow-hidden">
                   <Image
-                    src={feature.imageBase64 || "/placeholder.svg"}
+                    src={
+                      feature.imageData
+                        ? `data:${feature.imageData.imageContentType};base64,${feature.imageData.imageBase64}`
+                        : "/placeholder.svg"
+                    }
                     alt={feature.name}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -102,8 +58,8 @@ export function FeaturesSection({ data }: Props) {
                   </p>
                 </div>
               </div>
-            </div> */}
-          {/* ))} */}
+            </div>
+          ))}
 
           {/* کارت افزودن ویژگی جدید */}
           <div

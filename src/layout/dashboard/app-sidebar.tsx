@@ -24,6 +24,8 @@ import {
   SidebarHeader,
 } from "@/components/ui/sidebar";
 import { VersionSwitcher } from "@/components/ui/version-switcher";
+import { useGetAllClients } from "@/services/clients";
+import { useClientStore } from "./store";
 
 export const MenuItem = {
   versions: ["1 کلاینت", "کلاینت 2", "کلاینت 3"],
@@ -41,7 +43,12 @@ export const MenuItem = {
     },
     {
       title: "کاربران",
-      url: "/dashboard/client",
+      url: "/client",
+      icon: Settings,
+    },
+    {
+      title: "اتاق ها",
+      url: "/room",
       icon: Settings,
     },
     // {
@@ -163,6 +170,12 @@ export const MenuItem = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
   const [openKeys, setOpenKeys] = React.useState<string[]>([]);
+  const { data } = useGetAllClients({ returnAll: true });
+
+  const defaultVersion = data?.data?.[0].id;
+
+  // const [selectedVersion, setSelectedVersion] = React.useState(defaultVersion);
+  const { selectedVersion, setSelectedVersion } = useClientStore();
 
   React.useEffect(() => {
     const findOpenKeys = (menuItems: typeof MenuItem.navMain): string[] => {
@@ -210,8 +223,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar collapsible="icon" side="right" variant="inset" {...props}>
       <SidebarHeader className="">
         <VersionSwitcher
-          versions={MenuItem.versions}
-          defaultVersion={MenuItem.versions[0]}
+          versions={data?.data || []}
+          selectedVersion={selectedVersion}
+          setSelectedVersion={setSelectedVersion}
         />
         {/* <SidebarMenu>
           <SidebarMenuItem>

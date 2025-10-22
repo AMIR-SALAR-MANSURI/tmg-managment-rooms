@@ -13,16 +13,22 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { ClientsList } from "@/services/clients";
+
+type data = {
+  id: string;
+  name: string;
+};
 
 export function VersionSwitcher({
   versions,
-  defaultVersion,
+  selectedVersion,
+  setSelectedVersion,
 }: {
-  versions: string[];
-  defaultVersion: string;
+  versions: ClientsList[];
+  selectedVersion: string | undefined;
+  setSelectedVersion: (arg: string) => void;
 }) {
-  const [selectedVersion, setSelectedVersion] = React.useState(defaultVersion);
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -38,7 +44,13 @@ export function VersionSwitcher({
                 </div>
                 {/* <span className="font-medium">Documentation</span> */}
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="">{selectedVersion}</span>
+                  <span className="">
+                    {selectedVersion ? (
+                      versions.map((i) => i.id === selectedVersion && i.name)
+                    ) : (
+                      <p className="text-gray-400">کلاینت را انتخاب نمایید</p>
+                    )}
+                  </span>
                 </div>
               </div>
               <div>
@@ -54,11 +66,13 @@ export function VersionSwitcher({
               <DropdownMenuItem
                 dir="rtl"
                 className="flex items-center justify-between"
-                key={version}
-                onSelect={() => setSelectedVersion(version)}
+                key={version.id}
+                onSelect={() => setSelectedVersion(version.id)}
               >
-                {version}{" "}
-                {version === selectedVersion && <Check className="ml-auto" />}
+                {version.name}
+                {version.id === selectedVersion && (
+                  <Check className="ml-auto" />
+                )}
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>

@@ -25,7 +25,7 @@ export class ClientsService extends BaseService {
         url: this.EndPoint.clientsList,
         basePath: this.basePath,
       }),
-      { params: filter }
+      filter
     );
   }
 

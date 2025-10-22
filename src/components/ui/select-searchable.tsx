@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ArrowDown2 } from "iconsax-reactjs";
-import { CheckIcon, Loader2, Plus, XIcon } from "lucide-react";
+import { CheckIcon, ChevronDown, Loader2, Plus, XIcon } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "./button";
 import { Input } from "./input";
@@ -271,9 +271,9 @@ export default function SelectSearchable({
           {isLoading ? (
             <Loader2 className="!size-4 !text-muted-foreground animate-spin" />
           ) : (
-            <ArrowDown2
+            <ChevronDown
               id={"open-close-multi-select_" + id}
-              variant="Bold"
+              // variant="Bold"
               className={cn("opacity-75", iconClasses["sm"])}
             />
           )}

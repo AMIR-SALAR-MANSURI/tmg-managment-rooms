@@ -6,7 +6,8 @@ import {
 import { Tag } from "@/components/ui/tag";
 import { ClientsList } from "@/services/clients";
 import { CellContext, ColumnDef } from "@tanstack/react-table";
-import { Ban } from "lucide-react";
+import { Ban, Edit } from "lucide-react";
+import UpdateDialog from "./update-dialog";
 
 export const columns = (): ColumnDef<ClientsList>[] => [
   {
@@ -22,6 +23,7 @@ export const columns = (): ColumnDef<ClientsList>[] => [
     meta: {
       isWordWrapped: false,
     },
+    maxSize: 75,
   },
   {
     accessorKey: "description",
@@ -38,13 +40,12 @@ export const columns = (): ColumnDef<ClientsList>[] => [
       isWordWrapped: false,
     },
     cell: ({ row }) => {
-      const isBanned = row.original.isDisabled === true;
-      const variant = isBanned ? "destructive" : "success";
-      const label = isBanned ? "بن شده" : "فعال";
+      const isDisable = row.original.isDisabled === true;
+      const variant = isDisable ? "destructive" : "primary";
+      const label = isDisable ? "فعال" : "غیرفعال";
       return <Tag variant={variant}>{label}</Tag>;
     },
   },
-
   {
     id: "actions",
     header: "عملیات",
@@ -55,12 +56,7 @@ export const columns = (): ColumnDef<ClientsList>[] => [
 const Actions = ({ row: { original } }: CellContext<ClientsList, unknown>) => {
   return (
     <div className="flex items-center justify-center space-x-2 rtl:space-x-reverse">
-      {/* اینجا می‌توانید دکمه‌های بن/رفع بن، ویرایش، حذف و غیره را اضافه کنید */}
-      {/* مثال: <ToggleBanDialog uid={original.uid} isBanned={original.isBanned === "true"} /> */}
-      <Button variant="primary" model="outline" iconLeft={Ban}>
-        مسدود
-      </Button>
-      {/* <UpdateDialog uid={original.uid as string} /> */}
+      <UpdateDialog id={original.id} />
     </div>
   );
 };

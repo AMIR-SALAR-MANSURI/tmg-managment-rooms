@@ -1,13 +1,13 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import DataTable from "@/components/ui/data-table";
 import PageWrapper from "@/layout/dashboard/page-wrapper";
-import { Bot, LayoutDashboard, Plus, Settings, User } from "lucide-react";
-import React from "react";
+import { ClientsList, useGetAllClients } from "@/services/clients";
+import { LayoutDashboard, User } from "lucide-react";
 import { columns } from "./components/client-column";
 import CreateDialog from "./components/create-dialog";
 
 const page = () => {
+  const { data, isFetching } = useGetAllClients({ returnAll: false });
   return (
     <PageWrapper
       breadcrumbItems={[
@@ -24,7 +24,12 @@ const page = () => {
       }
     >
       <>
-        <DataTable columns={columns()} data={[]} />
+        <DataTable<ClientsList>
+          loading={isFetching}
+          columns={columns()}
+          data={data?.data}
+          pageCount={data?.pagingMetaData.totalPages}
+        />
       </>
     </PageWrapper>
   );

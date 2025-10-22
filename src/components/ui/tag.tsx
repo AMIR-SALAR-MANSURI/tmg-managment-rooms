@@ -43,7 +43,7 @@ const TagVariants = cva(
       {
         variant: "primary",
         type: "filled",
-        class: "text-white bg-primary-500",
+        class: "text-white bg-primary",
       },
       {
         variant: "primary",

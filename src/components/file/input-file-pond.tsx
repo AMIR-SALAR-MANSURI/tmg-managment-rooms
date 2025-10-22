@@ -98,9 +98,9 @@ export default function InputFilePond({
         labelIdle='<div>فایل خود را بکش و رها کن یا <span class="filepond--label-action">جستجو کن</span></div>'
         onupdatefiles={(files) => onAddFile?.(files)}
         allowProcess={props.allowProcess || false}
-        maxFileSize="50MB"
+        maxFileSize="1MB"
         labelMaxFileSizeExceeded="حجم فایل بیش از حد مجاز است"
-        labelMaxFileSize={`حداکثر حجم مجاز فایل 50 مگابایت است`}
+        labelMaxFileSize={`حداکثر حجم مجاز فایل 1 مگابایت است`}
         server={
           props.allowProcess
             ? {

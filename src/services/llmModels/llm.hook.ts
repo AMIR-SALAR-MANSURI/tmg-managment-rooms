@@ -8,7 +8,7 @@ const service = new LlmService();
 
 const useGetAllLlm = () => {
   const query = useQuery({
-    queryKey: [service.basePath],
+    queryKey: [service.EndPoint.llmList],
     queryFn: () => service.llmList(),
     select: (data) => data.data,
   });

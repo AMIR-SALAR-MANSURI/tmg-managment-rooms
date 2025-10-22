@@ -6,14 +6,18 @@ interface RoomList {
   id: string;
   name: string;
   description: string;
-  imageBase64: string;
+  imageData: {
+    imageBase64: string;
+    imageContentType: string;
+    imageExtension: string;
+  };
 }
 
 interface Filter {
-  pageNumber: number;
-  pageSize: number;
-  searchTerm: string;
-  clientId: string;
+  pageNumber?: number;
+  pageSize?: number;
+  searchTerm?: string;
+  clientId?: string;
 }
 
 const room = RoomService.Room();

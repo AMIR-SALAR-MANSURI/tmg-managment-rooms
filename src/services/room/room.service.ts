@@ -24,7 +24,7 @@ export class RoomService extends BaseService {
         url: this.EndPoint.roomList,
         basePath: this.basePath,
       }),
-      { params: filter }
+      filter
     );
   }
 

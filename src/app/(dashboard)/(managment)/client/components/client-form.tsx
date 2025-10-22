@@ -21,12 +21,12 @@ import { AddClientsRequest, EditClientsRequest } from "@/services/clients";
 import { useGetAllUser } from "@/services/users";
 import { UseFormReturn } from "react-hook-form";
 
-interface UserFormProps {
+interface ClientFormProps {
   form: UseFormReturn<AddClientsRequest, any, EditClientsRequest>;
 }
 
-export default function ClientForm({ form }: UserFormProps) {
-  const { data, isLoading } = useGetAllUser();
+export default function ClientForm({ form }: ClientFormProps) {
+  const { data, isLoading } = useGetAllUser({ returnAll: true });
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-1 gap-2 space-y-2">
@@ -85,7 +85,10 @@ export default function ClientForm({ form }: UserFormProps) {
                   onChange={(arg) => {
                     field.onChange(arg);
                   }}
-                  options={data?.map((i) => ({ label: i.name, value: i.id }))}
+                  options={data?.map((i) => ({
+                    label: i.username,
+                    value: i.id,
+                  }))}
                 />
               </FormControl>
               <FormMessage />

@@ -11,7 +11,7 @@ export class LlmService extends BaseService {
   };
 
   async llmList() {
-    return await this.post<GetAllLlmResponse[]>(
+    return await this.get<GetAllLlmResponse[]>(
       this.buildEndpoint({
         url: this.EndPoint.llmList,
         basePath: this.basePath,

@@ -9,19 +9,20 @@ import {
 } from "./user.interface";
 
 export class UserService extends BaseService {
-  public readonly basePath = "/ModelsManagement";
+  public readonly basePath = "/UsersManagement";
 
   public EndPoint = {
     userList: "/List",
     userAdd: "/Create",
   };
 
-  async userList() {
+  async userList(filter: GetAllUserRequest) {
     return await this.post<GetAllUserResponse[]>(
       this.buildEndpoint({
         url: this.EndPoint.userList,
         basePath: this.basePath,
-      })
+      }),
+      filter
     );
   }
 

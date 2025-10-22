@@ -12,17 +12,23 @@ import { Form } from "@/components/ui/form";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { AddClientsRequest, ClientsService } from "@/services/clients";
+import {
+  AddClientsRequest,
+  ClientsService,
+  useAddClients,
+} from "@/services/clients";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ClientForm from "./client-form";
 
 export default function CreateDialog() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const { mutateAsync, isPending } = useAddClients();
+
   const schema = ClientsService.clients();
 
   const form = useForm<AddClientsRequest>({
-    // disabled: isPending,
+    disabled: isPending,
     reValidateMode: "onBlur",
     resolver: zodResolver(schema),
     defaultValues: {
@@ -33,11 +39,12 @@ export default function CreateDialog() {
     },
   });
 
-  const onSubmit = async (values: "") => {
-    // const res = await mutateAsync(values);
-    // if (res.success) {
-    //   setIsOpen(false);
-    //   form.reset();
+  const onSubmit = async (values: AddClientsRequest) => {
+    const res = await mutateAsync(values);
+    if (res.isSuccess) {
+      setIsOpen(false);
+      form.reset();
+    }
   };
 
   return (
@@ -53,8 +60,7 @@ export default function CreateDialog() {
           <DialogTitle>ایجاد کلاینت</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form className="space-y-6">
-            {/* <CategoryFieldsForm form={form} /> */}
+          <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <ClientForm form={form} />
             <div className="flex justify-end gap-2">
               <Button
@@ -65,7 +71,11 @@ export default function CreateDialog() {
               >
                 لغو
               </Button>
-              <Button type="button" className="dialog-button">
+              <Button
+                type="submit"
+                loading={isPending}
+                className="dialog-button"
+              >
                 ذخیره
               </Button>
             </div>

@@ -1,34 +1,35 @@
+import { usePagination } from "@/hooks/use-pagination";
 import { queryClient } from "@/lib/queryClient";
-import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
-import { z } from "zod";
-import { ApiResponseDto, IDRequest } from "../../types/responseType";
-import { ClientsService } from "./clients.service";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { ApiResponseDto } from "../../types/responseType";
 import { GetAllClientsRequest } from "./clients.interface";
+import { ClientsService } from "./clients.service";
+import z from "zod";
 
 const service = new ClientsService();
 
 const useGetAllClients = (filter: GetAllClientsRequest) => {
-  return useInfiniteQuery({
-    queryKey: [service.EndPoint.clientsList, filter],
-    queryFn: ({ pageParam = 1 }) =>
+  const { pagination } = usePagination();
+
+  const query = useQuery({
+    queryKey: [service.EndPoint.clientsList, filter, pagination],
+    queryFn: () =>
       service.clientsList({
         ...filter,
-        pageNumber: pageParam,
-        pageSize: filter?.pageSize || 12,
+        ...pagination,
       }),
-    getNextPageParam: ({ pagingMetaData }) => {
-      // if (pagingMetaData && pagingMetaData. < pagingMetaData?.hasPrevious) {
-      return pagingMetaData?.currentPage + 1;
-      // }
-      // return undefined;
-    },
-    initialPageParam: 1,
   });
+  return {
+    ...query,
+    ...pagination,
+  };
 };
 const useGetClients = (id: string) => {
   const query = useQuery({
     queryKey: [service.EndPoint.clientsGet, id],
     queryFn: () => service.clientsGet(id),
+    enabled: z.string().uuid().safeParse(id).success,
+
     select: (data) => data.data,
   });
 
@@ -63,4 +64,4 @@ const useEditClients = () => {
   });
 };
 
-export { useAddClients, useGetAllClients, useEditClients, useGetClients };
+export { useAddClients, useEditClients, useGetAllClients, useGetClients };
