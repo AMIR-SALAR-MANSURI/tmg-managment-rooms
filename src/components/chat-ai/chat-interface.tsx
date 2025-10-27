@@ -65,13 +65,13 @@ export function ChatInterface({
                     </Avatar>
                   )}
 
-                  <div className="flex-1 max-w-[100%]" dir="rtl">
+                  <div className="flex-1 max-w-[75%]" dir="rtl">
                     <div
                       className={`rounded-2xl border p-4 ${
                         isUser ? "bg-muted" : "bg-muted"
                       }`}
                     >
-                      <p className="mb-4 text-sm text-gray-900">
+                      <p className="mb-4 text-sm text-gray-900 break-words whitespace-pre-wrap overflow-hidden">
                         {message.content}
                       </p>
                       <div className="flex items-center gap-2">

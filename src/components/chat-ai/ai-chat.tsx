@@ -121,17 +121,17 @@ export default function AiChat() {
         onSelectChat={handleSelectChat}
       />
       <div className="flex flex-1 flex-col">
-        {!selectedChatId ? (
+        {/* {!selectedChatId ? (
           <WelcomeScreen onSuggestionClick={handleSuggestionClick} />
-        ) : (
-          <ChatInterface
-            messages={messages}
-            input={input}
-            handleInputChange={handleInputChange}
-            handleSubmit={handleSubmit}
-            isLoading={isLoading}
-          />
-        )}
+        ) : ( */}
+        <ChatInterface
+          messages={messages}
+          input={input}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          isLoading={isLoading}
+        />
+        {/* )} */}
       </div>
     </div>
   );
