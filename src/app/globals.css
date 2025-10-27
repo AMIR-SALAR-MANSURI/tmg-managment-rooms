@@ -124,8 +124,39 @@
   --sidebar-border: oklch(0.3 0 0 / 0.1);
   --sidebar-ring: oklch(0.45 0.05 260);
 }
+* {
+  /* scrollbar-width: thin;
+  scrollbar-color: theme("colors.primary") theme("colors.gray.300"); */
+  /* scrollbar-3dlight-color: theme("colors.");
+  scrollbar-darkshadow-color: theme("colors.primary"); */
+  /* scrollbar-face-color: theme("backgroundColor.green.500");
+  scrollbar-highlight-color: theme("backgroundColor.green.500");
+  scrollbar-shadow-color: theme("backgroundColor.green.500"); */
+}
 
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
 
+::-webkit-scrollbar-track {
+  background: #e5e7eb; 
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: var(--primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.48 0.12 255); /* optional: slightly darker on hover */
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--muted); /* thumb / track */
+}
 
 .filepond--drop-label {
     font-family: "IRANSansfanum" !important;

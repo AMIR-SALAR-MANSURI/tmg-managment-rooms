@@ -10,6 +10,8 @@ import {
   Plus,
   Search,
   Settings,
+  Menu,
+  X,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -34,6 +36,7 @@ export default function Sidebar({
   onSelectChat,
 }: SidebarProps) {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isOpen, setIsOpen] = useState(true);
 
   const filteredChats = chats.filter(
     (chat) =>
@@ -42,82 +45,98 @@ export default function Sidebar({
   );
 
   return (
-    <div className="bg-muted flex w-80 flex-col border-r">
-      {/* Header */}
-      <div className="border-b p-4">
-        <Button className="w-full" variant={"primary"} onClick={onNewChat}>
-          <Plus />
-          New Chat
+    <>
+      {/* Menu button appears when sidebar is closed */}
+      {!isOpen && (
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute top-4 right-4 z-50"
+          onClick={() => setIsOpen(true)}
+        >
+          <Menu className="h-5 w-5" />
         </Button>
-      </div>
+      )}
 
-      {/* Recent Chats */}
-      <div className="flex min-h-0 flex-col">
-        <div className="px-4 py-2">
-          <div className="mb-2 flex items-center justify-between">
-            <h3 className="text-muted-foreground text-sm font-medium tracking-wide uppercase">
-              Recent Chats
-            </h3>
-            <Search className="h-4 w-4 text-gray-400" />
-          </div>
-          <div className="relative">
-            <Input
-              placeholder="Search chats..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="text-sm"
-            />
-          </div>
+      {/* Sidebar */}
+      <div
+        className={cn(
+          "bg-muted flex h-screen flex-col border-l transition-all duration-300",
+          isOpen ? "w-72 opacity-100" : "w-0 opacity-0 overflow-hidden"
+        )}
+      >
+        {/* Header */}
+        <div className="border-b p-4 flex items-center justify-between">
+          <h2 className="font-semibold text-right text-base">logo</h2>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="shrink-0"
+            onClick={() => setIsOpen(false)}
+          >
+            <X className="h-5 w-5" />
+          </Button>
         </div>
 
-        <div className="flex-1 overflow-hidden" dir="rtl">
-          <ScrollArea className="h-full">
-            <div className="space-y-1 pb-4">
-              {filteredChats.map((chat) => (
-                <Button
-                  key={chat.id}
-                  variant="ghost"
-                  onClick={() => onSelectChat(chat.id)}
-                  className={cn(
-                    "h-auto w-full justify-start p-3 text-left hover:bg-gray-100",
-                    selectedChatId === chat.id && "bg-gray-100"
-                  )}
-                >
-                  <div className="flex w-full items-start gap-2">
-                    <MessageCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-gray-400" />
-                    <div className="min-w-0 flex-1">
-                      <div className="truncate text-sm font-medium">
-                        {chat.title}
-                      </div>
-                      <div className="text-muted-foreground mt-0.5 truncate text-xs">
-                        {chat.preview}
-                      </div>
+        {/* Chat list */}
+        <div className="flex-1 min-h-0 flex flex-col">
+          {/* <ScrollArea className="flex-1"> */}
+          <div className="space-y-1 p-2 overflow-y-auto" dir="rtl">
+            {filteredChats.map((chat) => (
+              <Button
+                key={chat.id}
+                variant="ghost"
+                onClick={() => onSelectChat(chat.id)}
+                className={cn(
+                  "h-auto w-full justify-start p-3 text-right hover:bg-gray-100",
+                  selectedChatId === chat.id && "bg-gray-100"
+                )}
+              >
+                <div className="flex w-full items-start gap-2">
+                  <MessageCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-gray-400" />
+                  <div className="min-w-0 flex-1">
+                    <div className="truncate text-sm font-medium">
+                      {chat.title}
+                    </div>
+                    <div className="text-muted-foreground mt-0.5 truncate text-xs">
+                      {chat.preview}
                     </div>
                   </div>
-                </Button>
-              ))}
-            </div>
-          </ScrollArea>
+                </div>
+              </Button>
+            ))}
+          </div>
+          {/* </ScrollArea> */}
+        </div>
+
+        {/* Footer */}
+        <div className="border-t p-4 space-y-2">
+          <Button
+            className="text-muted-foreground w-full justify-start gap-2"
+            variant="ghost"
+            onClick={onNewChat}
+          >
+            <Plus className="h-4 w-4" />
+            New Chat
+          </Button>
+
+          <Button
+            variant="ghost"
+            className="text-muted-foreground w-full justify-start gap-2"
+          >
+            <Settings className="h-4 w-4" />
+            Settings
+          </Button>
+
+          <Button
+            variant="ghost"
+            className="text-muted-foreground w-full justify-start gap-2"
+          >
+            <HelpCircle className="h-4 w-4" />
+            Help & Support
+          </Button>
         </div>
       </div>
-
-      {/* Footer */}
-      <div className="space-y-1 border border-t p-4">
-        <Button
-          variant="ghost"
-          className="text-muted-foreground w-full justify-start gap-2"
-        >
-          <Settings className="h-4 w-4" />
-          Settings
-        </Button>
-        <Button
-          variant="ghost"
-          className="text-muted-foreground w-full justify-start gap-2"
-        >
-          <HelpCircle className="h-4 w-4" />
-          Help & Support
-        </Button>
-      </div>
-    </div>
+    </>
   );
 }

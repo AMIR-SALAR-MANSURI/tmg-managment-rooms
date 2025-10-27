@@ -5,6 +5,7 @@ import {
   EditRoomRequest,
   GetAllRoomRequest,
   GetAllRoomResponse,
+  GetRoomResponse,
 } from "./room.interface";
 import { IDRequest } from "@/types/responseType";
 
@@ -29,7 +30,7 @@ export class RoomService extends BaseService {
   }
 
   async roomGet(id: string) {
-    return await this.get<GetAllRoomResponse>(
+    return await this.get<GetRoomResponse>(
       this.buildEndpoint({
         url: this.EndPoint.roomGet,
         basePath: this.basePath,
@@ -67,7 +68,7 @@ export class RoomService extends BaseService {
       name: z.string(),
       description: z.string(),
       systemPrompt: z.string(),
-      imageBase64: z.string(),
+      ImageFile: z.any(),
       contentPrompt: z.string(),
       llmModelId: z.string(),
     });

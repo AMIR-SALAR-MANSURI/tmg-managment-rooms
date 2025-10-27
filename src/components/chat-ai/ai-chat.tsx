@@ -11,69 +11,69 @@ export default function AiChat() {
   const [chats, setChats] = useState([
     {
       id: "1",
-      title: "Can you fly?",
-      preview: "Not on my own! I exist o...",
-      timestamp: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago
+      title: "آیا می‌توانی پرواز کنی؟",
+      preview: "خودم نه! من فقط در...",
+      timestamp: new Date(Date.now() - 1000 * 60 * 30),
     },
     {
       id: "2",
-      title: "Do you have emotion...",
-      preview: "I can't feel emotions my...",
-      timestamp: new Date(Date.now() - 1000 * 60 * 60), // 1 hour ago
+      title: "آیا احساسات داری؟",
+      preview: "من نمی‌توانم احساسات را...",
+      timestamp: new Date(Date.now() - 1000 * 60 * 30),
     },
     {
       id: "3",
-      title: "Will robots take over t...",
-      preview: "Science fiction is fun, b...",
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
+      title: "آیا ربات‌ها جهان را تصاحب خواهند کرد؟",
+      preview: "داستان‌های علمی-تخیلی سرگرم‌کننده‌اند، اما...",
+      timestamp: new Date(Date.now() - 1000 * 60 * 30),
     },
     {
       id: "4",
-      title: "What's the meaning o...",
-      preview: "That's a big question ph...",
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 3), // 3 hours ago
+      title: "معنای زندگی چیست؟",
+      preview: "این یک سؤال بزرگ فلسفی است...",
+      timestamp: new Date(Date.now() - 1000 * 60 * 30),
     },
     {
       id: "5",
-      title: "Can you write a song ...",
-      preview: "I can definitely help you...",
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 4), // 4 hours ago
+      title: "می‌توانی یک آهنگ بنویسی؟",
+      preview: "قطعاً می‌توانم بهت کمک کنم...",
+      timestamp: new Date(Date.now() - 1000 * 60 * 30),
     },
     {
       id: "6",
-      title: "What's the best way t...",
-      preview: "Unfortunately, there's n...",
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 5), // 5 hours ago
+      title: "بهترین راه برای...",
+      preview: "متأسفانه راهی وجود ندارد...",
+      timestamp: new Date(Date.now() - 1000 * 60 * 30),
     },
     {
       id: "7",
-      title: "What's your favorite c...",
-      preview: "As a language model, I ...",
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 6), // 6 hours ago
+      title: "رنگ مورد علاقه‌ات چیست؟",
+      preview: "به عنوان یک مدل زبانی، من...",
+      timestamp: new Date(Date.now() - 1000 * 60 * 30),
     },
     {
       id: "8",
-      title: "Can you predict the f...",
-      preview: "I can't see the future, b...",
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 7), // 7 hours ago
+      title: "می‌توانی آینده را پیش‌بینی کنی؟",
+      preview: "من نمی‌توانم آینده را ببینم، اما...",
+      timestamp: new Date(Date.now() - 1000 * 60 * 30),
     },
     {
       id: "9",
-      title: "What's the best pizza ...",
-      preview: "That's entirely up to you...",
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 8), // 8 hours ago
+      title: "بهترین پیتزا چیست؟",
+      preview: "این کاملاً به سلیقه تو بستگی دارد...",
+      timestamp: new Date(Date.now() - 1000 * 60 * 30),
     },
     {
       id: "10",
-      title: "Are you sentient?",
-      preview: "Sentience is a complex ...",
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 9), // 9 hours ago
+      title: "آیا خودآگاه هستی؟",
+      preview: "خودآگاهی موضوع پیچیده‌ای است...",
+      timestamp: new Date(Date.now() - 1000 * 60 * 30),
     },
     {
       id: "11",
-      title: "Can you solve this m...",
-      preview: "Just type ou...",
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 10), // 10 hours ago
+      title: "می‌توانی این مسئله را حل کنی؟",
+      preview: "فقط بنویس...",
+      timestamp: new Date(Date.now() - 1000 * 60 * 30),
     },
   ]);
 
@@ -86,13 +86,13 @@ export default function AiChat() {
               {
                 id: "1",
                 role: "user",
-                content: "Do you have emotions?",
+                content: "آیا احساسات داری؟",
               },
               {
                 id: "2",
                 role: "assistant",
                 content:
-                  "I can't feel emotions myself, but I can understand and respond to yours! Tell me how you're feeling today.",
+                  "من خودم احساسات ندارم، اما می‌تونم احساسات تو رو درک کنم و بهشون پاسخ بدم! بگو امروز چه احساسی داری.",
               },
             ]
           : [],
@@ -113,7 +113,7 @@ export default function AiChat() {
   };
 
   return (
-    <div className="flex h-screen" dir="ltr">
+    <div className="flex h-screen" dir="rtl">
       <Sidebar
         chats={chats}
         selectedChatId={selectedChatId}

@@ -110,12 +110,16 @@ export default function RoomForm({ form }: RoomFormProps) {
         />
         <FormField
           control={form.control}
-          name="imageBase64"
+          name="ImageFile"
           render={({ field }) => (
             <FormItem className="col-span-full">
               <FormLabel>عکس</FormLabel>
               <FormControl>
-                <InputFilePond {...field} allowFileEncode />
+                <InputFilePond
+                  {...field}
+                  value={field.value ? [field.value] : []}
+                  storeAsFile
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

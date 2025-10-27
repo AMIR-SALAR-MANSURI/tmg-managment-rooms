@@ -42,7 +42,7 @@ export const columns = (): ColumnDef<ClientsList>[] => [
     cell: ({ row }) => {
       const isDisable = row.original.isDisabled === true;
       const variant = isDisable ? "destructive" : "primary";
-      const label = isDisable ? "فعال" : "غیرفعال";
+      const label = isDisable ? "غیرفعال" : "فعال";
       return <Tag variant={variant}>{label}</Tag>;
     },
   },

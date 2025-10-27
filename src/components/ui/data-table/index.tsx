@@ -165,8 +165,9 @@ const DataTable = <TData,>({
                           maxWidth: meta?.maxSize,
                           minWidth: meta?.minSize,
                         }}
+                        // border-l
                         className={cn(
-                          "px-1 h-[65px] border-b text-sm font-medium border-0 border-l last:border-l-0 border-border data-[align=left]:pl- data-[align=right]:pr-4 data-[isWordWrapped=false]:whitespace-nowrap data-[isDisabled=true]:text-neutral-third overflow-hidden text-ellipsis"
+                          "px-1 h-[65px] border-b text-sm font-medium border-0 last:border-l-0 border-border data-[align=left]:pl- data-[align=right]:pr-4 data-[isWordWrapped=false]:whitespace-nowrap data-[isDisabled=true]:text-neutral-third overflow-hidden text-ellipsis"
                         )}
                         data-isWordWrapped={meta?.isWordWrapped}
                         data-align={meta?.align || "center"}

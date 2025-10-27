@@ -53,14 +53,14 @@ export default function ClientForm({ form }: ClientFormProps) {
                 <Select
                   onValueChange={(val) => field.onChange(val === "true")}
                   value={String(field.value)}
-                  defaultValue="true"
+                  defaultValue="false"
                 >
                   <SelectTrigger aria-invalid={fieldState.invalid}>
                     <SelectValue placeholder="انتخاب وضعیت" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="true">فعال</SelectItem>
-                    <SelectItem value="false">غیرفعال</SelectItem>
+                    <SelectItem value="false">فعال</SelectItem>
+                    <SelectItem value="true">غیرفعال</SelectItem>
                   </SelectContent>
                 </Select>
               </FormControl>

@@ -32,6 +32,8 @@ export default function InputFilePond({
     const uploadStrategy =
       !props.allowFileEncode && !props.storeAsFile && !props.allowProcess;
 
+    console.log(file);
+
     const addBase64Prefix = (base64String: any) => {
       return `${base64String}`;
     };
@@ -95,6 +97,17 @@ export default function InputFilePond({
   return (
     <span>
       <FilePond
+        files={
+          Array.isArray(value)
+            ? value.map((v: any) =>
+                typeof v === "string"
+                  ? { source: v, options: { type: "local" } }
+                  : v
+              )
+            : value
+            ? [{ source: value, options: { type: "local" } }]
+            : []
+        }
         labelIdle='<div>فایل خود را بکش و رها کن یا <span class="filepond--label-action">جستجو کن</span></div>'
         onupdatefiles={(files) => onAddFile?.(files)}
         allowProcess={props.allowProcess || false}
