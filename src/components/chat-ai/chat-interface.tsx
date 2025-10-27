@@ -15,6 +15,7 @@ import {
   Mic,
 } from "lucide-react";
 import type { Message } from "@ai-sdk/react";
+import MarkdownRenderer from "../ui/markdown-renderer";
 
 interface ChatInterfaceProps {
   messages: Message[];
@@ -42,6 +43,7 @@ export function ChatInterface({
 
     // form.setFieldsValue({ userInput: masked });
   };
+
   return (
     <div className="relative flex h-screen flex-col">
       {/* Scrollable Chat Messages */}
@@ -72,7 +74,10 @@ export function ChatInterface({
                       }`}
                     >
                       <p className="mb-4 text-sm text-gray-900 break-words whitespace-pre-wrap overflow-hidden">
+                        {/* <MarkdownRenderer> */}
                         {message.content}
+
+                        {/* </MarkdownRenderer> */}
                       </p>
                       <div className="flex items-center gap-2">
                         <Button

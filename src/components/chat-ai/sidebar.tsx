@@ -46,7 +46,6 @@ export default function Sidebar({
 
   return (
     <>
-      {/* Menu button appears when sidebar is closed */}
       {!isOpen && (
         <Button
           variant="ghost"
@@ -127,14 +126,14 @@ export default function Sidebar({
             <Settings className="h-4 w-4" />
             Settings
           </Button>
-
+          {/* 
           <Button
             variant="ghost"
             className="text-muted-foreground w-full justify-start gap-2"
           >
             <HelpCircle className="h-4 w-4" />
             Help & Support
-          </Button>
+          </Button> */}
         </div>
       </div>
     </>
