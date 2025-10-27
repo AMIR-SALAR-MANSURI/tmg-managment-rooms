@@ -65,7 +65,7 @@ export function ChatInterface({
                     </Avatar>
                   )}
 
-                  <div className="flex-1 max-w-[75%]" dir="rtl">
+                  <div className="flex-1 max-w-[100%]" dir="rtl">
                     <div
                       className={`rounded-2xl border p-4 ${
                         isUser ? "bg-muted" : "bg-muted"
