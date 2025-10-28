@@ -84,8 +84,6 @@ export default function FormLab() {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 space-y-2">
-                {/* <div className="flex flex-col md:flex-row md:items-end gap-4 col-span-full"> */}
-                {/* <div className="flex-1"> */}
                 <FormField
                   control={form.control}
                   name="llmModelId"
@@ -116,12 +114,6 @@ export default function FormLab() {
                     </FormItem>
                   )}
                 />
-                {/* </div> */}
-
-                {/* <div className="flex-1"> */}
-
-                {/* </div> */}
-                {/* </div> */}
 
                 <FormField
                   control={form.control}
