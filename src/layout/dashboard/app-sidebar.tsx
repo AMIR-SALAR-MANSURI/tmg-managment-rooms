@@ -55,119 +55,7 @@ export const MenuItem = {
       title: "آزمایشگاه",
       url: "/laboratory",
       icon: LayoutDashboard,
-    },
-    // {
-    //   title: "دسته بندی",
-    //   url: "/dashboard/category",
-    //   icon: ClipboardList,
-    // },
-    // {
-    //   icon: Presentation,
-    //   title: "وبینارها / سمینارها",
-    //   url: "/dashboard/webinar",
-    // },
-    // {
-    //   title: "راه های ارتباطی",
-    //   url: "/dashboard/contact",
-    //   icon: LinkIcon,
-    //   children: [
-    //     {
-    //       icon: Phone,
-    //       title: "اطلاعات تماس",
-    //       url: "/dashboard/contact/info",
-    //     },
-    //     {
-    //       icon: UserRoundSearch,
-    //       title: "شبکه های اجتماعی",
-    //       url: "/dashboard/contact/social",
-    //     },
-    //     {
-    //       icon: MessageSquareText,
-    //       title: "درخواست ها",
-    //       url: "/dashboard/contact/request",
-    //     },
-    //   ],
-    // },
-    // {
-    //   icon: GraduationCap,
-    //   title: "پرتال دانشجویی",
-    //   url: "/dashboard/portal",
-    //   children: [
-    //     {
-    //       icon: FileText,
-    //       title: "مقالات",
-    //       url: "/dashboard/portal/article",
-    //     },
-    //   ],
-    // },
-    {
-      title: "اطلاعات من",
-      url: "/dashboard/my-information",
-      icon: Bot,
-      children: [
-        {
-          icon: Settings,
-          title: "درباره من",
-          url: "/dashboard/my-information/about",
-        },
-        {
-          icon: ImageIcon,
-          title: "گالری تصاویر",
-          url: "/dashboard/my-information/gallery",
-        },
-        {
-          icon: Briefcase,
-          title: "سوابق علمی / شغلی",
-          url: "/dashboard/my-information/career",
-        },
-        {
-          icon: BookOpenCheck,
-          title: "افتخارات / گواهینامه ها",
-          url: "/dashboard/my-information/certificates",
-        },
-        {
-          icon: FileText,
-          title: "مقالات",
-          url: "/dashboard/my-information/blog",
-        },
-        {
-          icon: FileText,
-          title: "جزوات",
-          url: "/dashboard/my-information/article",
-        },
-      ],
-    },
-    {
-      title: "مدیریت کاربران",
-      url: "/dashboard/user-management",
-      icon: Users,
-      children: [
-        {
-          icon: UserRoundSearch,
-          title: "لیست کاربران",
-          url: "/dashboard/user-management/users",
-        },
-        {
-          icon: UserRoundSearch,
-          title: "کاربران مسدود شده",
-          url: "/dashboard/user-management/ban",
-        },
-        {
-          icon: Users,
-          title: "نقش‌های کاربری",
-          url: "/dashboard/user-management/roles",
-        },
-        {
-          icon: ShieldQuestion,
-          title: "سطح‌های دسترسی",
-          url: "/dashboard/user-management/permissions",
-        },
-      ],
-    },
-    {
-      title: "سوالات متداول",
-      url: "/dashboard/FAQs",
-      icon: ShieldQuestion,
+      // children: [{}],
     },
   ],
 };
@@ -189,18 +77,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
         if (pathname === item.url || pathname.startsWith(item.url + "/")) {
           isActive = true;
-          if (item.children) {
+          if ((item as any).children) {
             keys.push(item.url);
           }
         }
-
-        if (item.children) {
-          item.children.forEach((child) => {
-            if (checkItem(child as any)) {
+        if ((item as any).children) {
+          (item as any).children.forEach((child: any) => {
+            if (checkItem(child)) {
               isActive = true;
-              if (item.children) {
-                keys.push(item.url);
-              }
+              keys.push(item.url);
             }
           });
         }
