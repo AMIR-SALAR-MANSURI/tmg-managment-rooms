@@ -51,6 +51,11 @@ export const MenuItem = {
       url: "/room",
       icon: Settings,
     },
+    {
+      title: "آزمایشگاه",
+      url: "/laboratory",
+      icon: LayoutDashboard,
+    },
     // {
     //   title: "دسته بندی",
     //   url: "/dashboard/category",
@@ -171,8 +176,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
   const [openKeys, setOpenKeys] = React.useState<string[]>([]);
   const { data } = useGetAllClients({ returnAll: true });
-
-  const defaultVersion = data?.data?.[0].id;
 
   // const [selectedVersion, setSelectedVersion] = React.useState(defaultVersion);
   const { selectedVersion, setSelectedVersion } = useClientStore();
