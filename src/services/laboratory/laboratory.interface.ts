@@ -27,6 +27,26 @@ interface Filter {
   returnAll?: boolean;
 }
 
+interface GetLab {
+  id: string;
+  isMarked: boolean;
+  createdAt: string;
+  systemPrompt: string;
+  contentPrompt: string;
+  question: string;
+  response: string;
+  temperature: number;
+  llmModel: {
+    id: string;
+    name: string;
+    nameFa: string;
+    description: string;
+    extendedData: string;
+    isDisabled: boolean;
+    queueServiceName: string;
+  };
+}
+
 const Lab = LabService.Lab();
 
 type AddLabRequest = z.infer<typeof Lab>;
@@ -34,7 +54,7 @@ type EditLabRequest = z.infer<typeof Lab>;
 type DeleteLabResponse = boolean;
 type GetAllLabResponse = LabList;
 type GetAllLabRequest = Filter & PaginationType;
-type GetLabResponse = LabList;
+type GetLabResponse = GetLab;
 
 export type {
   AddLabRequest,

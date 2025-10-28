@@ -70,7 +70,13 @@ export default function FormLab() {
 
   useEffect(() => {
     if (LabId) {
-      form.reset(detail.data);
+      form.reset({
+        contentPrompt: detail.data?.contentPrompt,
+        llmModelId: detail.data?.llmModel.id,
+        question: detail.data?.question,
+        systemPrompt: detail.data?.systemPrompt,
+        temperature: detail.data?.temperature,
+      });
     }
   }, [form, detail.data, LabId]);
 
@@ -114,7 +120,19 @@ export default function FormLab() {
                     </FormItem>
                   )}
                 />
-
+                <FormField
+                  control={form.control}
+                  name="systemPrompt"
+                  render={({ field }) => (
+                    <FormItem className="col-span-full">
+                      <FormLabel>systemPrompt</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="توضیحات" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <FormField
                   control={form.control}
                   name="contentPrompt"
@@ -132,7 +150,7 @@ export default function FormLab() {
                   control={form.control}
                   name="temperature"
                   rules={{
-                    required: "لطفا دقت را وارد کنید",
+                    required: "لطفا خلاقیت را وارد کنید",
                     validate: (value) =>
                       value > 0 && value <= 2
                         ? true
@@ -140,32 +158,19 @@ export default function FormLab() {
                   }}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>دقت</FormLabel>
+                      <FormLabel>خلاقیت</FormLabel>
                       <FormControl>
                         <Input
                           type="number"
                           step="0.01"
                           min="0"
                           max="2"
-                          placeholder="دقت را وارد نمایید"
+                          placeholder="خلاقیت را وارد نمایید"
                           {...field}
                           onChange={(e) =>
                             field.onChange(parseFloat(e.target.value))
                           }
                         />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="systemPrompt"
-                  render={({ field }) => (
-                    <FormItem className="col-span-full">
-                      <FormLabel>systemPrompt</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="توضیحات" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

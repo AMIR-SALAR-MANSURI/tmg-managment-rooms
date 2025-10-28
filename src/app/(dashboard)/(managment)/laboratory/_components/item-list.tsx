@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useGetAllLab } from "@/services/laboratory";
+import { useGetAllLab, useMarkLab } from "@/services/laboratory";
 import { LabList } from "@/services/laboratory/laboratory.interface";
 import { List, Star } from "lucide-react";
 import { useState } from "react";
@@ -23,12 +23,17 @@ export function ItemList({
   title = "لیست آیتم‌ها",
   items = [],
 }: ItemListProps) {
-  const [isActive, setIsActive] = useState(false);
   const { setLabId } = useLabStore();
 
   const { data, isLoading } = useGetAllLab({ returnAll: true });
 
-  const getStatusColor = (status?: string) => {
+  const { mutateAsync } = useMarkLab();
+
+  const onSubmit = async (id: string) => {
+    await mutateAsync(id);
+  };
+
+  const getLLmColor = (status?: string) => {
     switch (status) {
       case "Qwen-8":
         return "bg-green-500/10 text-green-700 dark:text-green-400";
@@ -41,7 +46,7 @@ export function ItemList({
     }
   };
 
-  const getStatusLabel = (status?: string) => {
+  const getLLmLabel = (status?: string) => {
     switch (status) {
       case "Qwen-8":
         return "Qwen-8";
@@ -73,14 +78,10 @@ export function ItemList({
               <div
                 key={item.id}
                 className="border border-border rounded-lg p-2 hover:bg-accent/50 transition-colors cursor-pointer"
-                onClick={() => setLabId(item.id)}
               >
                 <div className="flex items-start justify-between gap-3">
-                  <div className="space-y-1">
+                  <div className="space-y-1" onClick={() => setLabId(item.id)}>
                     <h4 className="font-medium w-40 truncate" dir="rtl">
-                      {/* {item.question.split(" ").length > 6
-                        ? item.question.split(" ").slice(0, 6).join(" ") + "..."
-                        : item.question} */}
                       {item.question}
                     </h4>
                     {item.response && (
@@ -95,15 +96,15 @@ export function ItemList({
                   <div className="flex items-center gap-0.5">
                     {item.llmModel && (
                       <span
-                        className={`text-xs px-2 py-1 rounded-full whitespace-nowrap ${getStatusColor(
+                        className={`text-xs px-2 py-1 rounded-full whitespace-nowrap ${getLLmColor(
                           item.llmModel.name
                         )}`}
                       >
-                        {getStatusLabel(item.llmModel.name)}
+                        {getLLmLabel(item.llmModel.name)}
                       </span>
                     )}
                     <button
-                      onClick={() => setIsActive(!isActive)}
+                      onClick={() => onSubmit(item.id)}
                       className="p-2 rounded-full transition-colors"
                     >
                       <Star

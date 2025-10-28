@@ -54,7 +54,7 @@ const useAddLab = () => {
   });
 };
 
-const useEditLab = () => {
+const useMarkLab = () => {
   return useMutation({
     mutationFn: service.labMark.bind(service),
     onSuccess(data: ApiResponseDto<{}>) {
@@ -67,4 +67,4 @@ const useEditLab = () => {
   });
 };
 
-export { useAddLab, useGetAllLab, useEditLab, useGetLab };
+export { useAddLab, useGetAllLab, useMarkLab, useGetLab };
