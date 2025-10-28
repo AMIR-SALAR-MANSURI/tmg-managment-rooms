@@ -30,7 +30,7 @@ export class LabService extends BaseService {
   }
 
   async labGet(id: string) {
-    return await this.get<GetLabResponse>(
+    return await this.post<GetLabResponse>(
       this.buildEndpoint({
         url: this.EndPoint.labGet,
         basePath: this.basePath,

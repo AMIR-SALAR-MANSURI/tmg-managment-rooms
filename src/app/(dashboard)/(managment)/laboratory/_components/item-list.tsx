@@ -2,8 +2,10 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useGetAllLab } from "@/services/laboratory";
+import { LabList } from "@/services/laboratory/laboratory.interface";
 import { List, Star } from "lucide-react";
 import { useState } from "react";
+import { useLabStore } from "../store";
 
 interface ListItem {
   id: string;
@@ -14,7 +16,7 @@ interface ListItem {
 
 interface ItemListProps {
   title?: string;
-  items?: ListItem[];
+  items?: LabList[];
 }
 
 export function ItemList({
@@ -22,6 +24,7 @@ export function ItemList({
   items = [],
 }: ItemListProps) {
   const [isActive, setIsActive] = useState(false);
+  const { setLabId } = useLabStore();
 
   const { data, isLoading } = useGetAllLab({ returnAll: true });
 
@@ -69,7 +72,8 @@ export function ItemList({
             {data?.data.map((item) => (
               <div
                 key={item.id}
-                className="border border-border rounded-lg p-2 hover:bg-accent/50 transition-colors"
+                className="border border-border rounded-lg p-2 hover:bg-accent/50 transition-colors cursor-pointer"
+                onClick={() => setLabId(item.id)}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="space-y-1">

@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/select";
 import { useForm } from "react-hook-form";
 import FormLab from "./_components/form-lab";
+import { useGetAllLab } from "@/services/laboratory";
 
 interface HistoryItem {
   id: string;
@@ -38,97 +39,6 @@ interface HistoryItem {
 }
 
 export default function Page() {
-  const [title, setTitle] = useState("");
-  const [message, setMessage] = useState("");
-  const [history, setHistory] = useState<HistoryItem[]>([]);
-
-  const sampleItems = [
-    {
-      id: "1",
-      title: "پروژه اول",
-      description: "توضیحات پروژه اول",
-      status: "active" as const,
-    },
-    {
-      id: "2",
-      title: "پروژه دوم",
-      description: "توضیحات پروژه دوم",
-      status: "pending" as const,
-    },
-    {
-      id: "3",
-      title: "پروژه سوم",
-      description: "توضیحات پروژه سوم",
-      status: "completed" as const,
-    },
-    {
-      id: "4",
-      title: "پروژه چهارم",
-      description: "توضیحات پروژه چهارم",
-      status: "active" as const,
-    },
-    {
-      id: "4",
-      title: "پروژه چهارم",
-      description: "توضیحات پروژه چهارم",
-      status: "active" as const,
-    },
-    {
-      id: "4",
-      title: "پروژه چهارم",
-      description: "توضیحات پروژه چهارم",
-      status: "active" as const,
-    },
-    {
-      id: "4",
-      title: "پروژه چهارم",
-      description: "توضیحات پروژه چهارم",
-      status: "active" as const,
-    },
-  ];
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!title.trim() || !message.trim()) return;
-
-    const newItem: HistoryItem = {
-      id: Date.now().toString(),
-      title: title.trim(),
-      message: message.trim(),
-      timestamp: new Date(),
-    };
-
-    setHistory([newItem, ...history]);
-    setTitle("");
-    setMessage("");
-  };
-
-  const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat("fa-IR", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    }).format(date);
-  };
-
-  const form = useForm<any>({
-    // disabled: isPending,
-    reValidateMode: "onBlur",
-    // resolver: zodResolver(schema),
-    defaultValues: {
-      clientId: undefined,
-      contentPrompt: undefined,
-      description: undefined,
-      ImageFile: undefined,
-      llmModelId: undefined,
-      name: undefined,
-      systemPrompt: undefined,
-    },
-  });
-
   return (
     <PageWrapper
       breadcrumbItems={[
@@ -139,7 +49,7 @@ export default function Page() {
     >
       <div className="flex gap-6 h-full">
         <aside className="w-80 flex-shrink-0 space-y-6">
-          <ItemList title="تاریخچه" items={sampleItems} />
+          <ItemList title="تاریخچه" />
         </aside>
         {/* Sidebar - Fixed width with form */}
         <main className="flex-1 min-w-0 space-y-6 h-[650px] overflow-y-auto p-1">

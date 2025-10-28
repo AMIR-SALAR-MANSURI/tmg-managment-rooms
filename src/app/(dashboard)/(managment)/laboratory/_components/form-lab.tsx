@@ -17,19 +17,28 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { AddLabRequest, LabService, useAddLab } from "@/services/laboratory";
+import {
+  AddLabRequest,
+  LabService,
+  useAddLab,
+  useGetLab,
+} from "@/services/laboratory";
 import { useGetAllLlm } from "@/services/llmModels";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Send } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import ResponseCard from "./response-card";
+import { useLabStore } from "../store";
 
-interface HistoryItem {}
 export default function FormLab() {
   const schema = LabService.Lab();
 
   const { mutateAsync, isPending, data: response } = useAddLab();
+
+  const { LabId } = useLabStore();
+
+  const detail = useGetLab(LabId as string);
 
   const { data, isLoading } = useGetAllLlm();
 
@@ -50,7 +59,7 @@ export default function FormLab() {
     disabled: isPending,
     reValidateMode: "onBlur",
     resolver: zodResolver(schema),
-    defaultValues: {
+    defaultValues: detail.data || {
       question: "",
       contentPrompt: "",
       temperature: undefined,
@@ -58,6 +67,13 @@ export default function FormLab() {
       systemPrompt: "",
     },
   });
+
+  useEffect(() => {
+    if (LabId) {
+      form.reset(detail.data);
+    }
+  }, [form, detail.data, LabId]);
+
   return (
     <>
       <Card className="top-6">
@@ -185,7 +201,9 @@ export default function FormLab() {
           </Form>
         </CardContent>
       </Card>
-      <ResponseCard response={response?.data.response} />
+      <ResponseCard
+        response={LabId ? detail.data?.response : response?.data.response}
+      />
     </>
   );
 }
