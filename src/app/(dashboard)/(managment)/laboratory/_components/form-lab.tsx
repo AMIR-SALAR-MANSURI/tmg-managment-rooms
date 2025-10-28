@@ -62,7 +62,7 @@ export default function FormLab() {
     defaultValues: detail.data || {
       question: "",
       contentPrompt: "",
-      temperature: undefined,
+      temperature: 0.5,
       llmModelId: "",
       systemPrompt: "",
     },
