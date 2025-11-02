@@ -25,6 +25,18 @@ const useGetAllRoom = (filter: GetAllRoomRequest) => {
     initialPageParam: 0,
   });
 };
+
+const useGetAllRooms = (filter: GetAllRoomRequest) => {
+  const query = useQuery({
+    queryKey: [service.EndPoint.roomGet, filter],
+    queryFn: () => service.roomList(filter),
+    select: (data) => data.data,
+  });
+
+  return {
+    ...query,
+  };
+};
 const useGetRoom = (id: string) => {
   const query = useQuery({
     queryKey: [service.EndPoint.roomGet, id],
@@ -64,4 +76,4 @@ const useEditRoom = () => {
   });
 };
 
-export { useAddRoom, useGetAllRoom, useEditRoom, useGetRoom };
+export { useAddRoom, useGetAllRoom, useEditRoom, useGetRoom, useGetAllRooms };

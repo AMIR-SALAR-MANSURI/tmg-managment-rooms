@@ -18,6 +18,7 @@ import { Pin, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { useLabStore } from "../store";
 import {
+  Form,
   FormControl,
   FormField,
   FormItem,
@@ -33,18 +34,21 @@ import {
 } from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useGetAllRoom, useGetAllRooms } from "@/services";
 
 export default function AssignDialog() {
   const [isOpen, setIsOpen] = useState(false);
 
   const { LabDeleteId } = useLabStore();
 
-  const deleteLab = useAssignLab();
+  const { data } = useGetAllRooms({ returnAll: true });
+
+  const { mutateAsync, isPending } = useAssignLab();
 
   const schema = LabService.Assign();
 
   const form = useForm<AssignLabRequest>({
-    // disabled: isPending,
+    disabled: isPending,
     reValidateMode: "onBlur",
     resolver: zodResolver(schema),
     defaultValues: {
@@ -53,11 +57,15 @@ export default function AssignDialog() {
     },
   });
 
-  const onSubmit = async () => {
-    // const res = await deleteLab.mutateAsync(LabDeleteId);
-    // if (res.isSuccess) {
-    //   setIsOpen(false);
-    // }
+  const onSubmit = async (values: AssignLabRequest) => {
+    const formValues = {
+      ...values,
+      id: LabDeleteId,
+    };
+    const res = await mutateAsync(formValues);
+    if (res.isSuccess) {
+      setIsOpen(false);
+    }
   };
 
   return (
@@ -70,36 +78,37 @@ export default function AssignDialog() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[800px] ">
         <DialogHeader>
-          <DialogTitle>حذف سوال</DialogTitle>
+          <DialogTitle>الصاق گفتگو به اتاق</DialogTitle>
         </DialogHeader>
-        <div>آیا مطمئن هستید می‌خواهید این آیتم را حذف کنید؟</div>
-        <div className="flex justify-end gap-2">
+        <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
               name="roomId"
               render={({ field, fieldState }) => (
                 <FormItem>
-                  <FormLabel>وضعیت</FormLabel>
+                  <FormLabel>اتاق</FormLabel>
                   <FormControl>
                     <Select
-                      onValueChange={(val) => field.onChange(val === "true")}
-                      value={String(field.value)}
-                      defaultValue="false"
+                      onValueChange={field.onChange}
+                      value={field.value || ""}
                     >
                       <SelectTrigger aria-invalid={fieldState.invalid}>
-                        <SelectValue placeholder="انتخاب وضعیت" />
+                        <SelectValue placeholder="انتخاب اتاق" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="false">فعال</SelectItem>
-                        <SelectItem value="true">غیرفعال</SelectItem>
+                        {data?.map((i) => (
+                          <SelectItem key={i.id} value={i.id}>
+                            {i.name}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
-            />{" "}
+            />
             <div className="flex justify-end gap-2">
               <Button
                 type="button"
@@ -118,7 +127,7 @@ export default function AssignDialog() {
               </Button>
             </div>
           </form>
-        </div>
+        </Form>
       </DialogContent>
     </Dialog>
   );

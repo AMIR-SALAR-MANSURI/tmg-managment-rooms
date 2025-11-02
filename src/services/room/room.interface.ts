@@ -18,6 +18,7 @@ interface Filter {
   pageSize?: number;
   searchTerm?: string;
   clientId?: string;
+  returnAll?: boolean;
 }
 
 interface GetRoom {
