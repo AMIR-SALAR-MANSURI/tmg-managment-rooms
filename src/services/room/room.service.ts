@@ -46,7 +46,12 @@ export class RoomService extends BaseService {
         basePath: this.basePath,
       }),
       request,
-      { notify: true }
+      {
+        notify: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
     );
   }
 
@@ -58,7 +63,12 @@ export class RoomService extends BaseService {
         values: [request.id],
       }),
       request,
-      { notify: true }
+      {
+        notify: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
     );
   }
 
