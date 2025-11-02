@@ -2,6 +2,7 @@ import { z } from "@/lib/zod";
 import { BaseService } from "@/services/BaseService";
 import {
   AddLabRequest,
+  DeleteLabResponse,
   EditLabRequest,
   GetAllLabRequest,
   GetAllLabResponse,
@@ -17,6 +18,7 @@ export class LabService extends BaseService {
     labAdd: "/send",
     labMark: "/{id}/mark",
     labGet: "/{id}",
+    labDelete: "/{id}/delete",
   };
 
   async labList(filter: GetAllLabRequest) {
@@ -57,6 +59,17 @@ export class LabService extends BaseService {
         basePath: this.basePath,
         values: [id],
       })
+    );
+  }
+
+  async labDelete(id: string) {
+    return await this.delete<DeleteLabResponse>(
+      this.buildEndpoint({
+        url: this.EndPoint.labDelete,
+        basePath: this.basePath,
+        values: [id],
+      }),
+      { notify: true }
     );
   }
 

@@ -67,4 +67,17 @@ const useMarkLab = () => {
   });
 };
 
-export { useAddLab, useGetAllLab, useMarkLab, useGetLab };
+const useDeleteLab = () => {
+  return useMutation({
+    mutationFn: service.labDelete.bind(service),
+    onSuccess(data: ApiResponseDto<{}>) {
+      if (data.isSuccess)
+        queryClient.invalidateQueries({
+          queryKey: [service.EndPoint.labList],
+          exact: false,
+        });
+    },
+  });
+};
+
+export { useAddLab, useGetAllLab, useMarkLab, useGetLab, useDeleteLab };

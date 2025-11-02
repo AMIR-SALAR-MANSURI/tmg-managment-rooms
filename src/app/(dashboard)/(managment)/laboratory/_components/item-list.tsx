@@ -1,11 +1,21 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useGetAllLab, useMarkLab } from "@/services/laboratory";
+import { useDeleteLab, useGetAllLab, useMarkLab } from "@/services/laboratory";
 import { LabList } from "@/services/laboratory/laboratory.interface";
-import { List, Star } from "lucide-react";
+import { Ellipsis, List, Star, Trash } from "lucide-react";
 import { useState } from "react";
 import { useLabStore } from "../store";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
+import { Popover, PopoverContent } from "@/components/ui/popover";
+import { PopoverTrigger } from "@radix-ui/react-popover";
+import DeleteDialog from "./dialog-delete";
 
 interface ListItem {
   id: string;
@@ -23,7 +33,7 @@ export function ItemList({
   title = "لیست آیتم‌ها",
   items = [],
 }: ItemListProps) {
-  const { setLabId } = useLabStore();
+  const { setLabId, setLabDeleteId } = useLabStore();
 
   const { data, isLoading } = useGetAllLab({ returnAll: true });
 
@@ -60,7 +70,7 @@ export function ItemList({
   };
 
   return (
-    <Card className="h-full">
+    <Card className="h-full w-full">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <List className="h-5 w-5" />
@@ -93,28 +103,43 @@ export function ItemList({
                       </p>
                     )}
                   </div>
-                  <div className="flex items-center gap-0.5">
-                    {item.llmModel && (
-                      <span
-                        className={`text-xs px-2 py-1 rounded-full whitespace-nowrap ${getLLmColor(
-                          item.llmModel.name
-                        )}`}
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="flex items-center gap-0.5">
+                      {item.llmModel && (
+                        <span
+                          className={`text-xs px-2 py-1 rounded-full whitespace-nowrap ${getLLmColor(
+                            item.llmModel.name
+                          )}`}
+                        >
+                          {getLLmLabel(item.llmModel.name)}
+                        </span>
+                      )}
+                      <button
+                        onClick={() => onSubmit(item.id)}
+                        className=" rounded-full transition-colors"
                       >
-                        {getLLmLabel(item.llmModel.name)}
-                      </span>
-                    )}
-                    <button
-                      onClick={() => onSubmit(item.id)}
-                      className="p-2 rounded-full transition-colors"
-                    >
-                      <Star
-                        className={`w-4 h-4 transition-colors cursor-pointer ${
-                          item.isMarked
-                            ? "text-yellow-500 fill-yellow-500"
-                            : "text-gray-400"
-                        }`}
-                      />
-                    </button>
+                        <Star
+                          className={`w-4 h-4 transition-colors cursor-pointer ${
+                            item.isMarked
+                              ? "text-yellow-500 fill-yellow-500"
+                              : "text-gray-400"
+                          }`}
+                        />
+                      </button>
+                    </div>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <div
+                          className="cursor-pointer"
+                          onClick={() => setLabDeleteId(item.id)}
+                        >
+                          <Ellipsis />
+                        </div>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-25 text-sm" dir="rtl">
+                        <DeleteDialog />
+                      </PopoverContent>
+                    </Popover>
                   </div>
                 </div>
               </div>

@@ -36,7 +36,7 @@ export default function FormLab() {
 
   const { mutateAsync, isPending, data: response } = useAddLab();
 
-  const { LabId } = useLabStore();
+  const { LabId, setLabId } = useLabStore();
 
   const detail = useGetLab(LabId as string);
 
@@ -80,11 +80,25 @@ export default function FormLab() {
     }
   }, [form, detail.data, LabId]);
 
+  const clearForm = () => {
+    setLabId("");
+    form.reset({
+      contentPrompt: "",
+      llmModelId: "",
+      question: "",
+      systemPrompt: "",
+      temperature: 0.5,
+    });
+  };
+
   return (
     <>
       <Card className="top-6">
         <CardHeader>
-          <CardTitle>فرم آزمایشگاه</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle>فرم آزمایشگاه</CardTitle>
+            <Button onClick={clearForm}>پاک کردن فرم</Button>
+          </div>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -98,6 +112,7 @@ export default function FormLab() {
                       <FormLabel>مدل زبانی</FormLabel>
                       <FormControl>
                         <Select
+                          disabled={isPending}
                           onValueChange={field.onChange}
                           value={field.value || ""}
                         >
@@ -190,7 +205,11 @@ export default function FormLab() {
                   )}
                 />
               </div>
-              <Button type="submit" className="w-full gap-2">
+              <Button
+                type="submit"
+                className="w-full gap-2"
+                loading={isPending}
+              >
                 <Send className="h-4 w-4" />
                 ارسال
               </Button>
