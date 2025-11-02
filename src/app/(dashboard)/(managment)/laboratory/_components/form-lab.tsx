@@ -102,8 +102,8 @@ export default function FormLab() {
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 space-y-2">
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
                 <FormField
                   control={form.control}
                   name="llmModelId"
@@ -130,32 +130,6 @@ export default function FormLab() {
                             ))}
                           </SelectContent>
                         </Select>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="systemPrompt"
-                  render={({ field }) => (
-                    <FormItem className="col-span-full">
-                      <FormLabel>systemPrompt</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="توضیحات" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="contentPrompt"
-                  render={({ field }) => (
-                    <FormItem className="col-span-full">
-                      <FormLabel>contentPrompt</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="توضیحات" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -191,6 +165,33 @@ export default function FormLab() {
                     </FormItem>
                   )}
                 />
+                <FormField
+                  control={form.control}
+                  name="systemPrompt"
+                  render={({ field }) => (
+                    <FormItem className="col-span-full">
+                      <FormLabel>systemPrompt</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="توضیحات" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="contentPrompt"
+                  render={({ field }) => (
+                    <FormItem className="col-span-full">
+                      <FormLabel>contentPrompt</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="توضیحات" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
                 <FormField
                   control={form.control}
                   name="question"

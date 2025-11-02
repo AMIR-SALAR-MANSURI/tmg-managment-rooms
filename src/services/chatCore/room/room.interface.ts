@@ -43,6 +43,7 @@ type DeleteRoomResponse = boolean;
 type GetAllRoomResponse = RoomList;
 type GetAllRoomRequest = Filter & PaginationType;
 type GetRoomResponse = GetRoom;
+type GetRoomRequest = { key: string; id: string };
 
 export type {
   AddRoomRequest,
@@ -51,6 +52,7 @@ export type {
   GetAllRoomResponse,
   GetAllRoomRequest,
   GetRoomResponse,
+  GetRoomRequest,
 };
 
 export type { RoomList };

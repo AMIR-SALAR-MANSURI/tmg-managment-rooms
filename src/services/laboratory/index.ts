@@ -4,4 +4,5 @@ export type {
   DeleteLabResponse,
   AddLabRequest,
   GetAllLabResponse,
+  AssignLabRequest,
 } from "./laboratory.interface";

@@ -5,18 +5,19 @@ import {
   EditRoomRequest,
   GetAllRoomRequest,
   GetAllRoomResponse,
+  GetRoomRequest,
   GetRoomResponse,
 } from "./room.interface";
 import { IDRequest } from "@/types/responseType";
 
 export class RoomService extends BaseService {
-  public readonly basePath = "/RoomsManagement";
+  public readonly basePath = "/RoomsManagement/clients";
 
   public EndPoint = {
     roomList: "/List",
     roomAdd: "/Create",
     roomEdit: "/{id}/Edit",
-    roomGet: "/{id}",
+    roomGet: "/{key}/Rooms/{id}",
   };
 
   async roomList(filter: GetAllRoomRequest) {
@@ -29,12 +30,12 @@ export class RoomService extends BaseService {
     );
   }
 
-  async roomGet(id: string) {
+  async roomGet(request: GetRoomRequest) {
     return await this.get<GetRoomResponse>(
       this.buildEndpoint({
         url: this.EndPoint.roomGet,
         basePath: this.basePath,
-        values: [id],
+        values: [request.key, request.id],
       })
     );
   }

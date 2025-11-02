@@ -16,6 +16,13 @@ import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent } from "@/components/ui/popover";
 import { PopoverTrigger } from "@radix-ui/react-popover";
 import DeleteDialog from "./dialog-delete";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import AssignDialog from "./dialog-assign";
 
 interface ListItem {
   id: string;
@@ -127,19 +134,37 @@ export function ItemList({
                         />
                       </button>
                     </div>
-                    <Popover>
-                      <PopoverTrigger asChild>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
                         <div
                           className="cursor-pointer"
                           onClick={() => setLabDeleteId(item.id)}
                         >
                           <Ellipsis />
                         </div>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-25 text-sm" dir="rtl">
-                        <DeleteDialog />
-                      </PopoverContent>
-                    </Popover>
+                      </DropdownMenuTrigger>
+
+                      <DropdownMenuContent side="bottom" className="w-32">
+                        <DropdownMenuItem className="cursor-pointer" dir="rtl">
+                          <div
+                            dir="rtl"
+                            onClick={(e) => e.stopPropagation()}
+                            className=""
+                          >
+                            <AssignDialog />
+                          </div>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="cursor-pointer" dir="rtl">
+                          <div
+                            dir="rtl"
+                            onClick={(e) => e.stopPropagation()}
+                            className=""
+                          >
+                            <DeleteDialog />
+                          </div>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </div>
                 </div>
               </div>

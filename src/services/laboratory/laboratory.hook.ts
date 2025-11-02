@@ -80,4 +80,24 @@ const useDeleteLab = () => {
   });
 };
 
-export { useAddLab, useGetAllLab, useMarkLab, useGetLab, useDeleteLab };
+const useAssignLab = () => {
+  return useMutation({
+    mutationFn: service.labAssign.bind(service),
+    onSuccess(data: ApiResponseDto<{}>) {
+      if (data.isSuccess)
+        queryClient.invalidateQueries({
+          queryKey: [service.EndPoint.labList],
+          exact: false,
+        });
+    },
+  });
+};
+
+export {
+  useAddLab,
+  useGetAllLab,
+  useMarkLab,
+  useGetLab,
+  useDeleteLab,
+  useAssignLab,
+};

@@ -35,13 +35,13 @@ export default function DeleteDialog() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <div className="cursor-pointer text-destructive flex items-center  gap-1">
+        <div className="cursor-pointer text-destructive flex items-center gap-1">
           حذف
-          <Trash2 className="w-4 h-4" />
+          <Trash2 className="w-4 h-4 text-destructive" />
         </div>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[800px]">
-        <DialogHeader>
+      <DialogContent className="sm:max-w-[800px] border-destructive-500">
+        <DialogHeader className="border-destructive-500">
           <DialogTitle>حذف سوال</DialogTitle>
         </DialogHeader>
         <div>آیا مطمئن هستید می‌خواهید این آیتم را حذف کنید؟</div>
@@ -59,8 +59,9 @@ export default function DeleteDialog() {
             loading={deleteLab.isPending}
             className="dialog-button"
             onClick={onSubmit}
+            variant={"destructive"}
           >
-            ذخیره
+            حذف
           </Button>
         </div>
       </DialogContent>

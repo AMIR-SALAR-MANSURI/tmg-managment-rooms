@@ -4,7 +4,7 @@ import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 
 import { cn } from "@/lib/utils";
-import { CloseSquare } from "iconsax-reactjs";
+import { CircleXIcon } from "lucide-react";
 
 const Dialog = DialogPrimitive.Root;
 
@@ -46,7 +46,7 @@ const DialogContent = React.forwardRef<
         id="close-dialog"
         className="absolute left-6 lg:left-8 top-3 lg:top-5 rounded-lg ring-offset-background hover:opacity-75 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
       >
-        <CloseSquare className="size-5 lg:size-6 text-primary-text" />
+        <CircleXIcon className="size-5 lg:size-6 text-primary-text" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>

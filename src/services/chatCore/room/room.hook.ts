@@ -1,9 +1,13 @@
+import { ApiResponseDto } from "@/types/responseType";
 import { queryClient } from "@/lib/queryClient";
 import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
 import { z } from "zod";
-import { ApiResponseDto, IDRequest } from "../../types/responseType";
 import { RoomService } from "./room.service";
-import { EditRoomRequest, GetAllRoomRequest } from "./room.interface";
+import {
+  EditRoomRequest,
+  GetAllRoomRequest,
+  GetRoomRequest,
+} from "./room.interface";
 
 const service = new RoomService();
 
@@ -25,11 +29,11 @@ const useGetAllRoom = (filter: GetAllRoomRequest) => {
     initialPageParam: 0,
   });
 };
-const useGetRoom = (id: string) => {
+const useGetRoom = (request: GetRoomRequest) => {
   const query = useQuery({
-    queryKey: [service.EndPoint.roomGet, id],
-    queryFn: () => service.roomGet(id),
-    enabled: z.string().uuid().safeParse(id).success,
+    queryKey: [service.EndPoint.roomGet, request.key, request.id],
+    queryFn: () => service.roomGet(request),
+    enabled: z.string().uuid().safeParse(request).success,
     select: (data) => data.data,
   });
 

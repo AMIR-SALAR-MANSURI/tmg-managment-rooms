@@ -2,13 +2,12 @@ import { z } from "@/lib/zod";
 import { BaseService } from "@/services/BaseService";
 import {
   AddLabRequest,
+  AssignLabRequest,
   DeleteLabResponse,
-  EditLabRequest,
   GetAllLabRequest,
   GetAllLabResponse,
   GetLabResponse,
 } from "./laboratory.interface";
-import { IDRequest } from "@/types/responseType";
 
 export class LabService extends BaseService {
   public readonly basePath = "/Laboratory/chat";
@@ -19,6 +18,7 @@ export class LabService extends BaseService {
     labMark: "/{id}/mark",
     labGet: "/{id}",
     labDelete: "/{id}/delete",
+    labAssign: "/{id}/assign",
   };
 
   async labList(filter: GetAllLabRequest) {
@@ -73,6 +73,18 @@ export class LabService extends BaseService {
     );
   }
 
+  async labAssign(request: AssignLabRequest) {
+    return await this.put<DeleteLabResponse>(
+      this.buildEndpoint({
+        url: this.EndPoint.labAssign,
+        basePath: this.basePath,
+        values: [request.id],
+      }),
+      request,
+      { notify: true }
+    );
+  }
+
   public static Lab() {
     return z.object({
       question: z.string(),
@@ -80,6 +92,13 @@ export class LabService extends BaseService {
       temperature: z.number(),
       contentPrompt: z.string(),
       llmModelId: z.string(),
+    });
+  }
+
+  public static Assign() {
+    return z.object({
+      id: z.string(),
+      roomId: z.string(),
     });
   }
 }

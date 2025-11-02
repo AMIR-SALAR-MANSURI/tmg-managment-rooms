@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { LabService } from "./laboratory.service";
-import { PaginationType } from "@/types/responseType";
+import { IDRequest, PaginationType } from "@/types/responseType";
 
 interface LabList {
   id: string;
@@ -55,6 +55,7 @@ type DeleteLabResponse = boolean;
 type GetAllLabResponse = LabList;
 type GetAllLabRequest = Filter & PaginationType;
 type GetLabResponse = GetLab;
+type AssignLabRequest = { roomId: string } & IDRequest;
 
 export type {
   AddLabRequest,
@@ -63,6 +64,7 @@ export type {
   GetAllLabResponse,
   GetAllLabRequest,
   GetLabResponse,
+  AssignLabRequest,
 };
 
 export type { LabList };
