@@ -47,10 +47,10 @@ export default function FormLab() {
     if (res.isSuccess) {
       form.reset({
         llmModelId: undefined,
-        contentPrompt: "",
-        temperature: 0.5,
-        systemPrompt: "",
-        question: "",
+        contentPrompt: undefined,
+        temperature: undefined,
+        systemPrompt: undefined,
+        question: undefined,
       });
     }
   };
@@ -60,11 +60,11 @@ export default function FormLab() {
     reValidateMode: "onBlur",
     resolver: zodResolver(schema),
     defaultValues: detail.data || {
-      question: "",
-      contentPrompt: "",
-      temperature: 0.5,
-      llmModelId: "",
-      systemPrompt: "",
+      llmModelId: undefined,
+      contentPrompt: undefined,
+      temperature: undefined,
+      systemPrompt: undefined,
+      question: undefined,
     },
   });
 
@@ -83,11 +83,11 @@ export default function FormLab() {
   const clearForm = () => {
     setLabId("");
     form.reset({
-      contentPrompt: "",
-      llmModelId: "",
-      question: "",
-      systemPrompt: "",
-      temperature: 0.5,
+      llmModelId: undefined,
+      contentPrompt: undefined,
+      temperature: undefined,
+      systemPrompt: undefined,
+      question: undefined,
     });
   };
 
