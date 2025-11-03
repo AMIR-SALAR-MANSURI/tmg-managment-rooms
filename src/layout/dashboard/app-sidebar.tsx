@@ -7,6 +7,7 @@ import {
   FileText,
   ImageIcon,
   LayoutDashboard,
+  LogOut,
   Settings,
   ShieldQuestion,
   UserSearch as UserRoundSearch,
@@ -26,6 +27,9 @@ import {
 import { VersionSwitcher } from "@/components/ui/version-switcher";
 import { useGetAllClients } from "@/services/clients";
 import { useClientStore } from "./store";
+import { Button } from "@/components/ui/button";
+import { ExitIcon } from "@radix-ui/react-icons";
+import { exists } from "fs";
 
 export const MenuItem = {
   versions: ["1 کلاینت", "کلاینت 2", "کلاینت 3"],
@@ -56,6 +60,13 @@ export const MenuItem = {
       url: "/laboratory",
       icon: LayoutDashboard,
       // children: [{}],
+    },
+  ],
+  exists: [
+    {
+      title: "خروج",
+      url: "/login",
+      icon: ExitIcon,
     },
   ],
 };
@@ -129,7 +140,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         {/* <NavDocuments items={data.documents} />
         <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
       </SidebarContent>
-      <SidebarFooter>{/* <NavUser user={data.user} /> */}</SidebarFooter>
+      <SidebarFooter>
+        <div
+          className="flex items-center justify-between w-full px-3 py-3 text-sm cursor-pointer text-destructive
+      hover:bg-accent hover:text-red-600 transition rounded-lg"
+          onClick={() => {
+            localStorage.removeItem("token"), (window.location.href = "/login");
+          }}
+          dir="rtl"
+        >
+          <span>خروج</span>
+          <LogOut className="h-4 w-4" />
+        </div>
+      </SidebarFooter>{" "}
     </Sidebar>
   );
 }

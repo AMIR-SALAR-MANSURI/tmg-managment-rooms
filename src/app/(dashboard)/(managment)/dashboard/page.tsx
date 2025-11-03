@@ -1,17 +1,10 @@
 "use client";
 
 import PageWrapper from "@/layout/dashboard/page-wrapper";
-import {
-  LayoutDashboard,
-  Users,
-  FileText,
-  Settings,
-  Building,
-} from "lucide-react";
+import { LayoutDashboard, Users, Settings, Building } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { CardPos } from "iconsax-reactjs";
 
 export default function Page() {
   const router = useRouter();
@@ -22,18 +15,33 @@ export default function Page() {
       icon: Users,
       href: "/client",
       description: "مشاهده و مدیریت کلاینت",
+      gradient: "from-blue-500 via-blue-400 to-cyan-400",
+      iconBg: "from-blue-500/30 via-blue-400/20 to-cyan-400/10",
+      iconColor: "text-blue-600 dark:text-blue-400",
+      borderColor: "border-blue-400/50 dark:border-blue-500/50",
+      shadowColor: "hover:shadow-blue-500/20",
     },
     {
       title: "اتاق",
       icon: Building,
       href: "/room",
       description: "مشاهده و مدیریت اتاق ها",
+      gradient: "from-purple-500 via-purple-400 to-pink-400",
+      iconBg: "from-purple-500/30 via-purple-400/20 to-pink-400/10",
+      iconColor: "text-purple-600 dark:text-purple-400",
+      borderColor: "border-purple-400/50 dark:border-purple-500/50",
+      shadowColor: "hover:shadow-purple-500/20",
     },
     {
       title: "آزمایشگاه",
       icon: Settings,
       href: "/laboratory",
       description: "پیکربندی و مدیریت تنظیمات سیستم",
+      gradient: "from-orange-500 via-orange-400 to-amber-400",
+      iconBg: "from-orange-500/30 via-orange-400/20 to-amber-400/10",
+      iconColor: "text-orange-600 dark:text-orange-400",
+      borderColor: "border-orange-400/50 dark:border-orange-500/50",
+      shadowColor: "hover:shadow-orange-500/20",
     },
   ];
 
@@ -63,29 +71,36 @@ export default function Page() {
             >
               <Card
                 onClick={() => router.push(item.href)}
-                className="
-                  cursor-pointer backdrop-blur-xl bg-white/60 dark:bg-black/30
-                  border border-white/50 shadow-[0_8px_18px_rgba(0,0,0,0.1)]
-                  hover:shadow-[0_10px_30px_rgba(0,0,0,0.2)]
-                  transition-all duration-300 rounded-2xl
-                "
+                className={`
+                  cursor-pointer backdrop-blur-xl bg-white/70 dark:bg-black/40
+                  border ${item.borderColor} shadow-[0_8px_18px_rgba(0,0,0,0.1)]
+                  hover:shadow-[0_12px_35px_rgba(0,0,0,0.15)] ${item.shadowColor}
+                  transition-all duration-300 rounded-2xl overflow-hidden
+                  relative group
+                `}
               >
-                <CardHeader className="flex flex-col items-center gap-4 pt-8">
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
+                />
+
+                <CardHeader className="flex flex-col items-center gap-4 pt-8 relative z-10">
                   <div
-                    className="
+                    className={`
                       p-4 rounded-full shadow-lg backdrop-blur-md
-                      bg-gradient-to-br from-blue-500/20 via-blue-400/10 to-transparent
-                      border border-blue-300/40 dark:border-blue-700/40
-                      group-hover:scale-110 transition-all
-                    "
+                      bg-gradient-to-br ${item.iconBg}
+                      border-2 ${item.borderColor}
+                      group-hover:scale-110 group-hover:rotate-6 transition-all duration-300
+                    `}
                   >
-                    <Icon className="w-10 h-10 text-blue-600 dark:text-blue-400" />
+                    <Icon
+                      className={`w-10 h-10 ${item.iconColor} drop-shadow-lg`}
+                    />
                   </div>
                   <CardTitle className="text-xl font-bold text-gray-800 dark:text-white">
                     {item.title}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="pb-8 text-center text-gray-600 dark:text-gray-300 text-sm">
+                <CardContent className="pb-8 text-center text-gray-600 dark:text-gray-300 text-sm relative z-10">
                   {item.description}
                 </CardContent>
               </Card>
