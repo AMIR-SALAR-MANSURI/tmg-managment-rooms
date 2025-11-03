@@ -14,9 +14,9 @@ import useAuth from "@/hooks/use-auth";
 import { LoginRequest } from "@/services";
 import { AuthService } from "@/services/auth/auth.service";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Sparkles } from "lucide-react";
+import { Eye, EyeOff, Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -66,7 +66,7 @@ export default function Login() {
           <div className="px-6 py-8">
             <Form {...form}>
               <form
-                className="space-y-6"
+                className="space-y-1"
                 onSubmit={form.handleSubmit(onSubmit)}
               >
                 <FormField
@@ -88,19 +88,39 @@ export default function Login() {
                 <FormField
                   control={form.control}
                   name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-gray-700">رمز عبور</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="password"
-                          placeholder="••••••"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+                  render={({ field }) => {
+                    const [showPassword, setShowPassword] = useState(false);
+
+                    return (
+                      <FormItem>
+                        <FormLabel className="text-gray-700">
+                          رمز عبور
+                        </FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Input
+                              type={showPassword ? "text" : "password"}
+                              placeholder="رمز عبور"
+                              {...field}
+                            />
+
+                            <button
+                              type="button"
+                              className="absolute left-2 top-3 text-gray-600"
+                              onClick={() => setShowPassword((prev) => !prev)}
+                            >
+                              {showPassword ? (
+                                <EyeOff size={18} />
+                              ) : (
+                                <Eye size={18} />
+                              )}
+                            </button>
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
                 />
 
                 <Button
