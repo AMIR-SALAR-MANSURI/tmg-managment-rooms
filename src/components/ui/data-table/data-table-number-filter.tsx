@@ -30,7 +30,6 @@ export default function DataTableNumberFilter<TData>({
       <Input
         type="number"
         inputMode="numeric"
-        variant="outline"
         placeholder={columnMeta?.placeholder ?? columnMeta?.label}
         value={(column.getFilterValue() as string) ?? ""}
         onChange={(event) => column.setFilterValue(event.target.value)}

@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import RoomForm from "../../_components/room-form";
 import { useEffect } from "react";
 
-const page = () => {
+const Page = () => {
   const { id } = useParams();
   const { mutateAsync, isPending } = useAddRoom();
   const router = useRouter();
@@ -101,4 +101,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

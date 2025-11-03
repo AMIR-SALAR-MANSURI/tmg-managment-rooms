@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 
-const page = () => {
+const Page = () => {
   const { mutateAsync, isPending } = useAddRoom();
   const router = useRouter();
 
@@ -75,4 +75,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
