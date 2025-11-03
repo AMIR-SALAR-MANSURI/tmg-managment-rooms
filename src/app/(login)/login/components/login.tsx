@@ -25,10 +25,11 @@ const schema = AuthService.Login();
 type LoginFormData = z.infer<typeof schema>;
 
 export default function Login() {
-  const { handleLogin, token } = useAuth();
+  const { handleLogin, token, isPending } = useAuth();
   const router = useRouter();
 
   const form = useForm<LoginFormData>({
+    disabled: isPending,
     resolver: zodResolver(schema),
     defaultValues: {
       username: undefined,
@@ -105,6 +106,7 @@ export default function Login() {
                 <Button
                   variant={"primary"}
                   type="submit"
+                  loading={isPending}
                   className="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   ورود به حساب

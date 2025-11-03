@@ -61,26 +61,72 @@ export const MenuItem = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  // const pathname = usePathname();
+  // const [openKeys, setOpenKeys] = React.useState<string[]>([]);
+  // const { data } = useGetAllClients({ returnAll: true });
+
+  // const { selectedVersion, setSelectedVersion } = useClientStore();
+
+  // React.useEffect(() => {
+  //   const findOpenKeys = (menuItems: typeof MenuItem.navMain): string[] => {
+  //     const keys: string[] = [];
+
+  //     const checkItem = (item: (typeof menuItems)[0]): boolean => {
+  //       let isActive = false;
+
+  //       if (pathname === item.url || pathname.startsWith(item.url + "/")) {
+  //         isActive = true;
+  //         if ((item as any).children) {
+  //           keys.push(item.url);
+  //         }
+  //       }
+  //       if ((item as any).children) {
+  //         (item as any).children.forEach((child: any) => {
+  //           if (checkItem(child)) {
+  //             isActive = true;
+  //             keys.push(item.url);
+  //           }
+  //         });
+  //       }
+
+  //       return isActive;
+  //     };
+
+  //     menuItems.forEach(checkItem);
+  //     return Array.from(new Set(keys));
+  //   };
+
+  //   const newOpenKeys = findOpenKeys(MenuItem.navMain);
+  //   setOpenKeys(newOpenKeys);
+  // }, [pathname]);
+
+  // const toggleOpenKey = (key: string) => {
+  //   setOpenKeys((prev) =>
+  //     prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
+  //   );
+  // };
+
   const pathname = usePathname();
   const [openKeys, setOpenKeys] = React.useState<string[]>([]);
   const { data } = useGetAllClients({ returnAll: true });
-
-  // const [selectedVersion, setSelectedVersion] = React.useState(defaultVersion);
   const { selectedVersion, setSelectedVersion } = useClientStore();
 
   React.useEffect(() => {
+    const cleanPath = pathname.split("?")[0].replace(/\/$/, "");
+
     const findOpenKeys = (menuItems: typeof MenuItem.navMain): string[] => {
       const keys: string[] = [];
 
       const checkItem = (item: (typeof menuItems)[0]): boolean => {
         let isActive = false;
 
-        if (pathname === item.url || pathname.startsWith(item.url + "/")) {
+        if (cleanPath === item.url || cleanPath.startsWith(`${item.url}/`)) {
           isActive = true;
           if ((item as any).children) {
             keys.push(item.url);
           }
         }
+
         if ((item as any).children) {
           (item as any).children.forEach((child: any) => {
             if (checkItem(child)) {

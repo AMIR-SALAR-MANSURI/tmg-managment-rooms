@@ -52,11 +52,35 @@ export function NavMain({
 }: NavMainProps) {
   const { isMobile, open } = useSidebar();
 
+  // const isItemActive = (url: string, children?: any[]): boolean => {
+  //   if (currentPath === url) return true;
+
+  //   if (children) {
+  //     return children.some((child) => currentPath === child.url);
+  //   }
+
+  //   return false;
+  // };
+
+  // const isParentItemActive = (children?: any[]): boolean => {
+  //   if (children) {
+  //     return children.some((child) => currentPath === child.url);
+  //   }
+  //   return false;
+  // };
+  const cleanPath = currentPath.split("?")[0].replace(/\/$/, "");
+
   const isItemActive = (url: string, children?: any[]): boolean => {
-    if (currentPath === url) return true;
+    // Active if exact match or child path
+    if (cleanPath === url || cleanPath.startsWith(`${url}/`)) {
+      return true;
+    }
 
     if (children) {
-      return children.some((child) => currentPath === child.url);
+      return children.some(
+        (child) =>
+          cleanPath === child.url || cleanPath.startsWith(`${child.url}/`)
+      );
     }
 
     return false;
@@ -64,7 +88,10 @@ export function NavMain({
 
   const isParentItemActive = (children?: any[]): boolean => {
     if (children) {
-      return children.some((child) => currentPath === child.url);
+      return children.some(
+        (child) =>
+          cleanPath === child.url || cleanPath.startsWith(`${child.url}/`)
+      );
     }
     return false;
   };
@@ -197,7 +224,10 @@ export function NavMain({
               ) : (
                 <SidebarMenuButton
                   asChild
-                  isActive={currentPath === item.url}
+                  isActive={
+                    cleanPath === item.url ||
+                    cleanPath.startsWith(`${item.url}/`)
+                  }
                   onClick={(e) => handleItemClick(item.url, false, e)}
                 >
                   <Link href={item.url}>

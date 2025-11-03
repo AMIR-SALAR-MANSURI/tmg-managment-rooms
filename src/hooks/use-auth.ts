@@ -52,5 +52,6 @@ export default function useAuth() {
     token,
     handleLogin,
     handleLogout,
+    isPending,
   };
 }
