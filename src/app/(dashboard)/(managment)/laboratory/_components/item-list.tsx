@@ -148,8 +148,10 @@ export function ItemList({
                         <DropdownMenuItem className="cursor-pointer" dir="rtl">
                           <div
                             dir="rtl"
-                            onClick={(e) => e.stopPropagation()}
-                            className=""
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setLabDeleteId(item.id);
+                            }}
                           >
                             <AssignDialog />
                           </div>
@@ -157,8 +159,10 @@ export function ItemList({
                         <DropdownMenuItem className="cursor-pointer" dir="rtl">
                           <div
                             dir="rtl"
-                            onClick={(e) => e.stopPropagation()}
-                            className=""
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setLabDeleteId(item.id);
+                            }}
                           >
                             <DeleteDialog />
                           </div>

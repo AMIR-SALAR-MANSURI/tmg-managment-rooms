@@ -61,55 +61,12 @@ export const MenuItem = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  // const pathname = usePathname();
-  // const [openKeys, setOpenKeys] = React.useState<string[]>([]);
-  // const { data } = useGetAllClients({ returnAll: true });
-
-  // const { selectedVersion, setSelectedVersion } = useClientStore();
-
-  // React.useEffect(() => {
-  //   const findOpenKeys = (menuItems: typeof MenuItem.navMain): string[] => {
-  //     const keys: string[] = [];
-
-  //     const checkItem = (item: (typeof menuItems)[0]): boolean => {
-  //       let isActive = false;
-
-  //       if (pathname === item.url || pathname.startsWith(item.url + "/")) {
-  //         isActive = true;
-  //         if ((item as any).children) {
-  //           keys.push(item.url);
-  //         }
-  //       }
-  //       if ((item as any).children) {
-  //         (item as any).children.forEach((child: any) => {
-  //           if (checkItem(child)) {
-  //             isActive = true;
-  //             keys.push(item.url);
-  //           }
-  //         });
-  //       }
-
-  //       return isActive;
-  //     };
-
-  //     menuItems.forEach(checkItem);
-  //     return Array.from(new Set(keys));
-  //   };
-
-  //   const newOpenKeys = findOpenKeys(MenuItem.navMain);
-  //   setOpenKeys(newOpenKeys);
-  // }, [pathname]);
-
-  // const toggleOpenKey = (key: string) => {
-  //   setOpenKeys((prev) =>
-  //     prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
-  //   );
-  // };
-
   const pathname = usePathname();
   const [openKeys, setOpenKeys] = React.useState<string[]>([]);
   const { data } = useGetAllClients({ returnAll: true });
   const { selectedVersion, setSelectedVersion } = useClientStore();
+
+  console.log(selectedVersion);
 
   React.useEffect(() => {
     const cleanPath = pathname.split("?")[0].replace(/\/$/, "");
@@ -161,24 +118,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           selectedVersion={selectedVersion}
           setSelectedVersion={setSelectedVersion}
         />
-        {/* <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              size="lg"
-              className="group-data-[collapsible=icon]:!p-0 items-center"
-              asChild
-            >
-              <Link href="/dashboard">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <Command className="size-4" />
-                </div>
-                <p className="flex-1 text-right truncate font-medium">
-                  داشبورد مدیریت
-                </p>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu> */}
       </SidebarHeader>
       <SidebarContent>
         <NavMain

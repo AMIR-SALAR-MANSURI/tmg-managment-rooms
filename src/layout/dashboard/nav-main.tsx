@@ -51,23 +51,6 @@ export function NavMain({
   currentPath,
 }: NavMainProps) {
   const { isMobile, open } = useSidebar();
-
-  // const isItemActive = (url: string, children?: any[]): boolean => {
-  //   if (currentPath === url) return true;
-
-  //   if (children) {
-  //     return children.some((child) => currentPath === child.url);
-  //   }
-
-  //   return false;
-  // };
-
-  // const isParentItemActive = (children?: any[]): boolean => {
-  //   if (children) {
-  //     return children.some((child) => currentPath === child.url);
-  //   }
-  //   return false;
-  // };
   const cleanPath = currentPath.split("?")[0].replace(/\/$/, "");
 
   const isItemActive = (url: string, children?: any[]): boolean => {

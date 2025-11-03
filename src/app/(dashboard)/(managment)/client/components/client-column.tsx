@@ -8,6 +8,7 @@ import { ClientsList } from "@/services/clients";
 import { CellContext, ColumnDef } from "@tanstack/react-table";
 import { Ban, Edit } from "lucide-react";
 import UpdateDialog from "./update-dialog";
+import { useRouter } from "next/navigation";
 
 export const columns = (): ColumnDef<ClientsList>[] => [
   {
@@ -54,9 +55,17 @@ export const columns = (): ColumnDef<ClientsList>[] => [
 ];
 
 const Actions = ({ row: { original } }: CellContext<ClientsList, unknown>) => {
+  const router = useRouter();
   return (
     <div className="flex items-center justify-center space-x-2 rtl:space-x-reverse">
       <UpdateDialog id={original.id} />
+      {/* <Button
+        model={"outline"}
+        variant={"secondary"}
+        onClick={() => router.push(`/gateWayLogin/${original.id}`)}
+      >
+        چت بات
+      </Button> */}
     </div>
   );
 };

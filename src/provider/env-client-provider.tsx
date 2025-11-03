@@ -1,6 +1,7 @@
 "use client";
 import {
   baseAxiosRequestInterceptors,
+  baseAxiosRequestInterceptorsCore,
   baseAxiosResponseInterceptors,
 } from "@/services/baseAxios";
 import { ReactNode, useEffect, useState } from "react";
@@ -11,6 +12,7 @@ interface EnvClientProviderProps {
 
 interface Env {
   baseUrl: string;
+  chatUrl: string;
 }
 
 declare global {
@@ -30,6 +32,8 @@ export default function EnvClientProvider({
       const data = await res.json();
       window.__CONFIG__ = data;
       baseAxiosRequestInterceptors(window.__CONFIG__?.baseUrl as string);
+      baseAxiosRequestInterceptorsCore(window.__CONFIG__?.chatUrl as string);
+
       baseAxiosResponseInterceptors();
       setEnv(data);
     }

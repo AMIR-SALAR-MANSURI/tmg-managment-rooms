@@ -7,5 +7,6 @@ export async function GET(request: NextRequest) {
   const { ...env } = process.env;
   return NextResponse.json({
     baseUrl: getBaseURL(env.NEXT_PUBLIC_API_URL as string),
+    chatUrl: getBaseURL(env.NEXT_PUBLIC_CHAT_URL as string),
   });
 }

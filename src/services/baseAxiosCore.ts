@@ -187,6 +187,7 @@ const baseAxiosRequestInterceptors = (baseUrl: string) => {
   requestInterceptorId = getBaseAxios().interceptors.request.use(
     (config) => {
       config.baseURL = baseUrl;
+
       return config;
     },
     (error) => {

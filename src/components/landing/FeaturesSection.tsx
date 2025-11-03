@@ -33,7 +33,7 @@ export function FeaturesSection({ data }: Props) {
           ></Button>
 
           <div
-            onClick={() => router.push("/chat-bot")}
+            // onClick={() => router.push("/chat-bot")}
             className="cursor-pointer"
           >
             <div className="relative h-48 w-full overflow-hidden">

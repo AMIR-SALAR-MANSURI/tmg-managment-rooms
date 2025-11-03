@@ -15,7 +15,7 @@ import {
   useDeleteLab,
 } from "@/services/laboratory";
 import { Pin, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLabStore } from "../store";
 import {
   Form,
@@ -52,7 +52,7 @@ export default function AssignDialog() {
     reValidateMode: "onBlur",
     resolver: zodResolver(schema),
     defaultValues: {
-      id: undefined,
+      id: LabDeleteId,
       roomId: undefined,
     },
   });
@@ -65,6 +65,7 @@ export default function AssignDialog() {
     const res = await mutateAsync(formValues);
     if (res.isSuccess) {
       setIsOpen(false);
+      form.reset();
     }
   };
 
@@ -120,7 +121,7 @@ export default function AssignDialog() {
               </Button>
               <Button
                 type="submit"
-                // loading={isPending}
+                loading={isPending}
                 className="dialog-button"
               >
                 ذخیره
