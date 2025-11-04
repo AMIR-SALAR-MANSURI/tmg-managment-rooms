@@ -28,7 +28,7 @@ export default function EnvClientProvider({
 
   useEffect(() => {
     async function fetchEnv() {
-      const res = await fetch("/api/front/env");
+      const res = await fetch(process.env.NEXT_PUBLIC_BASE_PATH + "/api/front/env");
       const data = await res.json();
       window.__CONFIG__ = data;
       baseAxiosRequestInterceptors(window.__CONFIG__?.baseUrl as string);
