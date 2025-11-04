@@ -80,7 +80,7 @@ export default function Login() {
                         نام کاربری
                       </FormLabel>
                       <FormControl>
-                        <Input placeholder="example@email.com" {...field} />
+                        <Input placeholder="admin" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
