@@ -171,7 +171,12 @@ const baseAxiosResponseInterceptors = () => {
       if (status === 401 || status === 403) {
         // authService().logout();
         localStorage.removeItem("token");
-        window.location.href = "/login";
+
+        const errorMessage = "زمان شما به پایان رسیده مجدد وراد سامانه شوید.";
+        toast.warning(errorMessage, {
+          position: "bottom-left",
+          description: message,
+        });
       }
 
       return Promise.reject(error);
