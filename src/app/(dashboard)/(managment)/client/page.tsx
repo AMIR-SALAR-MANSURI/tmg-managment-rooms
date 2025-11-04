@@ -6,7 +6,7 @@ import { LayoutDashboard, User } from "lucide-react";
 import { columns } from "./components/client-column";
 import CreateDialog from "./components/create-dialog";
 
-const page = () => {
+const Page = () => {
   const { data, isFetching } = useGetAllClients({ returnAll: false });
   return (
     <PageWrapper
@@ -35,4 +35,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -9,7 +9,7 @@ import { ClientsList, useGetAllClients } from "@/services/clients";
 import { LayoutDashboard, Plus, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const Page = () => {
   const { selectedVersion } = useClientStore();
   const { data, hasNextPage, isFetchingNextPage, fetchNextPage } =
     useGetAllRoom({
@@ -73,4 +73,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

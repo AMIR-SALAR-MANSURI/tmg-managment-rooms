@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
-import { ArrowDown2 } from "iconsax-reactjs";
 import { CheckIcon, ChevronDown, Loader2, Plus, XIcon } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "./button";
 import { Input } from "./input";
 import { Tag } from "./tag";
@@ -61,6 +60,13 @@ export default function SelectSearchable({
   const activeItemRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const searchValues = useCallback((): Option[] => {
+    if (!search) return getChild(options);
+    return getChild(options).filter((i) =>
+      i.label.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [search, options]);
+
   useEffect(() => {
     if (activeItemRef.current && !disabled) {
       activeItemRef.current.scrollIntoView({
@@ -85,7 +91,7 @@ export default function SelectSearchable({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [open, disabled]);
+  }, [open, disabled, searchValues, value]);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -173,13 +179,6 @@ export default function SelectSearchable({
     } else if (value === valueToRemove) {
       onChange?.("");
     }
-  };
-
-  const searchValues = (): Option[] => {
-    if (!search) return getChild(options);
-    return getChild(options).filter((i) =>
-      i.label.toLowerCase().includes(search.toLowerCase())
-    );
   };
 
   const normalize = (val: string) => {

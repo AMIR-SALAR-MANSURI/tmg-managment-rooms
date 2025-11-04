@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import useAuth from "@/hooks/use-auth";
-import { LoginRequest } from "@/services";
 import { AuthService } from "@/services/auth/auth.service";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff, Sparkles } from "lucide-react";
@@ -26,6 +25,9 @@ type LoginFormData = z.infer<typeof schema>;
 
 export default function Login() {
   const { handleLogin, token, isPending } = useAuth();
+
+  const [showPassword, setShowPassword] = useState(false);
+
   const router = useRouter();
 
   const form = useForm<LoginFormData>({
@@ -43,7 +45,7 @@ export default function Login() {
 
   useEffect(() => {
     if (token) router.push("/dashboard");
-  }, [token]);
+  }, [token, router]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 flex items-center justify-center px-6 py-12">
@@ -89,8 +91,6 @@ export default function Login() {
                   control={form.control}
                   name="password"
                   render={({ field }) => {
-                    const [showPassword, setShowPassword] = useState(false);
-
                     return (
                       <FormItem>
                         <FormLabel className="text-gray-700">

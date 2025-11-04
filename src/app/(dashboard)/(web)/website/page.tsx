@@ -5,7 +5,7 @@ import { HeroSection } from "@/components/landing/HeroSection";
 import { useGetAllLlm } from "@/services/llmModels";
 import React from "react";
 
-const page = () => {
+const Page = () => {
   const { data } = useGetAllLlm();
   return (
     <div>
@@ -16,4 +16,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
