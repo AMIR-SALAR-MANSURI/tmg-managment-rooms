@@ -72,7 +72,10 @@ export default function AssignDialog() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <div className="cursor-pointer flex items-center gap-1">
+        <div
+          className="cursor-pointer flex items-center gap-1 w-full"
+          onClick={(e) => e.stopPropagation()}
+        >
           الصاق
           <Pin className="w-4 h-4" />
         </div>

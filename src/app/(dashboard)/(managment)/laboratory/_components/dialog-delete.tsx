@@ -35,7 +35,10 @@ export default function DeleteDialog() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <div className="cursor-pointer text-destructive flex items-center gap-1">
+        <div
+          className="cursor-pointer text-destructive flex items-center gap-1 w-full"
+          onClick={(e) => e.stopPropagation()}
+        >
           حذف
           <Trash2 className="w-4 h-4 text-destructive" />
         </div>

@@ -152,6 +152,7 @@ export function ItemList({
                               e.stopPropagation();
                               setLabDeleteId(item.id);
                             }}
+                            className="w-full"
                           >
                             <AssignDialog />
                           </div>
@@ -163,6 +164,7 @@ export function ItemList({
                               e.stopPropagation();
                               setLabDeleteId(item.id);
                             }}
+                            className="w-full"
                           >
                             <DeleteDialog />
                           </div>
