@@ -33,10 +33,10 @@ export default function useAuth() {
 
   const handleLogin = async (values: LoginRequest) => {
     const res = await mutateAsync(values);
-    if (res) {
+    if (res.isSuccess) {
       localStorage.setItem("token", res.data.token);
       setToken(res.data.token);
-      router.push("/");
+      router.push(process.env.NEXT_PUBLIC_BASE_PATH as string);
       setAxiosAuthHeader();
     }
   };

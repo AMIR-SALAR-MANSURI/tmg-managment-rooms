@@ -142,8 +142,8 @@ export default function Login() {
             </div>
           </div>
 
-          <div className=" bg-gray-50 px-6 py-4 border-t border-gray-100">
-            <p className="text-center text-sm text-gray-500">
+          <div className=" bg-gray-50 px-6 py-4 border-t border-gray-100 flex items-center justify-center">
+            <p className="text-center text-sm text-gray-500 flex items-center gap-1">
               با ورود یا ثبت‌نام، شما{" "}
               <p className="text-blue-600 hover:underline">شرایط استفاده</p> و{" "}
               <p className="text-blue-600 hover:underline">حریم خصوصی</p> ما را
