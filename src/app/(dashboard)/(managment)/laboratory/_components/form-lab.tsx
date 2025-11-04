@@ -56,7 +56,7 @@ export default function FormLab() {
   };
 
   const form = useForm<AddLabRequest>({
-    disabled: isPending,
+    disabled: isPending || detail.isLoading,
     reValidateMode: "onBlur",
     resolver: zodResolver(schema),
     defaultValues: detail.data || {
