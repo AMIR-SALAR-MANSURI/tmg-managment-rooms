@@ -14,10 +14,13 @@ export default function Page() {
       title="آزمایشگاه"
       className="*:w-full *:min-h-full"
     >
-      <div className="flex gap-6 h-full">
-        <aside className="w-80 flex-shrink-0 space-y-6">
+      <div className="flex flex-col lg:flex-row gap-6 h-full">
+        {/* Sidebar */}
+        <aside className="w-full lg:w-80 flex-shrink-0 space-y-6">
           <ItemList title="تاریخچه" />
         </aside>
+
+        {/* Content */}
         <main className="flex-1 min-w-0 space-y-6 h-[650px] overflow-y-auto px-1">
           <FormLab />
         </main>
