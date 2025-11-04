@@ -94,9 +94,6 @@ function DataTableToolbarFilter<TData>({
         case "text":
           return (
             <Input
-              variant="filled"
-              iconRight={SearchStatus}
-              iconSize="lg"
               inputMode="numeric"
               className={cn(
                 ["max-w-60 lg:max-w-96", "max-w-32", "max-w-36", "max-w-40"]?.[
