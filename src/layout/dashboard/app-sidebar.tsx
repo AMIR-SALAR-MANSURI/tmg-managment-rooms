@@ -142,7 +142,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarFooter>
         <div
-          className="flex items-center justify-between w-full px-3 py-3 text-sm cursor-pointer text-destructive
+          className="flex items-center justify-between w-full  py-3 text-sm cursor-pointer text-destructive
       hover:bg-accent hover:text-red-600 transition rounded-lg"
           onClick={() => {
             localStorage.removeItem("token"), (window.location.href = "/login");
