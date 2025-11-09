@@ -43,8 +43,6 @@ const Page = () => {
   });
 
   useEffect(() => {
-    console.log(data?.imageFile?.imageBase64);
-
     form.reset({
       clientId: data?.clientId,
       contentPrompt: data?.contentPrompt,
@@ -54,7 +52,7 @@ const Page = () => {
       systemPrompt: data?.systemPrompt,
       ImageFile:
         data?.imageFile &&
-        `data:${data?.imageFile.imageContentType};base64,${data?.imageFile.imageBase64}`,
+        `data:${data?.imageFile.imageContentType};base64,${data.imageFile.imageBase64}`,
     });
   }, [form, data]);
 

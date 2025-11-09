@@ -27,6 +27,7 @@ import {
 import { useGetAllLlm } from "@/services/llmModels";
 import { useGetAllUser } from "@/services/users";
 import { UseFormReturn } from "react-hook-form";
+import InputFile from "@/components/ui/input-file";
 
 interface RoomFormProps {
   form: UseFormReturn<AddRoomRequest, any, EditRoomRequest>;
@@ -115,11 +116,19 @@ export default function RoomForm({ form }: RoomFormProps) {
             <FormItem className="col-span-full">
               <FormLabel>عکس</FormLabel>
               <FormControl>
-                <InputFilePond
+                <InputFile
+                  sendAsFile
+                  value={field.value}
+                  name={field.name}
+                  onChange={field.onChange}
+                  disabled={field.disabled}
+                  accept="image/*"
+                />
+                {/* <InputFilePond
                   {...field}
                   value={field.value ? [field.value] : []}
                   storeAsFile
-                />
+                /> */}
               </FormControl>
               <FormMessage />
             </FormItem>
