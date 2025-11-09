@@ -43,7 +43,7 @@ export default function useAuth() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    router.push(process.env.NEXT_PUBLIC_BASE_PATH + "/login");
+    router.push("/login");
     setToken(null);
     window.location.reload();
   };
