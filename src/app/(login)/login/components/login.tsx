@@ -172,7 +172,7 @@ export default function Login() {
 
       <div className="relative hidden lg:block bg-muted">
         <img
-          src="/support/images/ai-support.png"
+          src="/support/images/ChatGPT.png"
           alt="ورود"
           className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.3] dark:grayscale"
         />
