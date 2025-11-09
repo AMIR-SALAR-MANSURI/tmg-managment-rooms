@@ -13,7 +13,8 @@ import { Input } from "@/components/ui/input";
 import useAuth from "@/hooks/use-auth";
 import { AuthService } from "@/services/auth/auth.service";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, Sparkles } from "lucide-react";
+import { Eye, EyeOff, GalleryVerticalEnd, Sparkles } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -48,50 +49,68 @@ export default function Login() {
   }, [token, router]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 flex items-center justify-center px-6 py-12">
-      <div className="w-full max-w-md">
-        {/* Card Container */}
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-          {/* Card Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-8 text-center">
-            <div className="inline-flex items-center gap-3 mb-2">
-              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                <Sparkles className="w-6 h-6 text-white" />
-              </div>
+    <div className="grid min-h-screen lg:grid-cols-2 bg-gradient-to-br from-blue-50 via-white to-blue-50">
+      <div className="flex flex-col p-6 md:p-8">
+        <div className="flex justify-center md:justify-start">
+          <div className="flex items-center gap-2 font-semibold  transition-colors">
+            <div className="flex size-12 items-center justify-center rounded-md shadow-sm">
+              <Image
+                width={100}
+                height={100}
+                alt="Company Logo"
+                src="/support/icon/main.png"
+                priority
+                className="rounded-full"
+              />
             </div>
-            <h1 className="text-2xl font-bold text-white">
-              ورود به حساب کاربری
-            </h1>
-            <p className="text-blue-100 mt-2">لطفا اطلاعات خود را وارد کنید</p>
+            <span>داده پردازان بنیان آوا</span>
           </div>
+        </div>
 
-          <div className="px-6 py-8">
-            <Form {...form}>
-              <form
-                className="space-y-1"
-                onSubmit={form.handleSubmit(onSubmit)}
-              >
-                <FormField
-                  control={form.control}
-                  name="username"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-gray-700">
-                        نام کاربری
-                      </FormLabel>
-                      <FormControl>
-                        <Input placeholder="admin" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+        <div className="flex flex-1 items-center justify-center">
+          <div className="w-full max-w-md">
+            <div className="px-6 py-2 text-center ">
+              <div className="inline-flex items-center justify-center gap-3 mb-3">
+                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                  <Sparkles className="w-6 h-6 text-primary" />
+                </div>
+              </div>
 
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => {
-                    return (
+              <h1 className="text-2xl font-semibold text-foreground">
+                ورود به حساب کاربری
+              </h1>
+
+              <p className="text-muted-foreground mt-2 text-sm">
+                لطفاً اطلاعات خود را وارد کنید
+              </p>
+            </div>
+
+            <div className="px-6 py-8">
+              <Form {...form}>
+                <form
+                  className="space-y-4"
+                  onSubmit={form.handleSubmit(onSubmit)}
+                >
+                  <FormField
+                    control={form.control}
+                    name="username"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-700">
+                          نام کاربری
+                        </FormLabel>
+                        <FormControl>
+                          <Input placeholder="admin" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-gray-700">
                           رمز عبور
@@ -103,10 +122,9 @@ export default function Login() {
                               placeholder="رمز عبور"
                               {...field}
                             />
-
                             <button
                               type="button"
-                              className="absolute left-2 top-3 text-gray-600"
+                              className="absolute left-3 top-3 text-gray-500 hover:text-gray-700 transition-colors"
                               onClick={() => setShowPassword((prev) => !prev)}
                             >
                               {showPassword ? (
@@ -119,38 +137,46 @@ export default function Login() {
                         </FormControl>
                         <FormMessage />
                       </FormItem>
-                    );
-                  }}
-                />
+                    )}
+                  />
 
-                <Button
-                  variant={"primary"}
-                  type="submit"
-                  loading={isPending}
-                  className="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  ورود به حساب
-                </Button>
-              </form>
-            </Form>
-
-            <div className="mt-6 text-center">
-              <button className="text-sm text-gray-600 hover:text-blue-600 transition-colors">
-                حساب کاربری ندارید؟{" "}
-                <span className="font-medium text-blue-600">ثبت‌نام کنید</span>
-              </button>
+                  <Button
+                    variant="text"
+                    type="submit"
+                    loading={isPending}
+                    className="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium hover:from-blue-700 hover:to-blue-800 transition-all shadow-md hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    ورود به حساب
+                  </Button>
+                </form>
+              </Form>
             </div>
-          </div>
 
-          <div className=" bg-gray-50 px-6 py-4 border-t border-gray-100 flex items-center justify-center">
-            <p className="text-center text-sm text-gray-500 flex items-center gap-1">
-              با ورود یا ثبت‌نام، شما{" "}
-              <p className="text-blue-600 hover:underline">شرایط استفاده</p> و{" "}
-              <p className="text-blue-600 hover:underline">حریم خصوصی</p> ما را
-              می‌پذیرید.
-            </p>
+            <div className="bg-gray-50 px-6 py-4 border-t border-gray-100 text-center text-sm text-gray-500">
+              <p className="flex justify-center items-center flex-wrap gap-1">
+                با ورود یا ثبت‌نام، شما{" "}
+                <a href="#" className="text-blue-600 hover:underline">
+                  شرایط استفاده
+                </a>{" "}
+                و{" "}
+                <a href="#" className="text-blue-600 hover:underline">
+                  حریم خصوصی
+                </a>{" "}
+                ما را می‌پذیرید.
+              </p>
+            </div>
+            {/* </div> */}
           </div>
         </div>
+      </div>
+
+      <div className="relative hidden lg:block bg-muted">
+        <img
+          src="/support/images/ai-support.png"
+          alt="ورود"
+          className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.3] dark:grayscale"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/30 to-transparent" />
       </div>
     </div>
   );
