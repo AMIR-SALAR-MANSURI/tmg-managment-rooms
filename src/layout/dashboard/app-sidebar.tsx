@@ -30,6 +30,7 @@ import { useClientStore } from "./store";
 import { Button } from "@/components/ui/button";
 import { ExitIcon } from "@radix-ui/react-icons";
 import { exists } from "fs";
+import useAuth from "@/hooks/use-auth";
 
 export const MenuItem = {
   versions: ["1 کلاینت", "کلاینت 2", "کلاینت 3"],
@@ -76,6 +77,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const [openKeys, setOpenKeys] = React.useState<string[]>([]);
   const { data } = useGetAllClients({ returnAll: true });
   const { selectedVersion, setSelectedVersion } = useClientStore();
+  const { handleLogout } = useAuth();
 
   console.log(selectedVersion);
 
@@ -144,9 +146,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <div
           className="flex items-center justify-between w-full  py-3 text-sm cursor-pointer text-destructive
       hover:bg-accent hover:text-red-600 transition rounded-lg"
-          onClick={() => {
-            localStorage.removeItem("token"), (window.location.href = "/login");
-          }}
+          onClick={handleLogout}
           dir="rtl"
         >
           <span>خروج</span>
