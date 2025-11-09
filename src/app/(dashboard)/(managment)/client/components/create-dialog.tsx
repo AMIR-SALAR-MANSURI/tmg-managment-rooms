@@ -34,7 +34,7 @@ export default function CreateDialog() {
     defaultValues: {
       name: undefined,
       description: undefined,
-      isDisabled: undefined,
+      isDisabled: false,
       userIds: undefined,
     },
   });
