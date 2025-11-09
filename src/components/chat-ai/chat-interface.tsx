@@ -176,17 +176,14 @@ export function ChatInterface({
                 onInput={(e) => {
                   const target = e.currentTarget;
 
-                  // Reset height to calculate scrollHeight correctly
                   target.style.height = "auto";
 
-                  // Maximum height = 3 lines of text
-                  const lineHeight = 16; // adjust based on your text size
+                  const lineHeight = 16;
                   const maxHeight =
                     3 * lineHeight +
                     parseInt(getComputedStyle(target).paddingTop) +
                     parseInt(getComputedStyle(target).paddingBottom);
 
-                  // Set height: minimum of scrollHeight or maxHeight
                   target.style.height = `${Math.min(
                     target.scrollHeight,
                     maxHeight

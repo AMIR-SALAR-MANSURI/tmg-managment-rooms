@@ -23,6 +23,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import AssignDialog from "./dialog-assign";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface ListItem {
   id: string;
@@ -85,7 +86,19 @@ export function ItemList({
         </CardTitle>
       </CardHeader>
       <CardContent className="overflow-y-auto">
-        {data?.data.length === 0 ? (
+        {isLoading ? (
+          <div className="space-y-3 h-[550px]">
+            {[...Array(5)].map((_, idx) => (
+              <div
+                key={idx}
+                className="border border-border rounded-lg p-2 animate-pulse"
+              >
+                <Skeleton className="h-4 w-40 mb-2" />
+                <Skeleton className="h-3 w-full" />
+              </div>
+            ))}
+          </div>
+        ) : data?.data.length === 0 ? (
           <p className="text-center text-muted-foreground py-8" dir="rtl">
             هیچ آیتمی وجود ندارد
           </p>

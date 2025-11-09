@@ -48,7 +48,7 @@ export default function FormLab() {
       form.reset({
         llmModelId: undefined,
         contentPrompt: undefined,
-        temperature: undefined,
+        temperature: 0.5,
         systemPrompt: undefined,
         question: undefined,
       });
@@ -62,7 +62,7 @@ export default function FormLab() {
     defaultValues: detail.data || {
       llmModelId: undefined,
       contentPrompt: undefined,
-      temperature: undefined,
+      temperature: 0.5,
       systemPrompt: undefined,
       question: undefined,
     },
@@ -84,10 +84,10 @@ export default function FormLab() {
     setLabId("");
     form.reset({
       llmModelId: undefined,
-      contentPrompt: undefined,
-      temperature: undefined,
-      systemPrompt: undefined,
-      question: undefined,
+      contentPrompt: "",
+      temperature: 0.5,
+      systemPrompt: "",
+      question: "",
     });
   };
 

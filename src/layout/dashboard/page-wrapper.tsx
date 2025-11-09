@@ -84,7 +84,7 @@ export default function PageWrapper({
           </div>
         </div>
       </header>
-      <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+      <div className="flex flex-1 flex-col gap-4 p-4 pt-0 ">
         {/* <Separator /> */}
         <Card className="flex flex-col h-full">
           {(title || description || action) && (

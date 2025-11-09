@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Check, ChevronsUpDown, GalleryVerticalEnd } from "lucide-react";
+import { Check, ChevronsUpDown, GalleryVerticalEnd, XIcon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,11 +15,6 @@ import {
 } from "@/components/ui/sidebar";
 import { ClientsList } from "@/services/clients";
 
-type data = {
-  id: string;
-  name: string;
-};
-
 export function VersionSwitcher({
   versions,
   selectedVersion,
@@ -31,33 +26,31 @@ export function VersionSwitcher({
 }) {
   return (
     <SidebarMenu>
-      <SidebarMenuItem>
+      <SidebarMenuItem className="flex items-center justify-between">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground flex  justify-between items-center"
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground flex justify-between items-center flex-1"
             >
               <div className="flex items-center gap-2">
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                   <GalleryVerticalEnd className="size-4" />
                 </div>
-                {/* <span className="font-medium">Documentation</span> */}
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="">
+                  <span>
                     {selectedVersion ? (
-                      versions.map((i) => i.id === selectedVersion && i.name)
+                      versions.find((v) => v.id === selectedVersion)?.name
                     ) : (
                       <p className="text-gray-400">کلاینت را انتخاب نمایید</p>
                     )}
                   </span>
                 </div>
               </div>
-              <div>
-                <ChevronsUpDown className="size-5" />
-              </div>
+              <ChevronsUpDown className="size-5" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
+
           <DropdownMenuContent
             className="w-(--radix-dropdown-menu-trigger-width)"
             align="start"
@@ -77,6 +70,16 @@ export function VersionSwitcher({
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
+
+        {selectedVersion && (
+          <button
+            type="button"
+            onClick={() => setSelectedVersion("")}
+            className="ml-2 hover:text-destructive cursor-pointer"
+          >
+            <XIcon className="size-5" />
+          </button>
+        )}
       </SidebarMenuItem>
     </SidebarMenu>
   );
