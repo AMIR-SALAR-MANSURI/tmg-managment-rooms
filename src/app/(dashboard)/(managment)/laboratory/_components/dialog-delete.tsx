@@ -8,28 +8,27 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  AddClientsRequest,
-  ClientsService,
-  useAddClients,
-} from "@/services/clients";
 import { useDeleteLab } from "@/services/laboratory";
-import { Plus, Trash2 } from "lucide-react";
-import { useState } from "react";
-import { useLabStore } from "../store";
+import { Trash2 } from "lucide-react";
+import { useEffect, useState } from "react";
 
-export default function DeleteDialog() {
+interface Props {
+  id?: string | undefined;
+}
+
+export default function DeleteDialog({ id }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-
-  const { LabDeleteId, setLabDeleteId } = useLabStore();
 
   const deleteLab = useDeleteLab();
 
+  useEffect(() => {
+    console.log(isOpen ? id : "");
+  }, [id, isOpen]);
+
   const onSubmit = async () => {
-    const res = await deleteLab.mutateAsync(isOpen ? LabDeleteId : "");
+    const res = await deleteLab.mutateAsync(isOpen ? (id as string) : "");
     if (res.isSuccess) {
       setIsOpen(false);
-      setLabDeleteId("");
     }
   };
 

@@ -47,10 +47,10 @@ export default function FormLab() {
     if (res.isSuccess) {
       form.reset({
         llmModelId: undefined,
-        contentPrompt: undefined,
+        contentPrompt: "",
         temperature: 0.5,
-        systemPrompt: undefined,
-        question: undefined,
+        systemPrompt: "",
+        question: "",
       });
     }
   };
@@ -69,13 +69,13 @@ export default function FormLab() {
   });
 
   useEffect(() => {
-    if (LabId) {
+    if (LabId && detail.data) {
       form.reset({
-        contentPrompt: detail.data?.contentPrompt,
-        llmModelId: detail.data?.llmModel.id,
-        question: detail.data?.question,
-        systemPrompt: detail.data?.systemPrompt,
-        temperature: detail.data?.temperature,
+        contentPrompt: detail.data.contentPrompt ?? "",
+        llmModelId: detail.data.llmModel?.id ?? "",
+        question: detail.data.question ?? "",
+        systemPrompt: detail.data.systemPrompt ?? "",
+        temperature: detail.data.temperature ?? 0,
       });
     }
   }, [form, detail.data, LabId]);
@@ -83,7 +83,7 @@ export default function FormLab() {
   const clearForm = () => {
     setLabId("");
     form.reset({
-      llmModelId: undefined,
+      llmModelId: "",
       contentPrompt: "",
       temperature: 0.5,
       systemPrompt: "",
@@ -219,7 +219,7 @@ export default function FormLab() {
         </CardContent>
       </Card>
       <ResponseCard
-        response={LabId ? detail.data?.response : response?.data.response}
+        response={LabId ? detail.data?.response : response?.data.response || ""}
       />
     </>
   );

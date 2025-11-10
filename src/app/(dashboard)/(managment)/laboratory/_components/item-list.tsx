@@ -179,7 +179,7 @@ export function ItemList({
                             }}
                             className="w-full"
                           >
-                            <DeleteDialog />
+                            <DeleteDialog id={item.id} />
                           </div>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
