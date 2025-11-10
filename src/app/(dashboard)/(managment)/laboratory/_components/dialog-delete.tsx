@@ -21,14 +21,15 @@ import { useLabStore } from "../store";
 export default function DeleteDialog() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { LabDeleteId } = useLabStore();
+  const { LabDeleteId, setLabDeleteId } = useLabStore();
 
   const deleteLab = useDeleteLab();
 
   const onSubmit = async () => {
-    const res = await deleteLab.mutateAsync(LabDeleteId);
+    const res = await deleteLab.mutateAsync(isOpen ? LabDeleteId : "");
     if (res.isSuccess) {
       setIsOpen(false);
+      setLabDeleteId("");
     }
   };
 

@@ -27,7 +27,7 @@ export default function ResponseCard({ response }: Props) {
               }}
               dir="rtl"
             >
-              {response}
+              {response ? response : ""}
             </p>
           </div>
         )}
