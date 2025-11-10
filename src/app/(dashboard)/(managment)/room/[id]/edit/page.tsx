@@ -1,26 +1,24 @@
 "use client";
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
 import PageWrapper from "@/layout/dashboard/page-wrapper";
-import { useClientStore } from "@/layout/dashboard/store";
 import {
-  AddRoomRequest,
   EditRoomRequest,
   RoomService,
-  useAddRoom,
-  useGetAllRoom,
+  useEditRoom,
   useGetRoom,
 } from "@/services";
-import { User } from "lucide-react";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { User } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { Form } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import RoomForm from "../../_components/room-form";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import RoomForm from "../../_components/room-form";
+import { string } from "zod";
 
 const Page = () => {
   const { id } = useParams();
-  const { mutateAsync, isPending } = useAddRoom();
+  const { mutateAsync, isPending } = useEditRoom();
   const router = useRouter();
 
   const schema = RoomService.Room();
@@ -59,7 +57,7 @@ const Page = () => {
   const onSubmit = async (values: EditRoomRequest) => {
     const formValues = {
       ...values,
-      id,
+      id: id as string,
     };
     const res = await mutateAsync(formValues);
     if (res.isSuccess) {
