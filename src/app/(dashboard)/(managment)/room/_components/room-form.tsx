@@ -123,6 +123,7 @@ export default function RoomForm({ form }: RoomFormProps) {
                   onChange={field.onChange}
                   disabled={field.disabled}
                   accept="image/*"
+                  maxSize={1 * 1024 * 1024}
                 />
                 {/* <InputFilePond
                   {...field}

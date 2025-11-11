@@ -52,7 +52,7 @@ export function VersionSwitcher({
           </DropdownMenuTrigger>
 
           <DropdownMenuContent
-            className="w-(--radix-dropdown-menu-trigger-width)"
+            className="w-(--radix-dropdown-menu-trigger-width) max-h-32"
             align="start"
           >
             {versions.map((version) => (

@@ -7,7 +7,7 @@ import { useClientStore } from "@/layout/dashboard/store";
 import { useGetAllRoom } from "@/services";
 import { LayoutDashboard, Plus, User } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Skeleton } from "@/components/ui/skeleton"; // ✅ Assuming you have this Shadcn Skeleton
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Page = () => {
   const { selectedVersion } = useClientStore();

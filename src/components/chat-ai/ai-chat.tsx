@@ -80,6 +80,7 @@ export default function AiChat() {
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     useChat({
       api: "/api/chat",
+
       initialMessages:
         selectedChatId === "2"
           ? [

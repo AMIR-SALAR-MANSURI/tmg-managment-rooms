@@ -1,5 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import React from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface Props {
   response?: any;
@@ -27,7 +29,32 @@ export default function ResponseCard({ response }: Props) {
               }}
               dir="rtl"
             >
-              {response ? response : ""}
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  code({ node, inline, className, children, ...props }: any) {
+                    return inline ? (
+                      <code
+                        className="bg-gray-900 text-white px-1 rounded"
+                        {...props}
+                      >
+                        {children}
+                      </code>
+                    ) : (
+                      <pre
+                        className="bg-gray-900 text-white p-2 rounded overflow-auto"
+                        dir="ltr"
+                      >
+                        <code className={`${className} text-white`} {...props}>
+                          {children}
+                        </code>
+                      </pre>
+                    );
+                  },
+                }}
+              >
+                {response ? response : ""}
+              </ReactMarkdown>
             </p>
           </div>
         )}

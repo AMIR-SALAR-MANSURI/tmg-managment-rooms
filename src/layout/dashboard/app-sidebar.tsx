@@ -1,18 +1,6 @@
 "use client";
 
-import {
-  BookOpenCheck,
-  Bot,
-  Briefcase,
-  FileText,
-  ImageIcon,
-  LayoutDashboard,
-  LogOut,
-  Settings,
-  ShieldQuestion,
-  UserSearch as UserRoundSearch,
-  Users,
-} from "lucide-react";
+import { LayoutDashboard, LogOut, Settings } from "lucide-react";
 import * as React from "react";
 
 import { usePathname } from "next/navigation";
@@ -25,12 +13,10 @@ import {
   SidebarHeader,
 } from "@/components/ui/sidebar";
 import { VersionSwitcher } from "@/components/ui/version-switcher";
-import { useGetAllClients } from "@/services/clients";
-import { useClientStore } from "./store";
-import { Button } from "@/components/ui/button";
-import { ExitIcon } from "@radix-ui/react-icons";
-import { exists } from "fs";
 import useAuth from "@/hooks/use-auth";
+import { useGetAllClients } from "@/services/clients";
+import { ExitIcon } from "@radix-ui/react-icons";
+import { useClientStore } from "./store";
 
 export const MenuItem = {
   versions: ["1 کلاینت", "کلاینت 2", "کلاینت 3"],
@@ -78,8 +64,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data } = useGetAllClients({ returnAll: true });
   const { selectedVersion, setSelectedVersion } = useClientStore();
   const { handleLogout } = useAuth();
-
-  console.log(selectedVersion);
 
   React.useEffect(() => {
     const cleanPath = pathname.split("?")[0].replace(/\/$/, "");
