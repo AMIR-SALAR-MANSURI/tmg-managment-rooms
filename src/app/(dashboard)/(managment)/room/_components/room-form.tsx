@@ -148,7 +148,7 @@ export default function RoomForm({ form }: RoomFormProps) {
             </FormItem>
           )}
         />
-        <FormField
+        {/* <FormField
           control={form.control}
           name="systemPrompt"
           render={({ field }) => (
@@ -160,7 +160,7 @@ export default function RoomForm({ form }: RoomFormProps) {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         <FormField
           control={form.control}
           name="description"

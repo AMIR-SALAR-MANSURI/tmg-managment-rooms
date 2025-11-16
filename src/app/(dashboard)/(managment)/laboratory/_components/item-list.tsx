@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import AssignDialog from "./dialog-assign";
 import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 
 interface ListItem {
   id: string;
@@ -41,7 +42,7 @@ export function ItemList({
   title = "لیست آیتم‌ها",
   items = [],
 }: ItemListProps) {
-  const { setLabId, setLabDeleteId } = useLabStore();
+  const { setLabId, setLabDeleteId, LabId } = useLabStore();
 
   const { data, isLoading } = useGetAllLab({ returnAll: true });
 
@@ -107,10 +108,16 @@ export function ItemList({
             {data?.data.map((item) => (
               <div
                 key={item.id}
-                className="border border-border rounded-lg p-2 hover:bg-accent/50 transition-colors cursor-pointer"
+                className={cn(
+                  "border border-border rounded-lg p-2 hover:bg-accent/50 transition-colors cursor-pointer",
+                  LabId === item.id && "bg-gray-50"
+                )}
               >
                 <div className="flex items-start justify-between gap-3">
-                  <div className="space-y-1" onClick={() => setLabId(item.id)}>
+                  <div
+                    className={cn("space-y-1")}
+                    onClick={() => setLabId(item.id)}
+                  >
                     <h4 className="font-medium w-40 truncate" dir="rtl">
                       {item.question}
                     </h4>

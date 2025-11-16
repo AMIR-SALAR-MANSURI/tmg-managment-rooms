@@ -63,7 +63,7 @@ export default function FormLab() {
       llmModelId: undefined,
       contentPrompt: undefined,
       temperature: 0.5,
-      systemPrompt: undefined,
+      systemPrompt: "",
       question: undefined,
     },
   });
@@ -165,7 +165,7 @@ export default function FormLab() {
                     </FormItem>
                   )}
                 />
-                <FormField
+                {/* <FormField
                   control={form.control}
                   name="systemPrompt"
                   render={({ field }) => (
@@ -177,7 +177,7 @@ export default function FormLab() {
                       <FormMessage />
                     </FormItem>
                   )}
-                />
+                /> */}
                 <FormField
                   control={form.control}
                   name="contentPrompt"
