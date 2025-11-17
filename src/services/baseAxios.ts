@@ -111,7 +111,6 @@ const baseAxiosResponseInterceptors = () => {
       if (status === 401 || status === 403) {
         // authService().logout();
         localStorage.removeItem("token");
-        window.location.href = "/login";
       }
 
       return Promise.reject(error);
