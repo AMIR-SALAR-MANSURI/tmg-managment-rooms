@@ -219,7 +219,9 @@ export default function FormLab() {
         </CardContent>
       </Card>
       <ResponseCard
-        response={LabId ? detail.data?.response : response?.data.response || ""}
+        response={
+          LabId ? detail.data?.response : response?.data?.response || ""
+        }
       />
     </>
   );

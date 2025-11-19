@@ -110,7 +110,7 @@ export function ItemList({
                 key={item.id}
                 className={cn(
                   "border border-border rounded-lg p-2 hover:bg-accent/50 transition-colors cursor-pointer",
-                  LabId === item.id && "bg-gray-50"
+                  LabId === item?.id && "bg-gray-50"
                 )}
               >
                 <div className="flex items-start justify-between gap-3">
@@ -119,26 +119,26 @@ export function ItemList({
                     onClick={() => setLabId(item.id)}
                   >
                     <h4 className="font-medium w-40 truncate" dir="rtl">
-                      {item.question}
+                      {item?.question}
                     </h4>
                     {item.response && (
                       <p
                         className="text-sm text-muted-foreground line-clamp-1"
                         dir="rtl"
                       >
-                        {item.response}
+                        {item?.response}
                       </p>
                     )}
                   </div>
                   <div className="flex flex-col items-center gap-2">
-                    <div className="flex items-center gap-0.5">
+                    {/* <div className="flex items-center gap-0.5">
                       {item.llmModel && (
                         <span
                           className={`text-xs px-2 py-1 rounded-full whitespace-nowrap ${getLLmColor(
                             item.llmModel.name
                           )}`}
                         >
-                          {getLLmLabel(item.llmModel.name)}
+                          {getLLmLabel(item?.llmModel.name)}
                         </span>
                       )}
                       <button
@@ -153,7 +153,7 @@ export function ItemList({
                           }`}
                         />
                       </button>
-                    </div>
+                    </div> */}
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <div
