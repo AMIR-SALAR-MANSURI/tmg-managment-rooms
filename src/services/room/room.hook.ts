@@ -39,7 +39,7 @@ const useGetAllRooms = (filter: GetAllRoomRequest) => {
 };
 const useGetRoom = (id: string) => {
   const query = useQuery({
-    queryKey: [service.EndPoint.roomGet, id],
+    queryKey: [service.basePath, service.EndPoint.roomGet, id],
     queryFn: () => service.roomGet(id),
     enabled: z.string().uuid().safeParse(id).success,
     select: (data) => data.data,
