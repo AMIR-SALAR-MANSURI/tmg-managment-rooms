@@ -32,7 +32,7 @@ const Page = () => {
       ImageFile: undefined,
       llmModelId: undefined,
       name: undefined,
-      systemPrompt: "",
+      systemPrompt: "default",
     },
   });
 

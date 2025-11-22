@@ -63,7 +63,7 @@ export default function FormLab() {
       llmModelId: undefined,
       contentPrompt: undefined,
       temperature: 0.5,
-      systemPrompt: "",
+      systemPrompt: "default",
       question: undefined,
     },
   });
