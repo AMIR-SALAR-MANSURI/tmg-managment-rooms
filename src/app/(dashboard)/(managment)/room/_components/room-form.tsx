@@ -59,10 +59,7 @@ export default function RoomForm({ form }: RoomFormProps) {
             <FormItem>
               <FormLabel>کلاینت</FormLabel>
               <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  value={field.value || ""}
-                >
+                <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger aria-invalid={fieldState.invalid}>
                     <SelectValue placeholder="انتخاب کلاینت" />
                   </SelectTrigger>
@@ -88,10 +85,7 @@ export default function RoomForm({ form }: RoomFormProps) {
             <FormItem>
               <FormLabel>مدل زبانی</FormLabel>
               <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  value={field.value || ""}
-                >
+                <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger aria-invalid={fieldState.invalid}>
                     <SelectValue placeholder="انتخاب مدل زبانی" />
                   </SelectTrigger>

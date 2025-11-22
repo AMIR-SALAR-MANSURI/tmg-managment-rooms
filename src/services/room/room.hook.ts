@@ -72,6 +72,10 @@ const useEditRoom = () => {
           queryKey: [service.EndPoint.roomList],
           exact: false,
         });
+      queryClient.invalidateQueries({
+        queryKey: [service.basePath, service.EndPoint.roomGet],
+        exact: false,
+      });
     },
   });
 };
