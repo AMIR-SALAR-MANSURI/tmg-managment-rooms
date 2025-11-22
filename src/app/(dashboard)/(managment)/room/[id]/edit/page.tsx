@@ -41,18 +41,20 @@ const Page = () => {
   });
 
   useEffect(() => {
-    form.reset({
-      clientId: data?.clientId,
-      contentPrompt: data?.contentPrompt,
-      description: data?.description,
-      llmModelId: data?.llmModelId,
-      name: data?.name,
-      systemPrompt: data?.systemPrompt,
-      ImageFile:
-        data?.imageFile &&
-        `data:${data?.imageFile.imageContentType};base64,${data.imageFile.imageBase64}`,
-    });
-  }, [form, data]);
+    if (data) {
+      form.reset({
+        clientId: data?.clientId,
+        contentPrompt: data?.contentPrompt,
+        description: data?.description,
+        llmModelId: data?.llmModelId,
+        name: data?.name,
+        systemPrompt: data?.systemPrompt,
+        ImageFile:
+          data?.imageFile &&
+          `data:${data?.imageFile.imageContentType};base64,${data.imageFile.imageBase64}`,
+      });
+    }
+  }, [form, data, id]);
 
   const onSubmit = async (values: EditRoomRequest) => {
     const formValues = {
