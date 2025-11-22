@@ -49,7 +49,7 @@ export default function FormLab() {
         llmModelId: undefined,
         contentPrompt: "",
         temperature: 0.5,
-        systemPrompt: "",
+        systemPrompt: "default",
         question: "",
       });
     }
@@ -86,7 +86,7 @@ export default function FormLab() {
       llmModelId: "",
       contentPrompt: "",
       temperature: 0.5,
-      systemPrompt: "",
+      systemPrompt: "default",
       question: "",
     });
   };

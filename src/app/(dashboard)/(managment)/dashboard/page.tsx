@@ -4,7 +4,7 @@ import { LayoutDashboard, Users, Settings, Building } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import PageWrapper from "@/layout/dashboard/page-wrapper2";
+import PageWrapper from "@/layout/dashboard/page-wrapper";
 
 export default function Page() {
   const router = useRouter();
