@@ -26,16 +26,15 @@ const Page = () => {
   const { data, isPending: get } = useGetRoom(id as string);
 
   const form = useForm<EditRoomRequest>({
-    disabled: isPending || get,
-    reValidateMode: "onBlur",
     resolver: zodResolver(schema),
-    defaultValues: data || {
-      clientId: undefined,
-      contentPrompt: undefined,
-      description: undefined,
+    disabled: isPending || get,
+    defaultValues: {
+      clientId: "",
+      contentPrompt: "",
+      description: "",
       ImageFile: undefined,
-      llmModelId: undefined,
-      name: undefined,
+      llmModelId: "",
+      name: "",
       systemPrompt: "default",
     },
   });

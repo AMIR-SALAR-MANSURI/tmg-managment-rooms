@@ -1,6 +1,5 @@
 "use client";
 
-import InputFilePond from "@/components/file/input-file-pond";
 import {
   FormControl,
   FormField,
@@ -9,6 +8,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import InputFile from "@/components/ui/input-file";
 import {
   Select,
   SelectContent,
@@ -16,18 +16,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import SelectSearchable from "@/components/ui/select-searchable";
 import { Textarea } from "@/components/ui/textarea";
 import { AddRoomRequest, EditRoomRequest } from "@/services";
-import {
-  AddClientsRequest,
-  EditClientsRequest,
-  useGetAllClients,
-} from "@/services/clients";
+import { useGetAllClients } from "@/services/clients";
 import { useGetAllLlm } from "@/services/llmModels";
-import { useGetAllUser } from "@/services/users";
 import { UseFormReturn } from "react-hook-form";
-import InputFile from "@/components/ui/input-file";
 
 interface RoomFormProps {
   form: UseFormReturn<AddRoomRequest, any, EditRoomRequest>;
@@ -59,12 +52,15 @@ export default function RoomForm({ form }: RoomFormProps) {
             <FormItem>
               <FormLabel>کلاینت</FormLabel>
               <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
+                <Select
+                  disabled={form.formState.disabled}
+                  onValueChange={field.onChange}
+                  value={field.value ?? ""}
+                >
                   <SelectTrigger aria-invalid={fieldState.invalid}>
                     <SelectValue placeholder="انتخاب کلاینت" />
                   </SelectTrigger>
                   <SelectContent>
-                    {/* Map actual clients */}
                     {client?.data?.map((i) => (
                       <SelectItem key={i.id} value={i.id}>
                         {i.name}
@@ -85,12 +81,15 @@ export default function RoomForm({ form }: RoomFormProps) {
             <FormItem>
               <FormLabel>مدل زبانی</FormLabel>
               <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
+                <Select
+                  disabled={form.formState.disabled}
+                  onValueChange={field.onChange}
+                  value={field.value ?? ""}
+                >
                   <SelectTrigger aria-invalid={fieldState.invalid}>
                     <SelectValue placeholder="انتخاب مدل زبانی" />
                   </SelectTrigger>
                   <SelectContent>
-                    {/* Map actual LLM models */}
                     {data?.map((i) => (
                       <SelectItem key={i.id} value={i.id}>
                         {i.name}
