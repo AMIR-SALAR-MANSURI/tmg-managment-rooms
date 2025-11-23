@@ -112,7 +112,7 @@ const baseAxiosResponseInterceptors = () => {
         // authService().logout();
         localStorage.removeItem("token");
         setTimeout(() => {
-          window.location.href = "/login";
+          window.location.href = `${process.env.NEXT_PUBLIC_BASE_PATH}/login`;
         }, 1500);
       }
 
@@ -180,7 +180,7 @@ const baseAxiosResponseInterceptors = () => {
           description: message,
         });
         setTimeout(() => {
-          window.location.href = "/login";
+          window.location.href = `${process.env.NEXT_PUBLIC_BASE_PATH}/login`;
         }, 1500);
       }
 
