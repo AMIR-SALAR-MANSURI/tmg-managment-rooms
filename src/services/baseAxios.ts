@@ -111,6 +111,9 @@ const baseAxiosResponseInterceptors = () => {
       if (status === 401 || status === 403) {
         // authService().logout();
         localStorage.removeItem("token");
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 1500);
       }
 
       return Promise.reject(error);
@@ -176,6 +179,9 @@ const baseAxiosResponseInterceptors = () => {
           position: "bottom-left",
           description: message,
         });
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 1500);
       }
 
       return Promise.reject(error);
