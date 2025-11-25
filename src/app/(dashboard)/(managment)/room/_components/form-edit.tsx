@@ -76,7 +76,7 @@ const FormEdit = () => {
               type="button"
               className="w-full"
               variant="ghost"
-              // onClick={() => setIsOpen(false)}
+              onClick={() => router.push("/room")}
             >
               لغو
             </Button>
