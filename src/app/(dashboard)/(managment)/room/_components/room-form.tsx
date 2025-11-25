@@ -128,19 +128,24 @@ export default function RoomForm({ form }: RoomFormProps) {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="contentPrompt"
-          render={({ field }) => (
-            <FormItem className="col-span-full">
-              <FormLabel>contentPrompt</FormLabel>
-              <FormControl>
-                <Textarea placeholder="توضیحات" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="relative col-span-full">
+          <FormField
+            control={form.control}
+            name="contentPrompt"
+            render={({ field }) => (
+              <FormItem className="col-span-full">
+                <FormLabel>contentPrompt</FormLabel>
+                <FormControl>
+                  <Textarea placeholder="توضیحات" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <span className="absolute bottom-2 left-3 text-sm text-muted-foreground">
+            {form.watch("contentPrompt")?.length ?? 0}
+          </span>
+        </div>
         {/* <FormField
           control={form.control}
           name="systemPrompt"
