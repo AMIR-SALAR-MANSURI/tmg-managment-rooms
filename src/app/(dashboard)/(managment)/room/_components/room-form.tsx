@@ -137,9 +137,6 @@ export default function RoomForm({ form }: RoomFormProps) {
                 <FormLabel>contentPrompt</FormLabel>
                 <FormControl>
                   <Textarea placeholder="توضیحات" {...field} />
-                  <span className="absolute bottom-2 right-2 text-xs text-muted-foreground">
-                    {field.value?.length || 0}
-                  </span>
                 </FormControl>
                 <FormMessage />
               </FormItem>
