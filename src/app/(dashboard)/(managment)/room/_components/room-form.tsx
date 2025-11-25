@@ -142,7 +142,7 @@ export default function RoomForm({ form }: RoomFormProps) {
               </FormItem>
             )}
           />
-          <span className="absolute bottom-2 right-3 text-xs text-muted-foreground">
+          <span className="absolute bottom-2 left-3 text-sm text-muted-foreground">
             {form.watch("contentPrompt")?.length ?? 0}
           </span>
         </div>
