@@ -50,7 +50,7 @@ export default function RoomForm({ form }: RoomFormProps) {
           name="clientId"
           render={({ field, fieldState }) => (
             <FormItem>
-              <FormLabel>کلاینت {JSON.stringify(field.value)}</FormLabel>
+              <FormLabel>کلاینت</FormLabel>
               <FormControl>
                 <Select
                   {...field}
