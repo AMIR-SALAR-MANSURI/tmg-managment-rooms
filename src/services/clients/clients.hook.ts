@@ -12,7 +12,7 @@ const useGetAllClients = (filter: GetAllClientsRequest) => {
   const { pagination } = usePagination();
 
   const query = useQuery({
-    queryKey: [service.EndPoint.clientsList, filter, pagination],
+    queryKey: [service.basePath, service.EndPoint.clientsList, filter, pagination],
     queryFn: () =>
       service.clientsList({
         ...filter,
@@ -44,7 +44,7 @@ const useAddClients = () => {
     onSuccess(data: ApiResponseDto<{}>) {
       if (data.isSuccess)
         queryClient.invalidateQueries({
-          queryKey: [service.EndPoint.clientsList],
+          queryKey: [service.basePath, service.EndPoint.clientsList],
           exact: false,
         });
     },
@@ -57,7 +57,7 @@ const useEditClients = () => {
     onSuccess(data: ApiResponseDto<{}>) {
       if (data.isSuccess)
         queryClient.invalidateQueries({
-          queryKey: [service.EndPoint.clientsList],
+          queryKey: [service.basePath, service.EndPoint.clientsList],
           exact: false,
         });
     },

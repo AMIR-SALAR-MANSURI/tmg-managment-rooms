@@ -27,7 +27,7 @@ interface RoomFormProps {
 }
 
 export default function RoomForm({ form }: RoomFormProps) {
-  const { data, isLoading } = useGetAllLlm();
+  const { data } = useGetAllLlm();
   const { data: client } = useGetAllClients({ returnAll: true });
   return (
     <>
@@ -50,12 +50,15 @@ export default function RoomForm({ form }: RoomFormProps) {
           name="clientId"
           render={({ field, fieldState }) => (
             <FormItem>
-              <FormLabel>کلاینت</FormLabel>
+              <FormLabel>کلاینت {JSON.stringify(field.value)}</FormLabel>
               <FormControl>
                 <Select
-                  disabled={form.formState.disabled}
-                  onValueChange={field.onChange}
-                  value={field.value ?? ""}
+                  {...field}
+                  onValueChange={(val) => {
+                    if (val.length > 1) {
+                      field.onChange(val);
+                    }
+                  }}
                 >
                   <SelectTrigger aria-invalid={fieldState.invalid}>
                     <SelectValue placeholder="انتخاب کلاینت" />
@@ -82,9 +85,12 @@ export default function RoomForm({ form }: RoomFormProps) {
               <FormLabel>مدل زبانی</FormLabel>
               <FormControl>
                 <Select
-                  disabled={form.formState.disabled}
-                  onValueChange={field.onChange}
-                  value={field.value ?? ""}
+                  {...field}
+                  onValueChange={(val) => {
+                    if (val.length > 1) {
+                      field.onChange(val);
+                    }
+                  }}
                 >
                   <SelectTrigger aria-invalid={fieldState.invalid}>
                     <SelectValue placeholder="انتخاب مدل زبانی" />

@@ -37,6 +37,8 @@ const useGetAllRooms = (filter: GetAllRoomRequest) => {
     ...query,
   };
 };
+
+
 const useGetRoom = (id: string) => {
   const query = useQuery({
     queryKey: [service.basePath, service.EndPoint.roomGet, id],

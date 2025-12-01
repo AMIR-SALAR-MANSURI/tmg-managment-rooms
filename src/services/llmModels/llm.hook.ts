@@ -8,7 +8,7 @@ const service = new LlmService();
 
 const useGetAllLlm = () => {
   const query = useQuery({
-    queryKey: [service.EndPoint.llmList],
+    queryKey: [service.basePath, service.EndPoint.llmList],
     queryFn: () => service.llmList(),
     select: (data) => data.data,
   });
@@ -24,7 +24,7 @@ const useAddLlm = () => {
     onSuccess(data: ApiResponseDto<{}>) {
       if (data.isSuccess)
         queryClient.invalidateQueries({
-          queryKey: [service.EndPoint.llmList],
+          queryKey: [service.basePath, service.EndPoint.llmList],
           exact: false,
         });
     },

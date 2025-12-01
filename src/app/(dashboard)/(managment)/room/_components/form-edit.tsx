@@ -29,15 +29,31 @@ const FormEdit = () => {
     resolver: zodResolver(schema),
     disabled: isPending || get,
     defaultValues: {
-      clientId: "",
+      clientId: undefined,
       contentPrompt: "",
       description: "",
       ImageFile: undefined,
-      llmModelId: "",
+      llmModelId: undefined,
       name: "",
       systemPrompt: "default",
     },
   });
+
+  const base64ToFile = (
+    base64: string,
+    contentType: string,
+    fileName: string
+  ) => {
+    const byteCharacters = atob(base64);
+    const byteNumbers = new Array(byteCharacters.length);
+
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteNumbers);
+    return new File([byteArray], fileName, { type: contentType });
+  };
 
   useEffect(() => {
     if (data) {
@@ -48,9 +64,13 @@ const FormEdit = () => {
         llmModelId: data?.llmModelId,
         name: data?.name,
         systemPrompt: data?.systemPrompt,
-        ImageFile:
-          data?.imageFile &&
-          `data:${data?.imageFile.imageContentType};base64,${data.imageFile.imageBase64}`,
+        ImageFile: data.imageFile
+          ? base64ToFile(
+              data.imageFile.imageBase64,
+              data.imageFile.imageContentType,
+              "test"
+            )
+          : null,
       });
     }
   }, [form, data, id]);

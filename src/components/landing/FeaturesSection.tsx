@@ -2,8 +2,9 @@
 import { Edit, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { GetAllRoomResponse } from "@/services";
+import { GetAllRoomResponse, RoomService } from "@/services";
 import { Button } from "../ui/button";
+import { queryClient } from "@/lib/queryClient";
 
 interface Props {
   data: GetAllRoomResponse[] | undefined;
