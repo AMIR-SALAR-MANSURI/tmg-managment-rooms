@@ -1,12 +1,10 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { iransansfanum } from "@/lib/iransans-font";
-import QueryClientProvider from "@/provider/queryClientProvider";
 import NotificationProvider from "@/provider/NotificationProvider";
 import EnvClientProvider from "@/provider/env-client-provider";
+import QueryClientProvider from "@/provider/queryClientProvider";
+import type { Metadata } from "next";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
-import AuthProvider from "@/provider/AuthProvider";
+import "./globals.css";
+import { iransansfanum } from "@/lib/iransans-font";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${iransansfanum.className} antialiased`} dir="rtl">
+      <body className={` ${iransansfanum.className} antialiased`} dir="rtl">
         <EnvClientProvider>
           <QueryClientProvider>
             <NotificationProvider>
