@@ -1,10 +1,12 @@
 import { z } from "@/lib/zod";
 import { BaseService } from "@/services/BaseService";
 import {
+  AddRoomRagRequest,
   AddRoomRequest,
   EditRoomRequest,
   GetAllRoomRequest,
   GetAllRoomResponse,
+  GetRoomRagStatus,
   GetRoomResponse,
 } from "./room.interface";
 import { IDRequest } from "@/types/responseType";
@@ -17,6 +19,8 @@ export class RoomService extends BaseService {
     roomAdd: "/Create",
     roomEdit: "/{id}/Edit",
     roomGet: "/{id}",
+    roomRag: "/{id}/Rag",
+    roomRagStatus: '{id}/Rag/status'
   };
 
   async roomList(filter: GetAllRoomRequest) {
@@ -72,6 +76,33 @@ export class RoomService extends BaseService {
     );
   }
 
+  async roomRag(request: AddRoomRagRequest & IDRequest) {
+    return await this.post<{}>(
+      this.buildEndpoint({
+        url: this.EndPoint.roomRag,
+        basePath: this.basePath,
+        values: [request.id]
+      }),
+      request,
+      {
+        notify: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+  }
+
+  async roomRagStatus(id: string) {
+    return await this.get<GetRoomRagStatus>(
+      this.buildEndpoint({
+        url: this.EndPoint.roomRagStatus,
+        basePath: this.basePath,
+        values: [id],
+      })
+    );
+  }
+
   public static Room() {
     return z.object({
       clientId: z.string(),
@@ -82,5 +113,15 @@ export class RoomService extends BaseService {
       contentPrompt: z.string(),
       llmModelId: z.string(),
     });
+  }
+
+  public static RoomRag() {
+    return z.object({
+      File: z.any(),
+      Knowledge: z.string(),
+      SystemPrompt: z.string(),
+      SmallTalkPrompt: z.string(),
+      RAGParameters: z.number()
+    })
   }
 }

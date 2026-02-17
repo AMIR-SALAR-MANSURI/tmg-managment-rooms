@@ -1,9 +1,9 @@
 import { queryClient } from "@/lib/queryClient";
 import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
 import { z } from "zod";
-import { ApiResponseDto, IDRequest } from "../../types/responseType";
+import { ApiResponseDto } from "../../types/responseType";
+import { GetAllRoomRequest } from "./room.interface";
 import { RoomService } from "./room.service";
-import { EditRoomRequest, GetAllRoomRequest } from "./room.interface";
 
 const service = new RoomService();
 
@@ -82,4 +82,34 @@ const useEditRoom = () => {
   });
 };
 
-export { useAddRoom, useGetAllRoom, useEditRoom, useGetRoom, useGetAllRooms };
+
+const useAddRoomRag = () => {
+  return useMutation({
+    mutationFn: service.roomRag.bind(service),
+    onSuccess(data: ApiResponseDto<{}>) {
+      if (data.isSuccess)
+        queryClient.invalidateQueries({
+          queryKey: [service.EndPoint.roomList],
+          exact: false,
+        });
+    },
+  });
+};
+
+
+const useGetRoomRagStatus = (id: string) => {
+  const query = useQuery({
+    queryKey: [service.basePath, service.EndPoint.roomRagStatus, id],
+    queryFn: () => service.roomRagStatus(id),
+    enabled: z.string().uuid().safeParse(id).success,
+    select: (data) => data.data,
+  });
+
+  return {
+    ...query,
+  };
+};
+
+
+export { useAddRoom, useAddRoomRag, useEditRoom, useGetAllRoom, useGetAllRooms, useGetRoom, useGetRoomRagStatus };
+

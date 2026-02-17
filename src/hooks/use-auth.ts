@@ -3,6 +3,8 @@ import { useLogin } from "@/services/auth/auth.hook";
 import getBaseAxios from "@/services/baseAxios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
+
 
 export default function useAuth() {
   const key = "token";
@@ -48,10 +50,36 @@ export default function useAuth() {
     window.location.reload();
   };
 
+
+  type JwtPayload = {
+    role?: string;
+    roles?: string[];
+    exp?: number;
+    "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": string
+  };
+
+  function getUserRoleFromToken() {
+    if (typeof window === "undefined") return null;
+
+    const token = localStorage.getItem("token");
+    if (!token) return null;
+
+    try {
+      const decoded = jwtDecode<JwtPayload>(token);
+
+      return decoded[
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+      ];
+    } catch (error) {
+      console.error("Invalid JWT", error);
+      return null;
+    }
+  }
   return {
     token,
     handleLogin,
     handleLogout,
     isPending,
+    getUserRoleFromToken
   };
 }

@@ -8,6 +8,7 @@ import { useGetAllRoom } from "@/services";
 import { LayoutDashboard, Plus, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
+import useAuth from "@/hooks/use-auth";
 
 const Page = () => {
   const { selectedVersion } = useClientStore();

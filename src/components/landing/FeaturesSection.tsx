@@ -2,47 +2,60 @@
 import { Edit, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { GetAllRoomResponse, RoomService } from "@/services";
+import { GetAllRoomResponse } from "@/services";
 import { Button } from "../ui/button";
-import { queryClient } from "@/lib/queryClient";
+import useAuth from "@/hooks/use-auth";
+import RagStatusDialog from "@/app/(dashboard)/(managment)/room/_components/rag-status-dialog";
 
 interface Props {
   data: GetAllRoomResponse[] | undefined;
 }
 
 //from-white to-blue-50
+
 export function FeaturesSection({ data }: Props) {
+  const { getUserRoleFromToken } = useAuth();
+  const role = getUserRoleFromToken();
+
   const router = useRouter();
+
   return (
-    // <section className="bg-gradient-to-b ">
-    //   <div className="container mx-auto px-6">
-    // <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
     <>
       {data?.map((feature, index) => (
         <div
           key={index}
           className="relative group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
         >
+          {/* Edit button */}
           <Button
             onClick={(e) => {
               e.stopPropagation();
               router.push(`/room/${feature.id}/edit`);
             }}
-            className="absolute top-3 left-3 z-10 bg-blue-500 hover:bg-blue-600 text-white rounded-full p-2 transition-colors duration-200 shadow-md"
+            className="absolute top-3 left-3 z-10 bg-blue-500 hover:bg-blue-600 text-white rounded-full p-2 shadow-md"
             title="ویرایش"
             iconLeft={Edit}
-          ></Button>
+          />
 
-          <div
-            // onClick={() => router.push("/chat-bot")}
-            className="cursor-pointer"
-          >
+          {role === "SuperAdmin" && (
+            <Button
+              onClick={(e) => {
+                e.stopPropagation();
+                router.push(`/room/${feature.id}/knowledge`);
+              }}
+              className="absolute top-3 right-3 z-10 bg-orange-400/100 hover:bg-orange-500 text-white rounded-full p-2 shadow-md"
+              title="افزودن دانش"
+              iconLeft={Plus}
+            />
+          )}
+
+          <div className="cursor-pointer">
             <div className="relative h-48 w-full overflow-hidden">
               <Image
                 src={
                   feature.imageData
                     ? `data:${feature.imageData.imageContentType};base64,${feature.imageData.imageBase64}`
-                    : "/placeholder.svg"
+                    : "./placeholder/image.svg"
                 }
                 alt={feature.name}
                 fill
@@ -52,20 +65,22 @@ export function FeaturesSection({ data }: Props) {
             </div>
 
             <div className="p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <h3 className="text-base font-bold text-gray-900 mb-3 truncate">
                 {feature.name}
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 {feature.description}
               </p>
             </div>
+            {role === "SuperAdmin" && (
+              <div className="p-4 flex items-center justify-end">
+                <RagStatusDialog uid={feature.id} />
+              </div>
+            )}
           </div>
         </div>
       ))}
     </>
-    // </div>
-    //   </div>
-    // </section>
   );
 }
 
