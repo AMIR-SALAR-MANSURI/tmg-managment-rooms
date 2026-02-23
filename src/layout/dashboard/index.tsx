@@ -9,7 +9,9 @@ export default function Index({ children }: LayoutProps) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset>{children}</SidebarInset>
+      <SidebarInset className="min-w-0">
+        <div className="flex-1 min-w-0 overflow-hidden">{children}</div>
+      </SidebarInset>
     </SidebarProvider>
   );
 }

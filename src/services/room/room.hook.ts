@@ -2,8 +2,9 @@ import { queryClient } from "@/lib/queryClient";
 import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
 import { z } from "zod";
 import { ApiResponseDto } from "../../types/responseType";
-import { GetAllRoomRequest } from "./room.interface";
+import { GetAllRagHistoryRequest, GetAllRoomRequest, GetRoomRagRequest } from "./room.interface";
 import { RoomService } from "./room.service";
+import { usePagination } from "@/hooks/use-pagination";
 
 const service = new RoomService();
 
@@ -111,5 +112,59 @@ const useGetRoomRagStatus = (id: string) => {
 };
 
 
-export { useAddRoom, useAddRoomRag, useEditRoom, useGetAllRoom, useGetAllRooms, useGetRoom, useGetRoomRagStatus };
+
+const useGetAllRoomRag = (filter: GetAllRagHistoryRequest) => {
+  // const { pagination } = usePagination();
+
+  const query = useQuery({
+    queryKey: [service.basePath, service.EndPoint.roomRagList, filter,
+      // pagination
+    ],
+    queryFn: () =>
+      service.roomGetRagHistory({
+        ...filter,
+        // ...pagination,
+      }),
+    enabled: z.string().uuid().safeParse(filter.id).success
+  });
+  return {
+    ...query,
+    // ...pagination,
+  };
+
+};
+
+
+const useGetRoomRag = (request?: GetRoomRagRequest) => {
+  const query = useQuery({
+    queryKey: [service.basePath, service.EndPoint.roomRagStatus, request?.id, request?.promptId],
+    queryFn: () => service.roomGetRag(request!),
+    enabled: z.object({
+      id: z.string().uuid(),
+      promptId: z.string().uuid()
+    }).safeParse(request).success,
+    select: (data) => data.data,
+  });
+
+  return {
+    ...query,
+  };
+};
+
+const useEditRoomRag = () => {
+  return useMutation({
+    mutationFn: service.roomRagEdit.bind(service),
+    onSuccess(data: ApiResponseDto<{}>) {
+      if (data.isSuccess)
+        queryClient.invalidateQueries({
+          queryKey: [service.EndPoint.roomRagList],
+          exact: false,
+        });
+    },
+  });
+};
+
+
+
+export { useAddRoom, useAddRoomRag, useEditRoom, useGetAllRoom, useGetAllRooms, useGetRoom, useGetRoomRagStatus, useGetAllRoomRag, useGetRoomRag, useEditRoomRag };
 

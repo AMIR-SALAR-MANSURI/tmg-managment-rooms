@@ -2,6 +2,6 @@
 
 import { useParams } from 'next/navigation';
 
-export const useGetUid = () => useParams<{ uid: string }>();
+export const useGetUid = () => useParams<{ id: string }>();
 
 

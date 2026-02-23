@@ -28,7 +28,7 @@ const Page = () => {
           loading={isFetching}
           columns={columns()}
           data={data?.data}
-          pageCount={data?.pagingMetaData.totalPages}
+          // pageCount={data?.pagingMetaData.totalPages}
         />
       </>
     </PageWrapper>

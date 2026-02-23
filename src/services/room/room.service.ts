@@ -3,9 +3,14 @@ import { BaseService } from "@/services/BaseService";
 import {
   AddRoomRagRequest,
   AddRoomRequest,
+  EditRoomRagRequest,
   EditRoomRequest,
+  GetAllRagHistoryRequest,
+  GetAllRagHistoryResponse,
   GetAllRoomRequest,
   GetAllRoomResponse,
+  GetRoomRagRequest,
+  GetRoomRagResponse,
   GetRoomRagStatus,
   GetRoomResponse,
 } from "./room.interface";
@@ -20,7 +25,10 @@ export class RoomService extends BaseService {
     roomEdit: "/{id}/Edit",
     roomGet: "/{id}",
     roomRag: "/{id}/Rag",
-    roomRagStatus: '{id}/Rag/status'
+    roomRagStatus: '/{id}/Rag/status',
+    roomRagList: "/{id}/Prompt/List",
+    roomRagGet: '/{id}/Prompt/{promptId}',
+    roomRagEdit: '/{id}/Prompt/{promptId}/Edit'
   };
 
   async roomList(filter: GetAllRoomRequest) {
@@ -103,6 +111,40 @@ export class RoomService extends BaseService {
     );
   }
 
+
+  async roomGetRagHistory(request: GetAllRagHistoryRequest) {
+    return await this.get<GetAllRagHistoryResponse[]>(
+      this.buildEndpoint({
+        url: this.EndPoint.roomRagList,
+        basePath: this.basePath,
+        values: [request.id],
+      })
+    );
+  }
+  async roomGetRag(request: GetRoomRagRequest) {
+    return await this.get<GetRoomRagResponse>(
+      this.buildEndpoint({
+        url: this.EndPoint.roomRagGet,
+        basePath: this.basePath,
+        values: [request.id, request.promptId],
+      })
+    );
+  }
+
+  async roomRagEdit(request: EditRoomRagRequest & GetRoomRagRequest) {
+    return await this.put<{}>(
+      this.buildEndpoint({
+        url: this.EndPoint.roomRagEdit,
+        basePath: this.basePath,
+        values: [request.id, request.promptId],
+      }),
+      request,
+      {
+        notify: true,
+      }
+    );
+  }
+
   public static Room() {
     return z.object({
       clientId: z.string(),
@@ -122,6 +164,15 @@ export class RoomService extends BaseService {
       SystemPrompt: z.string(),
       SmallTalkPrompt: z.string(),
       RAGParameters: z.number()
+    })
+  }
+
+  public static RoomRagEdit() {
+    return z.object({
+      systemPrompt: z.string(),
+      smallTalkPrompt: z.string(),
+      isActive: z.boolean(),
+      temperature: z.number().optional()
     })
   }
 }

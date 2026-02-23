@@ -5,4 +5,5 @@ export type {
   DeleteRoomResponse,
   AddRoomRequest,
   GetAllRoomResponse,
+  RagHistoryList
 } from "./room.interface";

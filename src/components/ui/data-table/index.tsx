@@ -109,7 +109,7 @@ const DataTable = <TData,>({
                         onClick={header.column.getToggleSortingHandler()}
                         className={cn(
                           hasGrouping && "border",
-                          "relative h-12 lg:h-14 text-nowrap text-sm font-normal text-center text-primary-text bg-secondary-light [&>span]:last:hidden data-[align=left]:pl-4 data-[align=right]:pr-4"
+                          "relative h-12 lg:h-14 text-nowrap text-sm font-normal text-center text-primary-text bg-secondary-light [&>span]:last:hidden data-[align=left]:pl-4 data-[align=right]:pr-4",
                         )}
                         data-align={meta?.align || "center"}
                         align={meta?.align || "center"}
@@ -141,7 +141,7 @@ const DataTable = <TData,>({
 
                     const rendered = flexRender(
                       cell.column.columnDef.cell,
-                      context
+                      context,
                     );
 
                     let content = isNotEmpty(context.getValue())
@@ -167,7 +167,7 @@ const DataTable = <TData,>({
                         }}
                         // border-l
                         className={cn(
-                          "px-1 h-[65px] border-b text-sm font-medium border-0 last:border-l-0 border-border data-[align=left]:pl- data-[align=right]:pr-4 data-[isWordWrapped=false]:whitespace-nowrap data-[isDisabled=true]:text-neutral-third overflow-hidden text-ellipsis"
+                          "px-1 h-[65px] border-b text-sm font-medium border-0 last:border-l-0 border-border data-[align=left]:pl- data-[align=right]:pr-4 data-[isWordWrapped=false]:whitespace-nowrap data-[isDisabled=true]:text-neutral-third overflow-hidden text-ellipsis",
                         )}
                         data-isWordWrapped={meta?.isWordWrapped}
                         data-align={meta?.align || "center"}
@@ -195,7 +195,7 @@ const DataTable = <TData,>({
                               }
                               className={cn(
                                 meta?.tooltipProps?.tooltipClassName,
-                                "text-right leading-relaxed text-wrap"
+                                "text-right leading-relaxed text-wrap bg-sidebar-primary",
                               )}
                             >
                               {cellValue}

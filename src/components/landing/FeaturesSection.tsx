@@ -66,6 +66,7 @@ export function FeaturesSection({ data }: Props) {
 
             <div className="p-6">
               <h3 className="text-base font-bold text-gray-900 mb-3 truncate">
+                ``
                 {feature.name}
               </h3>
               <p className="text-gray-600 leading-relaxed">
