@@ -102,7 +102,7 @@ const FormRag = ({ isPending, form }: Props) => {
                     value={String(field.value)}
                   >
                     <SelectTrigger aria-invalid={fieldState.invalid}>
-                      <SelectValue placeholder="انتخاب RAGParameters" />
+                      <SelectValue placeholder="انتخاب کنید" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>

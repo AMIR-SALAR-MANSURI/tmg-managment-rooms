@@ -146,7 +146,7 @@ export default function UpdateDialog({ id, promptId }: Props) {
                         }
                       >
                         <SelectTrigger aria-invalid={fieldState.invalid}>
-                          <SelectValue placeholder="انتخاب RAGParameters" />
+                          <SelectValue placeholder="انتخاب کنید" />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectGroup>
